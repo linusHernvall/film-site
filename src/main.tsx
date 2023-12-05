@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@emotion/react'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRoutesFromElements } from 'react-router'
@@ -9,6 +10,7 @@ import CategorySpecific from './Pages/CategorySpecific.tsx'
 import FilmView from './Pages/FilmView.tsx'
 import HomePage from './Pages/HomePage.tsx'
 import './index.css'
+import { theme } from './theme.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,5 +27,8 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 )
