@@ -1,9 +1,11 @@
 import { createTheme } from '@mui/material'
+import { palette } from './palette'
 
 const FONT_PRIMARY = ['Bebas Neue', 'sans-serif'].join(',')
 const FONT_SECONDARY = ['Gothic A1', 'sans-serif'].join(',')
 
 export const theme = createTheme({
+  palette,
   typography: {
     fontFamily: FONT_PRIMARY,
     fontSize: 16,
