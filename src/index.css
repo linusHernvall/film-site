@@ -1,6 +1,8 @@
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: coral;
+  background: #221F1F;
+  font-family: 'Bebas Neue', sans-serif;
+font-family: 'Gothic A1', sans-serif;
 }
