@@ -1,6 +1,7 @@
 import { Box as MuiBox } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { Movie } from '../../interface'
+import placeholderImg from './images/error.png'
 import { Card, NextArrow, PrevArrow } from './style'
 
 interface ICarousel {
@@ -36,6 +37,10 @@ export const Carousel = ({ movies }: ICarousel) => {
   }
 
   const renderMovies = () => {
+    const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+      e.currentTarget.src = placeholderImg
+    }
+
     const start = current
     const end = start + visibleMoviesCount
     return movies.slice(start, end).map((movie, index) => (
@@ -44,6 +49,7 @@ export const Carousel = ({ movies }: ICarousel) => {
           style={{ objectFit: 'cover', borderRadius: '8px', width: '100%' }}
           src={movie.thumbnail}
           alt={`Image ${index}`}
+          onError={handleImgError}
         />
       </Card>
     ))
