@@ -1,10 +1,11 @@
-import CategoryGallery from '../Categories/CategoryGallery'
+import { Box } from '@mui/material'
+import CategoryGallery from '../components/Categories/CategoryGallery'
 
 function Categories() {
   return (
-    <div>
+    <Box display='flex' justifyContent='center'>
       <CategoryGallery />
-    </div>
+    </Box>
   )
 }
 
