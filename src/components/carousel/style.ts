@@ -3,6 +3,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { Box as MuiBox, styled } from '@mui/material'
 
 export const Card = styled(MuiBox)(() => ({
+  position: 'relative',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -15,6 +16,12 @@ export const Card = styled(MuiBox)(() => ({
   '&:hover': {
     transform: 'scale(1.1)',
   },
+}))
+
+export const CardBox = styled(MuiBox)(() => ({
+  position: 'absolute',
+  bottom: '16px',
+  left: '4px',
 }))
 
 export const PrevArrow = styled(NavigateBeforeIcon)(({ theme }) => ({

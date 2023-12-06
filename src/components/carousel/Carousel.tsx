@@ -1,8 +1,8 @@
-import { Box as MuiBox } from '@mui/material'
+import { Box as MuiBox, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { Movie } from '../../interface/interfaces'
 import placeholderImg from './images/error.png'
-import { Card, NextArrow, PrevArrow } from './style'
+import { Card, CardBox, NextArrow, PrevArrow } from './style'
 
 interface ICarousel {
   movies: Movie[]
@@ -67,6 +67,16 @@ function Carousel({ movies }: ICarousel) {
           alt={`Image ${index}`}
           onError={handleImgError}
         />
+        <CardBox
+          sx={{
+            padding: '2px 8px',
+            borderRadius: '8px',
+            opacity: '0.5',
+          }}
+        >
+          <Typography variant='body2'>{movie.year}</Typography>
+          <Typography variant='body2'>{movie.rating}</Typography>
+        </CardBox>
       </Card>
     ))
   }
@@ -80,7 +90,6 @@ function Carousel({ movies }: ICarousel) {
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        border: '1px solid coral',
         position: 'relative',
       }}
     >

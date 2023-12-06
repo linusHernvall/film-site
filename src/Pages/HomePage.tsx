@@ -1,10 +1,9 @@
-import movieData from '../../data/movies.json'
-import Carousel from '../components/carousel/Carousel'
+import { Typography } from '@mui/material'
 
 function HomePage() {
   return (
     <div>
-      <Carousel movies={movieData} />
+      <Typography variant='h1'>Home Page</Typography>
     </div>
   )
 }
