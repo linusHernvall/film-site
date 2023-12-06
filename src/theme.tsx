@@ -66,6 +66,13 @@ export const theme = createTheme({
       fontFamily: FONT_SECONDARY,
       color: '#f5f5f1',
     },
+    body2: {
+      lineHeight: 1.5,
+      fontSize: 12,
+      fontWeight: 700,
+      fontFamily: FONT_SECONDARY,
+      color: '#f5f5f1',
+    },
     button: {
       fontWeight: 700,
       fontSize: 16,
