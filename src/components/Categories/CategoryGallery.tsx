@@ -1,19 +1,9 @@
 import { Box, Typography } from '@mui/material'
 import moviesData from '../../../data/movies.json'
+import { Movie } from '../../interface/interfaces'
 import { CategoryBox } from './style'
 
-interface Movie {
-  title: string
-  year: number
-  rating: string
-  actors: string[]
-  genre: string
-  synopsis: string
-  thumbnail: string
-  isTrending?: boolean
-}
-
-const CategoryGallery = () => {
+function CategoryGallery() {
   const allGenres: string[] = moviesData.flatMap((movie: Movie) => movie.genre.split(','))
   const uniqueGenres: string[] = Array.from(new Set(allGenres.map((genre: string) => genre.trim())))
 
