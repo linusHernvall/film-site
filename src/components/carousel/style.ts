@@ -28,6 +28,7 @@ export const PrevArrow = styled(NavigateBeforeIcon)(({ theme }) => ({
   transform: 'translateY(-50%)',
   zIndex: '10',
 }))
+
 export const NextArrow = styled(NavigateNextIcon)(({ theme }) => ({
   fontSize: '80px',
   background: 'transparent',

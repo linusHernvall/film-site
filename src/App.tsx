@@ -1,12 +1,5 @@
-import movieData from '../data/movies.json'
-import { Carousel } from './components'
-
 function App() {
-  return (
-    <div>
-      <Carousel movies={movieData} />
-    </div>
-  )
+  return <div></div>
 }
 
 export default App

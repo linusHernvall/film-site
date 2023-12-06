@@ -1,6 +1,6 @@
 import { Box as MuiBox } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
-import { Movie } from '../../interface'
+import { Movie } from '../../interface/interfaces'
 import placeholderImg from './images/error.png'
 import { Card, NextArrow, PrevArrow } from './style'
 
@@ -8,7 +8,7 @@ interface ICarousel {
   movies: Movie[]
 }
 
-export const Carousel = ({ movies }: ICarousel) => {
+function Carousel({ movies }: ICarousel) {
   const [current, setCurrent] = useState(0)
   const [visibleMoviesCount, setVisibleMoviesCount] = useState(0)
   const boxRef = useRef<HTMLDivElement>(null)
@@ -90,3 +90,4 @@ export const Carousel = ({ movies }: ICarousel) => {
     </MuiBox>
   )
 }
+export default Carousel
