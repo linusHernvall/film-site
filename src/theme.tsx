@@ -50,6 +50,7 @@ export const theme = createTheme({
       fontSize: 18,
       textTransform: 'uppercase',
       color: '#E50914',
+      background: 'transparent',
     },
     subtitle1: {
       fontWeight: 700,
