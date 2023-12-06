@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import movieData from '../../../data/movies.json'
 import { Movie } from '../../interface/interfaces'
 import Carousel from '../carousel/Carousel'
+import { Container } from './style'
 
 function MovieCarousel() {
   const [trendingMovies, setTrendingMovies] = useState<Movie[]>([])
@@ -17,13 +18,17 @@ function MovieCarousel() {
   }, [])
 
   return (
-    <div>
-      <Typography variant='h6'>Trending</Typography>
-      <Carousel movies={trendingMovies} />
+    <Container sx={{ gap: '80px' }}>
+      <Container sx={{ gap: '16px' }}>
+        <Typography variant='h6'>Trending</Typography>
+        <Carousel movies={trendingMovies} />
+      </Container>
 
-      <Typography variant='h6'>Recommended for you</Typography>
-      <Carousel movies={recommendedMovies} />
-    </div>
+      <Container sx={{ gap: '16px' }}>
+        <Typography variant='h6'>Recommended for you</Typography>
+        <Carousel movies={recommendedMovies} />
+      </Container>
+    </Container>
   )
 }
 
