@@ -41,12 +41,28 @@ export const Carousel = ({ movies }: ICarousel) => {
       e.currentTarget.src = placeholderImg
     }
 
-    const start = current
-    const end = start + visibleMoviesCount
-    return movies.slice(start, end).map((movie, index) => (
+    const totalMovies = movies.length
+    const endIndex = current + visibleMoviesCount
+    let movieSlice = []
+
+    if (endIndex > totalMovies) {
+      const endSliceCount = endIndex - totalMovies
+      movieSlice = movies.slice(current, totalMovies)
+      movieSlice = movieSlice.concat(movies.slice(0, endSliceCount))
+    } else {
+      movieSlice = movies.slice(current, endIndex)
+    }
+
+    return movieSlice.map((movie, index) => (
       <Card key={index}>
         <img
-          style={{ objectFit: 'cover', borderRadius: '8px', width: '100%' }}
+          style={{
+            height: '100%',
+            width: 'auto',
+            maxWidth: '100%',
+            objectFit: 'cover',
+            borderRadius: '8px',
+          }}
           src={movie.thumbnail}
           alt={`Image ${index}`}
           onError={handleImgError}
