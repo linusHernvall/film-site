@@ -1,9 +1,12 @@
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import CategoryGallery from '../components/Categories/CategoryGallery'
 
 function Categories() {
   return (
-    <Box display='flex' justifyContent='center'>
+    <Box display='flex' justifyContent='center' flexDirection='column' alignItems='center'>
+      <Typography variant='h1' margin='3rem'>
+        CATEGORIES
+      </Typography>
       <CategoryGallery />
     </Box>
   )
