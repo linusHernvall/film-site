@@ -1,12 +1,38 @@
 import { PaletteOptions } from '@mui/material'
 
+declare module '@mui/material/styles' {
+  interface PaletteColor {
+    '100'?: string
+    '200'?: string
+    '300'?: string
+    '400'?: string
+    '500'?: string
+    '600'?: string
+    '700'?: string
+    '800'?: string
+    '900'?: string
+  }
+
+  interface SimplePaletteColorOptions {
+    '100'?: string
+    '200'?: string
+    '300'?: string
+    '400'?: string
+    '500'?: string
+    '600'?: string
+    '700'?: string
+    '800'?: string
+    '900'?: string
+  }
+}
+
 export const palette: PaletteOptions = {
   primary: {
     main: '#E50914',
-    '100': '##fce6e8',
-    '200': '##fbdadc',
-    '300': '##f7b3b6',
-    '400': '##E50914',
+    '100': '#fce6e8',
+    '200': '#fbdadc',
+    '300': '#f7b3b6',
+    '400': '#E50914',
     '500': '#ce0812',
     '600': '#b70710',
     '700': '#ac070f',
