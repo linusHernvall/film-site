@@ -1,5 +1,11 @@
+import CategoryGallery from '../Categories/CategoryGallery'
+
 function Categories() {
-  return <div>Categories page</div>
+  return (
+    <div>
+      <CategoryGallery />
+    </div>
+  )
 }
 
 export default Categories
