@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@emotion/react'
+import { ThemeProvider } from '@mui/material'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRoutesFromElements } from 'react-router'
