@@ -2,13 +2,31 @@ import { Box, Typography } from '@mui/material'
 
 function MovieCard() {
   return (
-    <Box display='flex' flexDirection='column' marginLeft='20px' marginRight='20px'>
+    <Box
+      style={{ display: 'flex', flexDirection: 'column', marginLeft: '40px', marginRight: '40px' }}
+    >
       <img src='/poster.jpg' alt='Movie Poster' />
-
+      <br />
+      <br />
       {/* Box with movie description */}
 
-      <Typography variant='h1'>Oppenheimer</Typography>
-      <Typography variant='h3'>Genre: Drama</Typography>
+      <Box style={{ display: 'flex', alignItems: 'center' }}>
+        {/* Vertical line */}
+        <Box
+          style={{
+            height: '70px',
+            width: '3px',
+            backgroundColor: '#E50914',
+            marginRight: '10px',
+            marginLeft: '-10px',
+          }}
+        />
+
+        <Box>
+          <Typography variant='h1'>Oppenheimer</Typography>
+          <Typography variant='h3'>Genre: Drama</Typography>
+        </Box>
+      </Box>
 
       <br />
       <Typography variant='body1'>
