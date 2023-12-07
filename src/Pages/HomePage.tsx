@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material'
-import MovieCarousel from '../components/moviecarousel/MovieCarousel'
+import MovieCarousel from '../components/movieCarousel/MovieCarousel'
 
 function HomePage() {
   return (

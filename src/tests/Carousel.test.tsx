@@ -1,10 +1,10 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, test } from 'vitest'
 
 import Carousel from '../components/carousel/Carousel'
 
 describe('Carousel', () => {
-  test('thumbnail should contain year and rating of the movie', () => {
+  test.only('thumbnail should contain year and rating of the movie', () => {
     const mockMovies = [
       {
         title: 'The Shawshank Redemption',
@@ -26,5 +26,29 @@ describe('Carousel', () => {
       expect(await screen.findByText(new RegExp(movie.year.toString(), 'i'))).toBeInTheDocument()
       expect(await screen.findByText(new RegExp(movie.rating, 'i'))).toBeInTheDocument()
     })
+  })
+
+  test('placeholder on broken thumbnail', async () => {
+    const mockMovies = [
+      {
+        title: 'Fight Club',
+        year: 1999,
+        rating: 'R',
+        actors: ['Brad Pitt", "Edward Norton", "Helena Bonham Carter'],
+        genre: 'Drama',
+        synopsis:
+          'An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.',
+        thumbnail:
+          'https://m.media-amazon.com/images/M/MV5BMjJmYTNkNmItYjYyZC00MGUxLWEyZmUtZTg1ZDM1YjNhOWE4XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,675,1000_AL_.jpg',
+        isTrending: true,
+      },
+    ]
+    render(<Carousel movies={mockMovies} />)
+
+    const fightClubImage = (await screen.findByAltText('Fight Club')) as HTMLImageElement
+    expect(fightClubImage).toBeInTheDocument()
+
+    fireEvent.error(fightClubImage)
+    expect(fightClubImage.src).toContain('error.png')
   })
 })

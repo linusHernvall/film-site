@@ -42,16 +42,20 @@ function Carousel({ movies }: ICarousel) {
     }
 
     const totalMovies = movies.length
+    // console.log(movies, 'MOVIES')
+
     const endIndex = current + visibleMoviesCount
     let movieSlice = []
 
     if (endIndex > totalMovies) {
       const endSliceCount = endIndex - totalMovies
-      movieSlice = movies.slice(current, totalMovies)
+      movieSlice = movies.slice(current, totalMovies + 1)
       movieSlice = movieSlice.concat(movies.slice(0, endSliceCount))
     } else {
-      movieSlice = movies.slice(current, endIndex)
+      movieSlice = movies.slice(current, endIndex + 1)
     }
+
+    console.log(movieSlice)
 
     return movieSlice.map((movie, index) => (
       <Card key={index}>
@@ -64,7 +68,7 @@ function Carousel({ movies }: ICarousel) {
             borderRadius: '8px',
           }}
           src={movie.thumbnail}
-          alt={`Image ${index}`}
+          alt={movie.title}
           onError={handleImgError}
         />
         <CardBox
