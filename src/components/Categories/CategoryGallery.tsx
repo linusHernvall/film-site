@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
 import moviesData from '../../../data/movies.json'
 import { Movie } from '../../interface/interfaces'
 import { CategoryBox } from './style'
@@ -12,7 +13,9 @@ function CategoryGallery() {
       {uniqueGenres.map((genre: string, index: number) => (
         <Box key={index} p={0.5} display='flex'>
           <CategoryBox>
-            <Typography variant='h5'>{genre}</Typography>
+            <Link to={`/categories/${encodeURIComponent(genre)}`}>
+              <Typography variant='h5'>{genre}</Typography>
+            </Link>
           </CategoryBox>
         </Box>
       ))}
