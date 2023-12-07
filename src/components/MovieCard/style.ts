@@ -3,6 +3,9 @@ import { Box, Grid, styled } from '@mui/material';
 export const MovieCardContainer = styled(Grid)(() => ({
   display: 'flex',
   justifyContent: 'center',
+  maxWidth: "800px",
+  alignItems: "center",
+  marginTop: "20px"
 }));
 
 export const MovieInfoBox = styled(Box)(() => ({
@@ -18,7 +21,7 @@ export const MovieInfoItemBox = styled(Box)(() => ({
 }));
 
 export const MoviePosterImage = styled('img')({
-  width: '100%',
+  width: '90%',
   height: 'auto',
 });
 
