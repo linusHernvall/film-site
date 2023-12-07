@@ -1,8 +1,8 @@
-import { Box as MuiBox, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { Movie } from '../../interface/interfaces'
 import placeholderImg from './images/error.png'
-import { Card, CardBox, NextArrow, PrevArrow } from './style'
+import { Card, CardBox, Container, NextArrow, PrevArrow } from './style'
 
 interface ICarousel {
   movies: Movie[]
@@ -97,22 +97,11 @@ function Carousel({ movies }: ICarousel) {
   }
 
   return (
-    <MuiBox
-      ref={boxRef}
-      sx={{
-        display: 'flex',
-        overflow: 'hidden',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100vw',
-        minWidth: '375px',
-        position: 'relative',
-      }}
-    >
+    <Container ref={boxRef}>
       <PrevArrow onClick={handlePrev} />
       {renderMovies()}
       <NextArrow onClick={handleNext} />
-    </MuiBox>
+    </Container>
   )
 }
 export default Carousel
