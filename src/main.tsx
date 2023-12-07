@@ -19,7 +19,7 @@ const router = createBrowserRouter(
       <Route path='filmview' element={<FilmView />} />
       <Route path='bookmarked' element={<Bookmarked />} />
       <Route path='categories' element={<Categories />} />
-      <Route path='categories/:id' element={<CategorySpecific />} />
+      <Route path='categories/:genre' element={<CategorySpecific />} />
     </Route>
   )
 )
