@@ -9,7 +9,6 @@ export const Card = styled(MuiBox)(() => ({
   alignItems: 'center',
   borderRadius: '8px',
   width: '200px',
-  minHeight: '300px',
   margin: '0 8px',
   overflow: 'hidden',
   transition: 'transform 0.3s ease-out',

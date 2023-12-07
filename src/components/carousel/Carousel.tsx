@@ -10,13 +10,19 @@ interface ICarousel {
 
 function Carousel({ movies }: ICarousel) {
   const [current, setCurrent] = useState(0)
-  const [visibleMoviesCount, setVisibleMoviesCount] = useState(0)
+  const cardWidth = 200 + 16
+  console.log(window.innerWidth, 'Inner width')
+  const [visibleMoviesCount, setVisibleMoviesCount] = useState(
+    Math.floor(window.innerWidth / cardWidth)
+  )
   const boxRef = useRef<HTMLDivElement>(null)
 
   const updateVisibleMoviesCount = () => {
     if (boxRef.current) {
+      console.log({ boxRef })
       const boxWidth = boxRef.current.offsetWidth
-      const cardWidth = 200
+      console.log({ boxWidth })
+
       setVisibleMoviesCount(Math.floor(boxWidth / cardWidth))
     }
   }
@@ -26,6 +32,7 @@ function Carousel({ movies }: ICarousel) {
     window.addEventListener('resize', updateVisibleMoviesCount)
 
     return () => window.removeEventListener('resize', updateVisibleMoviesCount)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleNext = () => {
@@ -42,29 +49,35 @@ function Carousel({ movies }: ICarousel) {
     }
 
     const totalMovies = movies.length
-    // console.log(movies, 'MOVIES')
 
     const endIndex = current + visibleMoviesCount
+    console.log({ current })
+    console.log({ endIndex })
+    console.log({ visibleMoviesCount })
+    console.log({ totalMovies })
+
     let movieSlice = []
 
-    if (endIndex > totalMovies) {
-      const endSliceCount = endIndex - totalMovies
-      movieSlice = movies.slice(current, totalMovies + 1)
-      movieSlice = movieSlice.concat(movies.slice(0, endSliceCount))
+    if (visibleMoviesCount >= totalMovies) {
+      movieSlice = movies
     } else {
-      movieSlice = movies.slice(current, endIndex + 1)
+      if (endIndex > totalMovies) {
+        const endSliceCount = endIndex - totalMovies
+        movieSlice = movies.slice(current, totalMovies + 1)
+        movieSlice = movieSlice.concat(movies.slice(0, endSliceCount))
+      } else {
+        movieSlice = movies.slice(current, endIndex)
+      }
     }
-
-    console.log(movieSlice)
 
     return movieSlice.map((movie, index) => (
       <Card key={index}>
         <img
           style={{
-            height: '100%',
-            width: 'auto',
+            // height: '100%',
+            // // width: 'auto',
             maxWidth: '100%',
-            objectFit: 'cover',
+            objectFit: 'contain',
             borderRadius: '8px',
           }}
           src={movie.thumbnail}
@@ -93,7 +106,8 @@ function Carousel({ movies }: ICarousel) {
         overflow: 'hidden',
         justifyContent: 'center',
         alignItems: 'center',
-        width: '100%',
+        width: '100vw',
+        minWidth: '375px',
         position: 'relative',
       }}
     >
