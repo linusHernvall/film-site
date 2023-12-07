@@ -74,8 +74,6 @@ function Carousel({ movies }: ICarousel) {
       <Card key={index}>
         <img
           style={{
-            // height: '100%',
-            // // width: 'auto',
             maxWidth: '100%',
             objectFit: 'contain',
             borderRadius: '8px',

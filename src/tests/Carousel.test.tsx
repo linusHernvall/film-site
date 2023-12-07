@@ -94,6 +94,55 @@ describe('Carousel', () => {
       expect(ratingElement).toBeInTheDocument()
     }
   })
+
+  test.only('do not render the same movie twice', async () => {
+    const mockMovies = [
+      {
+        title: 'Fight Club',
+        year: 1999,
+        rating: 'R',
+        actors: ['Brad Pitt", "Edward Norton", "Helena Bonham Carter'],
+        genre: 'Drama',
+        synopsis:
+          'An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.',
+        thumbnail:
+          'https://m.media-amazon.com/images/M/MV5BMjJmYTNkNmItYjYyZC00MGUxLWEyZmUtZTg1ZDM1YjNhOWE4XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,675,1000_AL_.jpg',
+        isTrending: true,
+      },
+      {
+        title: 'Star Wars: Episode V - The Empire Strikes Back',
+        year: 1980,
+        rating: 'PG',
+        actors: ['Mark Hamill', 'Harrison Ford', 'Carrie Fisher'],
+        genre: 'Action, Adventure, Fantasy',
+        synopsis:
+          'After the Rebels are overpowered by the Empire, Luke Skywalker begins his Jedi training with Yoda, while his friends are pursued across the galaxy by Darth Vader and bounty hunter Boba Fett.',
+        thumbnail:
+          'https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,675,1000_AL_.jpg',
+        isTrending: true,
+      },
+      {
+        title: 'City of God',
+        year: 2002,
+        rating: 'R',
+        actors: ['Alexandre Rodrigues', 'Leandro Firmino', 'Matheus Nachtergaele'],
+        genre: 'Crime, Drama',
+        synopsis:
+          "In the slums of Rio, two kids' paths diverge as one struggles to become a photographer and the other a kingpin.",
+        thumbnail:
+          'https://m.media-amazon.com/images/M/MV5BMGU5OWEwZDItNmNkMC00NzZmLTk1YTctNzVhZTJjM2NlZTVmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SY1000_CR0,0,675,1000_AL_.jpg',
+      },
+    ]
+
+    render(<Carousel movies={mockMovies} />)
+
+    const renderedImages = await screen.findAllByRole('img')
+
+    const movieTitles = renderedImages.map(img => (img as HTMLImageElement).alt)
+
+    const uniqueMovieTitles = new Set(movieTitles)
+    expect(movieTitles.length).toBe(uniqueMovieTitles.size)
+  })
 })
 
 // describe('MovieCarousel', () => {
