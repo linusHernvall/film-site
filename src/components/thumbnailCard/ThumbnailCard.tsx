@@ -17,18 +17,19 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
 
   return (
     <MuiBox>
-      <Card sx={{ maxWidth: 250 }}>
+      <Card sx={{ maxWidth: 330 }}>
         <CardMedia
           component='img'
           alt={title}
-          height='350'
+          height='500'
           image={imageSource}
           onError={() => setImageError(true)}
         />
         <Content>
           <TypographyContainer>
-            <Text sx={{ color: 'black' }}>{rating}</Text>
-            <Text>{year}</Text>
+            <Text variant='body1'>{year}</Text>
+            <Text variant='body1'>|</Text>
+            <Text variant='body1'>{rating}</Text>
           </TypographyContainer>
           <HeartIcon>
             <span
