@@ -1,6 +1,7 @@
-import { Card, CardMedia, Box as MuiBox, Box as TypographyContainer } from '@mui/material'
+import { Card, CardMedia, Box as MuiBox } from '@mui/material'
+import { useState } from 'react'
 import { Movie } from '../../interface/interfaces'
-import { Content, HeartIcon, Text } from './style'
+import { Content, HeartIcon, Text, TypographyContainer } from './style'
 
 interface ThumbnailCardProps {
   movie: Movie
@@ -8,6 +9,11 @@ interface ThumbnailCardProps {
 
 function ThumbnailCard({ movie }: ThumbnailCardProps) {
   const { title, year, rating, thumbnail } = movie
+  const [imageError, setImageError] = useState(false)
+
+  const imageSource = imageError
+    ? 'https://bfl-bred.com/wp-content/themes/finacia/assets/images/no-image/No-Image-Found-400x264.png'
+    : thumbnail
 
   return (
     <MuiBox>
@@ -16,18 +22,11 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
           component='img'
           alt={title}
           height='100%'
-          image={thumbnail}
+          image={imageSource}
+          onError={() => setImageError(true)}
         />
         <Content>
-          <TypographyContainer
-            sx={{
-              display: 'flex',
-              gap: '1rem',
-              alignItems: 'center',
-              backgroundColor: '#f5f5f1',
-              color: 'black',
-            }}
-          >
+          <TypographyContainer>
             <Text sx={{ color: 'black' }}>{rating}</Text>
             <Text>{year}</Text>
           </TypographyContainer>
