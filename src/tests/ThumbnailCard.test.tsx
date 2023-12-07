@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, test } from 'vitest'
-import ThumbnailCard from '../components/thumbnailCard/thumbnailCard'
+import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
 
 describe('ThumbnailCard tests', () => {
   const mockedMovie = {
