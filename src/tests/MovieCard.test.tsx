@@ -1,36 +1,41 @@
-import { expect, render, test } from 'vitest'
+import { render } from '@testing-library/react'
+import { expect, test } from 'vitest'
 import MovieCard from '../components/MovieCard/MovieCard'
 
-test('MovieCard renders correctly', () => {
-  const movie = {
-    title: 'Sample Movie',
-    year: '2022',
-    rating: 8.5,
-    actors: ['Actor 1', 'Actor 2'],
-    genre: 'Action',
-    synopsis: 'A sample movie synopsis.',
-    thumbnail: 'path/to/image.jpg',
-  }
+// Mock movie data
+const mockMovie = {
+  title: 'Test Movie',
+  year: 2023,
+  rating: '8.5',
+  actors: ['Actor 1', 'Actor 2'],
+  genre: 'Action',
+  synopsis: 'This is a test movie.',
+  thumbnail: 'test-image.jpg',
+}
 
-  const tree = render.create(<MovieCard movie={movie} />).toJSON()
-  expect(tree).toMatchSnapshot()
-})
+test('renders MovieCard component correctly', async () => {
+  const { getByText, getByAltText } = render(<MovieCard movie={mockMovie} />)
 
-test('MovieCard renders movie information correctly', () => {
-  const movie = {
-    title: 'Sample Movie',
-    year: '2022',
-    rating: 8.5,
-    actors: ['Actor 1', 'Actor 2'],
-    genre: 'Action',
-    synopsis: 'A sample movie synopsis.',
-    thumbnail: 'path/to/image.jpg',
-  }
+  // Check if movie title, genre, and year are rendered
+  expect(getByText(mockMovie.title)).toBeInTheDocument()
+  expect(getByText(`Genre: ${mockMovie.genre}`)).toBeInTheDocument()
+  const yearLabel = getByText(/Year:/)
+  expect(yearLabel).toBeInTheDocument()
 
-  const { getByText } = render(<MovieCard movie={movie} />)
+  const yearValue = getByText(mockMovie.year.toString())
+  expect(yearValue).toBeInTheDocument()
 
-  expect(getByText('Sample Movie')).toBeInTheDocument()
-  expect(getByText('Genre: Action')).toBeInTheDocument()
-  expect(getByText('Year:')).toBeInTheDocument()
-  expect(getByText('2022')).toBeInTheDocument()
+  // Check if rating and actors are rendered
+  expect(getByText('Rating:')).toBeInTheDocument()
+  expect(getByText(mockMovie.rating.toString())).toBeInTheDocument()
+  expect(getByText('Cast:')).toBeInTheDocument()
+  expect(getByText(mockMovie.actors.join(', '))).toBeInTheDocument()
+
+  // Check if synopsis is rendered
+  expect(getByText(mockMovie.synopsis)).toBeInTheDocument()
+
+  // Check if the movie poster is rendered
+  const moviePoster = getByAltText('Movie Poster')
+  expect(moviePoster).toBeInTheDocument()
+  expect(moviePoster).toHaveAttribute('src', mockMovie.thumbnail)
 })
