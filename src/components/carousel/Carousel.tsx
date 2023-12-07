@@ -103,9 +103,9 @@ function Carousel({ movies }: ICarousel) {
 
   return (
     <Container ref={boxRef}>
-      {showArrows && <PrevArrow onClick={handlePrev} />}
+      {showArrows && <PrevArrow role='prevArrow' onClick={handlePrev} />}
       {renderMovies()}
-      {showArrows && <NextArrow onClick={handleNext} />}
+      {showArrows && <NextArrow role='nextArrow' onClick={handleNext} />}
     </Container>
   )
 }

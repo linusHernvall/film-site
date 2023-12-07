@@ -136,12 +136,40 @@ describe('Carousel', () => {
 
     render(<Carousel movies={mockMovies} />)
 
-    const renderedImages = await screen.findAllByRole('img')
+    const renderedMovies = await screen.findAllByRole('img')
 
-    const movieTitles = renderedImages.map(img => (img as HTMLImageElement).alt)
+    const movieTitles = renderedMovies.map(img => (img as HTMLImageElement).alt)
 
     const uniqueMovieTitles = new Set(movieTitles)
     expect(movieTitles.length).toBe(uniqueMovieTitles.size)
+  })
+
+  test('arrows disappears when all movies are showing', async () => {
+    Object.defineProperty(window, 'innerWidth', { writable: true, value: 800 })
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 800 })
+    const mockMovies = [
+      {
+        title: 'The Shawshank Redemption',
+        year: 1994,
+        rating: 'R',
+        actors: ['Tim Robbins', 'Morgan Freeman', 'Bob Gunton'],
+        genre: 'Drama',
+        synopsis:
+          'Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.',
+        thumbnail:
+          'https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_QL75_UX380_CR0,4,380,562_.jpg',
+      },
+    ]
+
+    render(<Carousel movies={mockMovies} />)
+    screen.debug()
+
+    // queryByRole seemed to be better in this situation where I expected the arrows not to be found.
+    const prevArrow = screen.queryByRole('prevArrow')
+    const nextArrow = screen.queryByRole('nextArrow')
+
+    expect(prevArrow).not.toBeInTheDocument()
+    expect(nextArrow).not.toBeInTheDocument()
   })
 })
 
