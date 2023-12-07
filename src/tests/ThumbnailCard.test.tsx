@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, test } from 'vitest'
 import ThumbnailCard from '../components/thumbnailCard/thumbnailCard'
 
@@ -29,32 +29,32 @@ describe('ThumbnailCard tests', () => {
     expect(yearElement).toBeInTheDocument()
   })
 
-  test('should render ThumbnailCard with thumbnail image', () => {
+  test('should render ThumbnailCard with thumbnail alt title', () => {
     render(<ThumbnailCard movie={mockedMovie} />)
 
     const imageTitle = screen.getByAltText(mockedMovie.title)
     expect(imageTitle).toBeInTheDocument()
+  })
+
+  test('should render ThumbnailCard with thumbnail image', () => {
+    render(<ThumbnailCard movie={mockedMovie} />)
 
     const imageElement = screen.getByRole('img')
     expect(imageElement).toHaveAttribute('src', mockedMovie.thumbnail)
   })
 
-  test('should render ThumbnailCard with placeholder image if error', () => {
+  test('should render ThumbnailCard with placeholder image if error', async () => {
     render(<ThumbnailCard movie={mockedMovie} />)
 
-    const originalImage = screen.getByAltText(mockedMovie.title);
-    expect(originalImage).toBeInTheDocument();
+    const originalImage = screen.getByRole('img')
+    expect(originalImage).toHaveAttribute('src', mockedMovie.thumbnail)
 
-    const imageElement = screen.getByRole('img')
-    expect(imageElement).toHaveAttribute('src', mockedMovie.thumbnail)
+    fireEvent.error(originalImage)
 
-    fireEvent.error(originalImage);
-
-    // Rerender the component to reflect the updated state after the error
-    render(<ThumbnailCard movie={mockedMovie} />);
-
-    // Check that the placeholder image is visible
-    const placeholderImage = screen.getByAltText('Placeholder');
-    expect(placeholderImage).toBeInTheDocument();
+    const placeholderImage = await screen.findByRole('img')
+    expect(placeholderImage).toHaveAttribute(
+      'src',
+      'https://bfl-bred.com/wp-content/themes/finacia/assets/images/no-image/No-Image-Found-400x264.png'
+    )
   })
 })
