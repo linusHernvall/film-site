@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest'
 import Carousel from '../components/carousel/Carousel'
 
 describe('Carousel', () => {
-  test.only('thumbnail should contain year and rating of the movie', () => {
+  test.only('thumbnail should contain year and rating of the movie', async () => {
     const mockMovies = [
       {
         title: 'The Shawshank Redemption',
@@ -22,10 +22,13 @@ describe('Carousel', () => {
     render(<Carousel movies={mockMovies} />)
 
     // I used new RegExp to ensure to find my mocked up data in the component. It seems like the rendered text in the DOM differed from the component.
-    mockMovies.forEach(async movie => {
-      expect(await screen.findByText(new RegExp(movie.year.toString(), 'i'))).toBeInTheDocument()
-      expect(await screen.findByText(new RegExp(movie.rating, 'i'))).toBeInTheDocument()
-    })
+    for (const movie of mockMovies) {
+      const yearElement = await screen.findByText(new RegExp(movie.year.toString(), 'i'))
+      expect(yearElement).toBeInTheDocument()
+
+      const ratingElement = await screen.findByText(new RegExp(movie.rating, 'i'))
+      expect(ratingElement).toBeInTheDocument()
+    }
   })
 
   test('placeholder on broken thumbnail', async () => {
