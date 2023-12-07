@@ -1,20 +1,22 @@
-import {
-  Card,
-  CardMedia,
-  Box as MuiBox,
-  Box as TypographyContainer,
-} from '@mui/material'
+import { Card, CardMedia, Box as MuiBox, Box as TypographyContainer } from '@mui/material'
+import { Movie } from '../../interface/interfaces'
 import { Content, HeartIcon, Text } from './style'
 
-function ThumbnailCard() {
+interface ThumbnailCardProps {
+  movie: Movie
+}
+
+function ThumbnailCard({ movie }: ThumbnailCardProps) {
+  const { title, year, rating, thumbnail } = movie
+
   return (
     <MuiBox>
       <Card sx={{ maxWidth: 300 }}>
         <CardMedia
           component='img'
-          alt='thumbnail'
+          alt={title}
           height='100%'
-          image='https://m.media-amazon.com/images/M/MV5BODQ3NDExOGYtMzI3Mi00NWRlLTkwNjAtNjc4MDgzZGJiZTA1XkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_QL75_UX380_CR0,3,380,562_.jpg'
+          image={thumbnail}
         />
         <Content>
           <TypographyContainer
@@ -26,8 +28,8 @@ function ThumbnailCard() {
               color: 'black',
             }}
           >
-            <Text sx={{ color: 'black' }}>R</Text>
-            <Text>1968</Text>
+            <Text sx={{ color: 'black' }}>{rating}</Text>
+            <Text>{year}</Text>
           </TypographyContainer>
           <HeartIcon>
             <span
