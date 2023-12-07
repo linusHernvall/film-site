@@ -4,23 +4,27 @@ export const Content = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   backgroundColor: theme.palette.secondary.main,
   justifyContent: 'space-between',
+  alignItems: 'center',
 }))
 
-export const HeartIcon = styled(Box)(({ theme }) => ({
+export const HeartButton = styled(Box)(({ theme }) => ({
   display: 'flex',
   color: theme.palette.secondary[900],
 }))
 
-export const TypographyContainer = styled(Box)(() => ({
+export const TypographyContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
-  gap: '1rem',
-  alignItems: 'center',
-  backgroundColor: '#f5f5f1',
-  color: 'black',
+  gap: '0.4rem',
+  backgroundColor: theme.palette.secondary.main,
 }))
 
-export const Text = styled(Typography)(() => ({
+export const Text = styled(Typography)(({ theme }) => ({
   display: 'flex',
+  color: theme.palette.background.default,
+}))
+
+export const HeartIcon = styled(Box)(({ theme }) => ({
   color: 'black',
-  fontFamily: 'Gothic A1'
+  backgroundColor: theme.palette.secondary.main,
+  cursor: 'pointer',
 }))
