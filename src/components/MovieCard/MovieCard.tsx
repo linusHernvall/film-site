@@ -39,18 +39,16 @@ function MovieCard() {
 
             {/* Box with movie information */}
             <MovieInfoItemBox>
-              <Typography variant='h3'>Year: </Typography>
+              <Typography variant='h4'>Year: </Typography>
               <Typography variant='body1'>2023</Typography>
             </MovieInfoItemBox>
             <MovieInfoItemBox>
-              <Typography variant='h3'>Rating:</Typography>
+              <Typography variant='h4'>Rating:</Typography>
               <Typography variant='body1'> PG-13</Typography>
             </MovieInfoItemBox>
             <MovieInfoItemBox>
-              <Typography variant='h3'>Cast:</Typography>
-              <Typography variant='body1'>
-                Cillian Murphy, Robert Downey Jr, Emily BLunt, Matt Damon
-              </Typography>
+              <Typography variant='h4'>Cast:</Typography>
+              <Typography variant='body1'>Cillian Murphy, Robert Downey Jr, Emily Blunt</Typography>
             </MovieInfoItemBox>
 
             <br />
