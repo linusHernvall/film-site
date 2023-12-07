@@ -95,7 +95,7 @@ describe('Carousel', () => {
     }
   })
 
-  test.only('do not render the same movie twice', async () => {
+  test('do not render the same movie twice', async () => {
     const mockMovies = [
       {
         title: 'Fight Club',

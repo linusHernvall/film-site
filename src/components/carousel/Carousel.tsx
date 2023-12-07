@@ -9,9 +9,12 @@ interface ICarousel {
 }
 
 function Carousel({ movies }: ICarousel) {
-  const [current, setCurrent] = useState(0)
-  const cardWidth = 200 + 16
   console.log(window.innerWidth, 'Inner width')
+
+  const cardWidth = 200 + 16
+
+  const [current, setCurrent] = useState(0)
+  const [showArrows, setShowArrows] = useState(false)
   const [visibleMoviesCount, setVisibleMoviesCount] = useState(
     Math.floor(window.innerWidth / cardWidth)
   )
@@ -23,7 +26,9 @@ function Carousel({ movies }: ICarousel) {
       const boxWidth = boxRef.current.offsetWidth
       console.log({ boxWidth })
 
+      const newVisibleMoviesCount = Math.floor(boxWidth / cardWidth)
       setVisibleMoviesCount(Math.floor(boxWidth / cardWidth))
+      setShowArrows(movies.length > newVisibleMoviesCount)
     }
   }
 
@@ -33,7 +38,7 @@ function Carousel({ movies }: ICarousel) {
 
     return () => window.removeEventListener('resize', updateVisibleMoviesCount)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [movies.length])
 
   const handleNext = () => {
     setCurrent(prev => (prev + 1) % movies.length)
@@ -98,9 +103,9 @@ function Carousel({ movies }: ICarousel) {
 
   return (
     <Container ref={boxRef}>
-      <PrevArrow onClick={handlePrev} />
+      {showArrows && <PrevArrow onClick={handlePrev} />}
       {renderMovies()}
-      <NextArrow onClick={handleNext} />
+      {showArrows && <NextArrow onClick={handleNext} />}
     </Container>
   )
 }
