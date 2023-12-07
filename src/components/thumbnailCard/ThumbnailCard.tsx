@@ -17,11 +17,11 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
 
   return (
     <MuiBox>
-      <Card sx={{ maxWidth: 300 }}>
+      <Card sx={{ maxWidth: 250 }}>
         <CardMedia
           component='img'
           alt={title}
-          height='100%'
+          height='350'
           image={imageSource}
           onError={() => setImageError(true)}
         />
