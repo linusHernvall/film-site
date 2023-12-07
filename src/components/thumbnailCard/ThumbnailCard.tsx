@@ -1,7 +1,7 @@
 import { Card, CardMedia, Box as MuiBox } from '@mui/material'
 import { useState } from 'react'
 import { Movie } from '../../interface/interfaces'
-import { Content, HeartIcon, Text, TypographyContainer } from './style'
+import { Content, HeartButton, HeartIcon, Text, TypographyContainer } from './style'
 
 interface ThumbnailCardProps {
   movie: Movie
@@ -17,7 +17,14 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
 
   return (
     <MuiBox>
-      <Card sx={{ maxWidth: 330 }}>
+      <Card
+        sx={{
+          maxWidth: 330,
+          '& .MuiCardContent-root:last-child': {
+            padding: '20px',
+          },
+        }}
+      >
         <CardMedia
           component='img'
           alt={title}
@@ -31,14 +38,9 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
             <Text variant='body1'>|</Text>
             <Text variant='body1'>{rating}</Text>
           </TypographyContainer>
-          <HeartIcon>
-            <span
-              className='material-symbols-outlined'
-              style={{ color: 'black', backgroundColor: '#f5f5f1' }}
-            >
-              favorite
-            </span>
-          </HeartIcon>
+          <HeartButton>
+            <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
+          </HeartButton>
         </Content>
       </Card>
     </MuiBox>
