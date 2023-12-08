@@ -28,3 +28,10 @@ export const HeartIcon = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
   cursor: 'pointer',
 }))
+
+export const HeartIconRed = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  cursor: 'pointer',
+  fontVariationSettings: `'FILL' 1`,
+  color: 'red',
+}))
