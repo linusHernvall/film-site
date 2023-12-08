@@ -1,10 +1,15 @@
-import { Box as MuiBox, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
+import moviesData from '../../data/movies.json'
+import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
 
 function Bookmarked() {
   return (
-    <MuiBox sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Typography variant='h1'>Your list</Typography>
-    </MuiBox>
+    <div>
+      <Typography variant='h1'>Bookmarked page</Typography>
+      {moviesData.map((movie, index) => (
+        <ThumbnailCard key={index} movie={movie} />
+      ))}
+    </div>
   )
 }
 

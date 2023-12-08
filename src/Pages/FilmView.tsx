@@ -1,5 +1,7 @@
+import MovieCard from '../components/MovieCard/MovieCard'
+
 function FilmView() {
-  return <div>FilmView page</div>
+  return <MovieCard />
 }
 
 export default FilmView

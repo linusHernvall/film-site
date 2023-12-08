@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gothic+A1&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: #221F1F;
+  background: #221f1f;
   font-family: 'Bebas Neue', sans-serif;
-font-family: 'Gothic A1', sans-serif;
+  font-family: 'Gothic A1', sans-serif;
 }
