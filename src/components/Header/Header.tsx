@@ -30,7 +30,7 @@ function Header() {
             backgroundColor: 'transparent',
           }}
         >
-          <HeartIcon />
+          <HeartIcon role='heartIcon' />
         </Link>
       </LittleBox>
     </HeaderBox>
