@@ -10,7 +10,7 @@ function CategorySpecific() {
         CATEGORIES
       </Typography>
       <Box width='100%' display='flex' justifyContent='flex-start'>
-        <Typography variant='h5' p={3}>
+        <Typography variant='h5' p={3} className='Genre'>
           {genre}
         </Typography>
       </Box>
