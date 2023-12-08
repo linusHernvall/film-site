@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import { describe, expect, test } from 'vitest'
-import Footer from '../components/footer/Footer'
+import App from '../App'
 
 describe('Footer', () => {
   test('should render info in footer', () => {
     render(
       <MemoryRouter>
-        <Footer />
+        <App />
       </MemoryRouter>
     )
     const footerElement = screen.getByText('Kontakta oss')
@@ -20,7 +20,7 @@ describe('Footer', () => {
   test('should render twitter-icon', () => {
     render(
       <MemoryRouter>
-        <Footer />
+        <App />
       </MemoryRouter>
     )
     const twitterIcon = screen.getByTestId('TwitterIcon')
