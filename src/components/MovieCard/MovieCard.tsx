@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from '@mui/material'
-
+import { Movie } from '../../interface/interfaces'
 import {
   MovieCardContainer,
   MovieInfoBox,
@@ -8,13 +8,19 @@ import {
   VerticalLine,
 } from './style'
 
-function MovieCard() {
+interface MovieCardProps {
+  movie: Movie
+}
+
+function MovieCard({ movie }: MovieCardProps) {
+  const { title, year, rating, actors, genre, synopsis, thumbnail } = movie
+
   return (
     <Box style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <MovieCardContainer container spacing={2} justifyContent='center'>
         {/* Movie Poster */}
         <Grid item md={4} style={{ display: 'flex', justifyContent: 'center' }}>
-          <MoviePosterImage src='/poster.jpg' alt='Movie Poster' />
+          <MoviePosterImage src={thumbnail} alt='Movie Poster' />
         </Grid>
 
         {/* Movie Description */}
@@ -26,29 +32,26 @@ function MovieCard() {
               <VerticalLine />
 
               <Box>
-                <Typography variant='h1'>Oppenheimer</Typography>
-                <Typography variant='h3'>Genre: Drama</Typography>
+                <Typography variant='h1'>{title}</Typography>
+                <Typography variant='h3'>Genre: {genre}</Typography>
               </Box>
             </MovieInfoItemBox>
 
             <br />
-            <Typography variant='body1'>
-              A mysterious stranger with a harmonica joins forces with a notorious desperado to
-              protect a beautiful widow from a ruthless assassin working for the railroad.
-            </Typography>
+            <Typography variant='body1'>{synopsis}</Typography>
 
             {/* Box with movie information */}
             <MovieInfoItemBox>
               <Typography variant='h4'>Year: </Typography>
-              <Typography variant='body1'>2023</Typography>
+              <Typography variant='body1'>{year}</Typography>
             </MovieInfoItemBox>
             <MovieInfoItemBox>
               <Typography variant='h4'>Rating:</Typography>
-              <Typography variant='body1'> PG-13</Typography>
+              <Typography variant='body1'>{rating}</Typography>
             </MovieInfoItemBox>
             <MovieInfoItemBox>
               <Typography variant='h4'>Cast:</Typography>
-              <Typography variant='body1'>Cillian Murphy, Robert Downey Jr, Emily Blunt</Typography>
+              <Typography variant='body1'>{actors.join(', ')}</Typography>
             </MovieInfoItemBox>
 
             <br />
