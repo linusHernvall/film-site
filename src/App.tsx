@@ -5,14 +5,7 @@ import Header from './components/Header/Header'
 
 function App() {
   return (
-    <Box
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
+    <Box>
       <Header />
       <BackArrow />
       <Outlet />

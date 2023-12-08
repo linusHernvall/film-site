@@ -1,5 +1,6 @@
 import { Card, CardMedia, Box as MuiBox } from '@mui/material'
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 import { Movie } from '../../interface/interfaces'
 import { Content, HeartButton, HeartIcon, Text, TypographyContainer } from './style'
 
@@ -10,10 +11,16 @@ interface ThumbnailCardProps {
 function ThumbnailCard({ movie }: ThumbnailCardProps) {
   const { title, year, rating, thumbnail } = movie
   const [imageError, setImageError] = useState(false)
+  const navigate = useNavigate()
 
   const imageSource = imageError
     ? 'https://bfl-bred.com/wp-content/themes/finacia/assets/images/no-image/No-Image-Found-400x264.png'
     : thumbnail
+
+  const handleClick = () => {
+    const formattedTitle = title.replace(/\s+/g, '-')
+    navigate(`/filmview/${formattedTitle}`)
+  }
 
   return (
     <MuiBox>
@@ -23,7 +30,11 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
           '& .MuiCardContent-root:last-child': {
             padding: '20px',
           },
+          '&:hover': {
+            cursor: 'pointer',
+          },
         }}
+        onClick={handleClick}
       >
         <CardMedia
           component='img'

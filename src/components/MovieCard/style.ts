@@ -20,10 +20,11 @@ export const MovieInfoItemBox = styled(Box)(() => ({
   alignItems: 'center',
 }));
 
-export const MoviePosterImage = styled('img')({
+export const MoviePosterImage = styled('img')(({theme}) => ({
   width: '90%',
   height: 'auto',
-});
+  borderRadius: theme.shape.borderRadius
+}));
 
 export const VerticalLine = styled(Box)(({ theme }) => ({
   height: '70px',

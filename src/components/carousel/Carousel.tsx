@@ -1,23 +1,34 @@
-import { Box as MuiBox, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { Movie } from '../../interface/interfaces'
 import placeholderImg from './images/error.png'
-import { Card, CardBox, NextArrow, PrevArrow } from './style'
+import { Card, CardBox, Container, NextArrow, PrevArrow } from './style'
 
 interface ICarousel {
   movies: Movie[]
 }
 
 function Carousel({ movies }: ICarousel) {
+  console.log(window.innerWidth, 'Inner width')
+
+  const cardWidth = 200 + 16
+
   const [current, setCurrent] = useState(0)
-  const [visibleMoviesCount, setVisibleMoviesCount] = useState(0)
+  const [showArrows, setShowArrows] = useState(false)
+  const [visibleMoviesCount, setVisibleMoviesCount] = useState(
+    Math.floor(window.innerWidth / cardWidth)
+  )
   const boxRef = useRef<HTMLDivElement>(null)
 
   const updateVisibleMoviesCount = () => {
     if (boxRef.current) {
+      console.log({ boxRef })
       const boxWidth = boxRef.current.offsetWidth
-      const cardWidth = 200
+      console.log({ boxWidth })
+
+      const newVisibleMoviesCount = Math.floor(boxWidth / cardWidth)
       setVisibleMoviesCount(Math.floor(boxWidth / cardWidth))
+      setShowArrows(movies.length > newVisibleMoviesCount)
     }
   }
 
@@ -26,7 +37,8 @@ function Carousel({ movies }: ICarousel) {
     window.addEventListener('resize', updateVisibleMoviesCount)
 
     return () => window.removeEventListener('resize', updateVisibleMoviesCount)
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [movies.length])
 
   const handleNext = () => {
     setCurrent(prev => (prev + 1) % movies.length)
@@ -42,29 +54,37 @@ function Carousel({ movies }: ICarousel) {
     }
 
     const totalMovies = movies.length
+
     const endIndex = current + visibleMoviesCount
+    console.log({ current })
+    console.log({ endIndex })
+    console.log({ visibleMoviesCount })
+    console.log({ totalMovies })
+
     let movieSlice = []
 
-    if (endIndex > totalMovies) {
-      const endSliceCount = endIndex - totalMovies
-      movieSlice = movies.slice(current, totalMovies)
-      movieSlice = movieSlice.concat(movies.slice(0, endSliceCount))
+    if (visibleMoviesCount >= totalMovies) {
+      movieSlice = movies
     } else {
-      movieSlice = movies.slice(current, endIndex)
+      if (endIndex > totalMovies) {
+        const endSliceCount = endIndex - totalMovies
+        movieSlice = movies.slice(current, totalMovies + 1)
+        movieSlice = movieSlice.concat(movies.slice(0, endSliceCount))
+      } else {
+        movieSlice = movies.slice(current, endIndex)
+      }
     }
 
     return movieSlice.map((movie, index) => (
       <Card key={index}>
         <img
           style={{
-            height: '100%',
-            width: 'auto',
             maxWidth: '100%',
-            objectFit: 'cover',
+            objectFit: 'contain',
             borderRadius: '8px',
           }}
           src={movie.thumbnail}
-          alt={`Image ${index}`}
+          alt={movie.title}
           onError={handleImgError}
         />
         <CardBox
@@ -82,21 +102,11 @@ function Carousel({ movies }: ICarousel) {
   }
 
   return (
-    <MuiBox
-      ref={boxRef}
-      sx={{
-        display: 'flex',
-        overflow: 'hidden',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        position: 'relative',
-      }}
-    >
-      <PrevArrow onClick={handlePrev} />
+    <Container ref={boxRef}>
+      {showArrows && <PrevArrow role='prevArrow' onClick={handlePrev} />}
       {renderMovies()}
-      <NextArrow onClick={handleNext} />
-    </MuiBox>
+      {showArrows && <NextArrow role='nextArrow' onClick={handleNext} />}
+    </Container>
   )
 }
 export default Carousel
