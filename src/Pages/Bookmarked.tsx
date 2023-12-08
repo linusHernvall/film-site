@@ -4,7 +4,7 @@ import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
 
 function Bookmarked() {
   return (
-    <div
+    <Box
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -28,7 +28,7 @@ function Bookmarked() {
           <ThumbnailCard key={index} movie={movie} />
         ))}
       </Box>
-    </div>
+    </Box>
   )
 }
 
