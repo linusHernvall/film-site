@@ -28,7 +28,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
-      <App />
     </ThemeProvider>
   </React.StrictMode>
 )
