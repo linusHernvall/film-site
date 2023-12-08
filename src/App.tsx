@@ -5,14 +5,7 @@ import Footer from './components/footer/Footer'
 
 function App() {
   return (
-    <Box
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
+    <Box>
       <Header />
       <Outlet />
       <Footer />
