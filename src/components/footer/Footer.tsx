@@ -53,7 +53,6 @@ function Footer() {
       </FooterBox>
       <Box
         style={{
-          //   justifyContent: 'center',
           width: '100%',
           display: 'flex',
           color: 'white',

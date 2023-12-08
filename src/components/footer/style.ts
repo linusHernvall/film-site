@@ -13,7 +13,6 @@ export const FooterBox = styled(Box)(() => ({
   flexDirection: 'column',
   justifyContent: 'center',
   width: '100%',
-  //   background: 'tomato',
 }))
 
 export const Footertext = styled(Typography)(({ theme }) => ({
