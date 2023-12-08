@@ -1,4 +1,6 @@
+import { Typography } from '@mui/material'
 import { useState } from 'react'
+import MovieCarousel from '../components/movieCarousel/MovieCarousel'
 import SearchBar from '../components/searchBar/SearchBar'
 
 function HomePage() {
@@ -7,7 +9,9 @@ function HomePage() {
   const handleSearch = () => {}
   return (
     <div>
+      <Typography variant='h1'>Home Page</Typography>
       <SearchBar searchWord={searchWord} setSearchWord={setSearchWord} onSubmit={handleSearch} />
+      <MovieCarousel />
     </div>
   )
 }
