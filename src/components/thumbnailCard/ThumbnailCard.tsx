@@ -30,6 +30,9 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
           '& .MuiCardContent-root:last-child': {
             padding: '20px',
           },
+          '&:hover': {
+            cursor: 'pointer',
+          },
         }}
         onClick={handleClick}
       >
