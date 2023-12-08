@@ -1,6 +1,6 @@
+import { Typography } from '@mui/material'
 import { useState } from 'react'
 import SearchBar from '../components/searchBar/SearchBar'
-import { Typography } from '@mui/material'
 
 function HomePage() {
   const [searchWord, setSearchWord] = useState('')

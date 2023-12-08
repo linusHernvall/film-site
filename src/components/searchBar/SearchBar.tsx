@@ -11,6 +11,13 @@ function SearchBar({ searchWord, setSearchWord, onSubmit }: ISearchBar) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     onSubmit(searchWord)
+    console.log({ Search })
+  }
+
+  const handleClick = (event: React.MouseEvent<SVGSVGElement>) => {
+    event.preventDefault()
+    onSubmit(searchWord)
+    console.log({ Search })
   }
 
   return (
@@ -22,7 +29,7 @@ function SearchBar({ searchWord, setSearchWord, onSubmit }: ISearchBar) {
           onChange={e => setSearchWord(e.target.value)}
           placeholder='Search movies...'
         />
-        <Search type='submit' />
+        <Search type='submit' onClick={handleClick} />
       </InputContainer>
     </form>
   )
