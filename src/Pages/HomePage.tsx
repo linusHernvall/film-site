@@ -10,8 +10,8 @@ function HomePage() {
   return (
     <div>
       <Typography variant='h1'>Home Page</Typography>
-      <MovieCarousel />
       <SearchBar searchWord={searchWord} setSearchWord={setSearchWord} onSubmit={handleSearch} />
+      <MovieCarousel />
     </div>
   )
 }
