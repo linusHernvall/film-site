@@ -16,8 +16,8 @@ function CategoryGallery() {
             to={`/categories/${encodeURIComponent(genre)}`}
             color='inherit'
             style={{
-              textDecoration: 'none', // Alternative way to remove underline
-              backgroundColor: 'transparent', // Removes background
+              textDecoration: 'none',
+              backgroundColor: 'transparent',
             }}
           >
             <CategoryBox>

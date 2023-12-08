@@ -28,7 +28,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
     <MuiBox>
       <Card
         sx={{
-          maxWidth: 330,
+          maxWidth: 300,
           '& .MuiCardContent-root:last-child': {
             padding: '20px',
           },
@@ -38,7 +38,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
         <CardMedia
           component='img'
           alt={title}
-          height='500'
+          height='440'
           image={imageSource}
           onError={() => setImageError(true)}
         />
