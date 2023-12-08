@@ -11,13 +11,11 @@ function SearchBar({ searchWord, setSearchWord, onSubmit }: ISearchBar) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     onSubmit(searchWord)
-    console.log({ Search })
   }
 
   const handleClick = (event: React.MouseEvent<SVGSVGElement>) => {
     event.preventDefault()
     onSubmit(searchWord)
-    console.log({ Search })
   }
 
   return (
