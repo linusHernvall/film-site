@@ -1,8 +1,8 @@
 import { Card, CardMedia, Box as MuiBox } from '@mui/material'
 import { useState } from 'react'
-import { Movie } from '../../interface/interfaces'
-import { Content, HeartButton, HeartIcon, Text, TypographyContainer } from './style'
 import { useThumbnailContext } from '../../context/BookmarkedContext'
+import { Movie } from '../../interface/interfaces'
+import { Content, HeartButton, HeartIcon, HeartIconRed, Text, TypographyContainer } from './style'
 
 interface ThumbnailCardProps {
   movie: Movie
@@ -52,7 +52,11 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
             <Text variant='body1'>{rating}</Text>
           </TypographyContainer>
           <HeartButton onClick={toggleBookmark}>
-            <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
+            {isBookmarked ? (
+              <HeartIconRed className='material-symbols-outlined'>favorite</HeartIconRed>
+            ) : (
+              <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
+            )}
           </HeartButton>
         </Content>
       </Card>
