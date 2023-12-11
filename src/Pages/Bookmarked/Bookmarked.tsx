@@ -6,7 +6,7 @@ import { ContainerBox, ThumbnailBox } from './style'
 function Bookmarked() {
   return (
     <ContainerBox>
-      <Typography variant='h1'>Bookmarked page</Typography>
+      <Typography variant='h1'>Bookmarked movies</Typography>
       <ThumbnailBox>
         {moviesData.map((movie, index) => (
           <ThumbnailCard key={index} movie={movie} />

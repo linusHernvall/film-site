@@ -17,7 +17,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
       <Route index element={<HomePage />} />
-      <Route path='filmview' element={<FilmView />} />
+      <Route path='filmview/:title' element={<FilmView />} />
       <Route path='bookmarked' element={<Bookmarked />} />
       <Route path='categories' element={<Categories />} />
       <Route path='categories/:genre' element={<CategorySpecific />} />
@@ -30,7 +30,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <ThemeProvider theme={theme}>
       <ThumbnailProvider>
         <RouterProvider router={router} />
-        <App />
       </ThumbnailProvider>
     </ThemeProvider>
   </React.StrictMode>

@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router'
 import { describe, expect, test } from 'vitest'
 import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
 import { ThumbnailProvider } from '../context/BookmarkedContext'
@@ -18,9 +19,11 @@ describe('ThumbnailCard tests', () => {
 
   test('should render ThumbnailCard with rating', () => {
     render(
-      <ThumbnailProvider>
-        <ThumbnailCard movie={mockedMovie} />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <ThumbnailCard movie={mockedMovie} />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const ratingElement = screen.getByText('R')
@@ -29,9 +32,11 @@ describe('ThumbnailCard tests', () => {
 
   test('should render ThumbnailCard with year', () => {
     render(
-      <ThumbnailProvider>
-        <ThumbnailCard movie={mockedMovie} />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <ThumbnailCard movie={mockedMovie} />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const yearElement = screen.getByText(1994)
@@ -40,9 +45,11 @@ describe('ThumbnailCard tests', () => {
 
   test('should render ThumbnailCard with thumbnail alt title', () => {
     render(
-      <ThumbnailProvider>
-        <ThumbnailCard movie={mockedMovie} />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <ThumbnailCard movie={mockedMovie} />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const imageTitle = screen.getByAltText(mockedMovie.title)
@@ -51,9 +58,11 @@ describe('ThumbnailCard tests', () => {
 
   test('should render ThumbnailCard with thumbnail image', () => {
     render(
-      <ThumbnailProvider>
-        <ThumbnailCard movie={mockedMovie} />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <ThumbnailCard movie={mockedMovie} />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const imageElement = screen.getByRole('img')
@@ -62,9 +71,11 @@ describe('ThumbnailCard tests', () => {
 
   test('should render ThumbnailCard with placeholder image if error', async () => {
     render(
-      <ThumbnailProvider>
-        <ThumbnailCard movie={mockedMovie} />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <ThumbnailCard movie={mockedMovie} />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const originalImage = screen.getByRole('img')
