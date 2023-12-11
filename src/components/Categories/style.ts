@@ -5,6 +5,7 @@ export const CategoryBox = styled(Box)(({ theme }) => ({
   height: 170,
   backgroundColor: theme.palette.secondary[800],
   display: 'flex',
+  borderRadius: theme.shape.borderRadius,
   justifyContent: 'center',
   alignItems: 'center',
   '&:hover': {

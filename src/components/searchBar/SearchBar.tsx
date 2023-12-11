@@ -2,20 +2,24 @@ import React from 'react'
 import { Input, InputContainer, Search } from './style'
 
 interface ISearchBar {
-  searchWord: string
-  setSearchWord: (searchWord: string) => void
-  onSubmit: (searchWord: string) => void
+  searchMovie: string
+  setSearchMovie: (searchMovie: string) => void
+  onSubmit: (searchMovie: string) => void
 }
 
-function SearchBar({ searchWord, setSearchWord, onSubmit }: ISearchBar) {
+function SearchBar({
+  searchMovie: searchMovie,
+  setSearchMovie: setSearchMovie,
+  onSubmit,
+}: ISearchBar) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    onSubmit(searchWord)
+    onSubmit(searchMovie)
   }
 
   const handleClick = (event: React.MouseEvent<SVGSVGElement>) => {
     event.preventDefault()
-    onSubmit(searchWord)
+    onSubmit(searchMovie)
   }
 
   return (
@@ -23,8 +27,8 @@ function SearchBar({ searchWord, setSearchWord, onSubmit }: ISearchBar) {
       <InputContainer>
         <Input
           type='text'
-          value={searchWord}
-          onChange={e => setSearchWord(e.target.value)}
+          value={searchMovie}
+          onChange={e => setSearchMovie(e.target.value)}
           placeholder='Search movies...'
         />
         <Search type='submit' onClick={handleClick} />

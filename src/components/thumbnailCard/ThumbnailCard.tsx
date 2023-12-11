@@ -1,21 +1,34 @@
 import { Card, CardMedia, Box as MuiBox } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import { useThumbnailContext } from '../../context/BookmarkedContext'
 import { Movie } from '../../interface/interfaces'
-import { Content, HeartButton, HeartIcon, Text, TypographyContainer } from './style'
+import { Content, HeartButton, HeartIcon, HeartIconRed, Text, TypographyContainer } from './style'
 
 interface ThumbnailCardProps {
   movie: Movie
 }
 
 function ThumbnailCard({ movie }: ThumbnailCardProps) {
+  const { bookmarkedMovies, setBookmarkedMovies } = useThumbnailContext()
   const { title, year, rating, thumbnail } = movie
   const [imageError, setImageError] = useState(false)
+  const isBookmarked = bookmarkedMovies.some(bookmarkedMovie => bookmarkedMovie.title === title)
   const navigate = useNavigate()
 
   const imageSource = imageError
     ? 'https://bfl-bred.com/wp-content/themes/finacia/assets/images/no-image/No-Image-Found-400x264.png'
     : thumbnail
+
+  const toggleBookmark = () => {
+    if (isBookmarked) {
+      setBookmarkedMovies(
+        bookmarkedMovies.filter(bookmarkedMovie => bookmarkedMovie.title !== title)
+      )
+    } else {
+      setBookmarkedMovies([...bookmarkedMovies, movie])
+    }
+  }
 
   const handleClick = () => {
     const formattedTitle = title.replace(/\s+/g, '-')
@@ -34,7 +47,6 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
             cursor: 'pointer',
           },
         }}
-        onClick={handleClick}
       >
         <CardMedia
           component='img'
@@ -42,6 +54,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
           height='440'
           image={imageSource}
           onError={() => setImageError(true)}
+          onClick={handleClick}
         />
         <Content>
           <TypographyContainer>
@@ -49,8 +62,12 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
             <Text variant='body1'>|</Text>
             <Text variant='body1'>{rating}</Text>
           </TypographyContainer>
-          <HeartButton>
-            <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
+          <HeartButton onClick={toggleBookmark}>
+            {isBookmarked ? (
+              <HeartIconRed className='material-symbols-outlined'>favorite</HeartIconRed>
+            ) : (
+              <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
+            )}
           </HeartButton>
         </Content>
       </Card>
