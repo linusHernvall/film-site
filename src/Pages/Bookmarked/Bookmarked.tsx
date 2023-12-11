@@ -1,14 +1,16 @@
 import { Typography } from '@mui/material'
-import moviesData from '../../../data/movies.json'
 import ThumbnailCard from '../../components/thumbnailCard/ThumbnailCard'
 import { ContainerBox, ThumbnailBox } from './style'
+import { useThumbnailContext } from '../../context/ThumbnailContext'
 
 function Bookmarked() {
+  const { bookmarkedMovies } = useThumbnailContext()
+
   return (
     <ContainerBox>
       <Typography variant='h1'>Bookmarked movies</Typography>
       <ThumbnailBox>
-        {moviesData.map((movie, index) => (
+        {bookmarkedMovies.map((movie, index) => (
           <ThumbnailCard key={index} movie={movie} />
         ))}
       </ThumbnailBox>
