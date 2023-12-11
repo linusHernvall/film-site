@@ -10,7 +10,7 @@ export const Content = styled(CardContent)(({ theme }) => ({
 export const HeartButton = styled(Box)(({ theme }) => ({
   display: 'flex',
   color: theme.palette.secondary[900],
-  marginLeft:"150px"
+  marginRight: "10px"
 }))
 
 export const TypographyContainer = styled(Box)(({ theme }) => ({
