@@ -9,6 +9,7 @@ import Categories from './Pages/Categories.tsx'
 import CategorySpecific from './Pages/CategorySpecific.tsx'
 import FilmView from './Pages/FilmView.tsx'
 import HomePage from './Pages/HomePage.tsx'
+import { ThumbnailProvider } from './context/BookmarkedContext.tsx'
 import './index.css'
 import { theme } from './theme.tsx'
 
@@ -27,7 +28,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
+      <ThumbnailProvider>
+        <RouterProvider router={router} />
+      </ThumbnailProvider>
     </ThemeProvider>
   </React.StrictMode>
 )
