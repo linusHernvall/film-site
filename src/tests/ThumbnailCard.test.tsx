@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import { describe, expect, test } from 'vitest'
 import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
-import { ThumbnailProvider } from '../context/BookmarkedContext'
+import { ThumbnailProvider } from '../context/ThumbnailContext'
 
 describe('ThumbnailCard tests', () => {
   const mockedMovie = {
