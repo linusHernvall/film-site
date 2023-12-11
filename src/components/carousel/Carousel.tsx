@@ -1,9 +1,8 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { useThumbnailContext } from '../../context/BookmarkedContext'
 import { Movie } from '../../interface/interfaces'
 import { theme } from '../../theme'
-import placeholderImg from './images/error.png'
 import {
   Card,
   Container,
@@ -102,7 +101,8 @@ function Carousel({ movies }: ICarousel) {
       }
 
       const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-        e.currentTarget.src = placeholderImg
+        e.currentTarget.src =
+          'https://bfl-bred.com/wp-content/themes/finacia/assets/images/no-image/No-Image-Found-400x264.png'
       }
 
       return (
@@ -110,8 +110,8 @@ function Carousel({ movies }: ICarousel) {
           <img
             style={{
               maxWidth: '100%',
-              objectFit: 'contain',
-              borderRadius: '8px',
+              height: '300px',
+              objectFit: 'cover',
             }}
             src={movie.thumbnail}
             alt={movie.title}
@@ -119,24 +119,36 @@ function Carousel({ movies }: ICarousel) {
           />
 
           <Content>
-            <TypographyContainer>
-              <Typography color={theme.palette.black[400]} variant='body1'>
-                {movie.year}
-              </Typography>
-              <Typography color={theme.palette.black[400]} variant='body1'>
-                |
-              </Typography>
-              <Typography color={theme.palette.black[400]} variant='body1'>
-                {movie.rating}
-              </Typography>
-            </TypographyContainer>
-            <HeartButton onClick={toggleBookmark}>
-              {isBookmarked ? (
-                <HeartIconRed className='material-symbols-outlined'>favorite</HeartIconRed>
-              ) : (
-                <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
-              )}
-            </HeartButton>
+            <Box
+              sx={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItem: 'center',
+              }}
+            >
+              <TypographyContainer>
+                <Typography color={theme.palette.black[400]} variant='body1'>
+                  {movie.year}
+                </Typography>
+                <Typography color={theme.palette.black[400]} variant='body1'>
+                  |
+                </Typography>
+                <Typography color={theme.palette.black[400]} variant='body1'>
+                  {movie.rating}
+                </Typography>
+              </TypographyContainer>
+              <HeartButton onClick={toggleBookmark}>
+                {isBookmarked ? (
+                  <HeartIconRed className='material-symbols-outlined'>favorite</HeartIconRed>
+                ) : (
+                  <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
+                )}
+              </HeartButton>
+            </Box>
+            <Typography color={theme.palette.black[400]} variant='h6'>
+              {movie.title}
+            </Typography>
           </Content>
         </Card>
       )

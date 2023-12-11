@@ -21,6 +21,7 @@ export const Card = styled(MuiBox)(() => ({
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   transition: 'transform 0.3s ease-out',
   cursor: 'pointer',
+  margin: '12px 0px',
   '&:hover': {
     transform: 'scale(1.05)',
   },
@@ -28,18 +29,21 @@ export const Card = styled(MuiBox)(() => ({
 
 export const Content = styled(MuiBox)(({ theme }) => ({
   display: 'flex',
+  justifyContent: 'start',
   flexDirection: 'column',
   backgroundColor: theme.palette.secondary.main,
-  padding: '20px',
+  padding: '16px',
   alignItems: 'start',
   gap: '10px',
   borderRadius: '0 0 10px 10px',
+  height: '100px',
 }))
 
 export const TypographyContainer = styled(MuiBox)(() => ({
+  width: '100%',
   display: 'flex',
+  alignItem: 'center',
   gap: '0.4rem',
-  alignItems: 'center',
 }))
 
 export const Text = styled(MuiTypography)(({ theme }) => ({
@@ -48,9 +52,6 @@ export const Text = styled(MuiTypography)(({ theme }) => ({
 }))
 
 export const HeartButton = styled(MuiBox)(() => ({
-  position: 'absolute',
-  bottom: '20px',
-  right: '20px',
   cursor: 'pointer',
 }))
 
