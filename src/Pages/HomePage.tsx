@@ -7,19 +7,19 @@ import { Movie } from '../interface/interfaces'
 import { theme } from '../theme'
 
 function HomePage() {
-  const [searchWord, setSearchWord] = useState('')
+  const [searchMovie, setSearchMovie] = useState('')
   const [searchResults, setSearchResults] = useState<Movie[]>([])
   const [isError, setIsError] = useState(false)
   const [noResults, setNoResults] = useState(false)
 
   const handleSearch = () => {
-    if (searchWord.trim() === '') {
+    if (searchMovie.trim() === '') {
       setIsError(true)
       setNoResults(false)
     } else {
       setIsError(false)
       const filteredMovies = movieData.filter(movie =>
-        movie.title.toLowerCase().includes(searchWord.toLowerCase())
+        movie.title.toLowerCase().includes(searchMovie.toLowerCase())
       )
       if (filteredMovies.length > 0) {
         setSearchResults(filteredMovies)
@@ -43,7 +43,11 @@ function HomePage() {
   return (
     <div>
       <Typography variant='h1'>Home Page</Typography>
-      <SearchBar searchWord={searchWord} setSearchWord={setSearchWord} onSubmit={handleSearch} />
+      <SearchBar
+        searchMovie={searchMovie}
+        setSearchMovie={setSearchMovie}
+        onSubmit={handleSearch}
+      />
 
       {/* Single Box for displaying messages or acting as a filler */}
       <Box sx={{ minHeight: '24px' }}>
