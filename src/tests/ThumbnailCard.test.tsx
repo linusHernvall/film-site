@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, test } from 'vitest'
 import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
+import { ThumbnailProvider } from '../context/BookmarkedContext'
 
 describe('ThumbnailCard tests', () => {
   const mockedMovie = {
@@ -16,35 +17,55 @@ describe('ThumbnailCard tests', () => {
   }
 
   test('should render ThumbnailCard with rating', () => {
-    render(<ThumbnailCard movie={mockedMovie} />)
+    render(
+      <ThumbnailProvider>
+        <ThumbnailCard movie={mockedMovie} />
+      </ThumbnailProvider>
+    )
 
     const ratingElement = screen.getByText('R')
     expect(ratingElement).toBeInTheDocument()
   })
 
   test('should render ThumbnailCard with year', () => {
-    render(<ThumbnailCard movie={mockedMovie} />)
+    render(
+      <ThumbnailProvider>
+        <ThumbnailCard movie={mockedMovie} />
+      </ThumbnailProvider>
+    )
 
     const yearElement = screen.getByText(1994)
     expect(yearElement).toBeInTheDocument()
   })
 
   test('should render ThumbnailCard with thumbnail alt title', () => {
-    render(<ThumbnailCard movie={mockedMovie} />)
+    render(
+      <ThumbnailProvider>
+        <ThumbnailCard movie={mockedMovie} />
+      </ThumbnailProvider>
+    )
 
     const imageTitle = screen.getByAltText(mockedMovie.title)
     expect(imageTitle).toBeInTheDocument()
   })
 
   test('should render ThumbnailCard with thumbnail image', () => {
-    render(<ThumbnailCard movie={mockedMovie} />)
+    render(
+      <ThumbnailProvider>
+        <ThumbnailCard movie={mockedMovie} />
+      </ThumbnailProvider>
+    )
 
     const imageElement = screen.getByRole('img')
     expect(imageElement).toHaveAttribute('src', mockedMovie.thumbnail)
   })
 
   test('should render ThumbnailCard with placeholder image if error', async () => {
-    render(<ThumbnailCard movie={mockedMovie} />)
+    render(
+      <ThumbnailProvider>
+        <ThumbnailCard movie={mockedMovie} />
+      </ThumbnailProvider>
+    )
 
     const originalImage = screen.getByRole('img')
     expect(originalImage).toHaveAttribute('src', mockedMovie.thumbnail)
