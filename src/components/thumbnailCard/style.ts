@@ -24,7 +24,14 @@ export const Text = styled(Typography)(({ theme }) => ({
 }))
 
 export const HeartIcon = styled(Box)(({ theme }) => ({
-  color: 'black',
+  color: theme.palette.background.default,
   backgroundColor: theme.palette.secondary.main,
   cursor: 'pointer',
+}))
+
+export const HeartIconRed = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  cursor: 'pointer',
+  fontVariationSettings: `'FILL' 1`,
+  color: theme.palette.primary.main,
 }))
