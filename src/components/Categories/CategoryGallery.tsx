@@ -21,7 +21,7 @@ function CategoryGallery() {
             }}
           >
             <CategoryBox>
-              <Typography variant='h5' role='heading' component='span'>
+              <Typography variant='h5' component='span'>
                 {genre}
               </Typography>
             </CategoryBox>

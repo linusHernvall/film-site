@@ -1,7 +1,9 @@
-import { render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { MemoryRouter, Route, Routes } from 'react-router'
 import { describe, expect, test } from 'vitest'
 import Categories from '../Pages/Categories'
+import CategorySpecific from '../Pages/CategorySpecific'
 
 describe('Categories', () => {
   test('should render categories title', () => {
@@ -10,33 +12,30 @@ describe('Categories', () => {
         <Categories />
       </MemoryRouter>
     )
+
+    //
     const titleElement = screen.getByText('CATEGORIES')
     expect(titleElement).toBeInTheDocument()
   })
 
-  test('should render a category called drama', () => {
+  test('should navigate to the drama category page when clicked', async () => {
     render(
-      <MemoryRouter>
-        <Categories />
+      <MemoryRouter initialEntries={['/categories']}>
+        <Routes>
+          <Route path='/categories' element={<Categories />} />
+          <Route path='/categories/:genre' element={<CategorySpecific />} />
+        </Routes>
       </MemoryRouter>
     )
-    const dramaCategory = screen.getByRole('heading', { name: 'Drama' })
-    expect(dramaCategory).toBeInTheDocument()
-  })
 
-  test('should navigate to the drama category page when clicked', async () => {
-    //   render(
-    //     <MemoryRouter initialEntries={['/categories']}>
-    //       <Routes>
-    //         <Route path='/categories' Component={Categories} />
-    //         <Route path='/categories/drama' Component={CategorySpecific} />
-    //       </Routes>
-    //     </MemoryRouter>
-    //   )
-    //   const categoryBox = screen.getByRole('heading', { name: 'Drama' })
-    //   userEvent.click(categoryBox)
-    //   await waitFor(() => {
-    //     expect(window.location.pathname).toBe('/categories/Drama')
-    //   })
+    // Click on link with text Drama
+    const categoryBox = screen.getByRole('link', { name: 'Drama' })
+    userEvent.click(categoryBox)
+
+    // Find title Drama on category specific page
+    await waitFor(() => {
+      const categoryTitle = screen.getByText('CATEGORIES/Drama')
+      expect(categoryTitle).toBeInTheDocument()
+    })
   })
 })

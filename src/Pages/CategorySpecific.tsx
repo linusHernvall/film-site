@@ -11,15 +11,10 @@ function CategorySpecific() {
   return (
     <Box display='flex' justifyContent='center' flexDirection='column' alignItems='center'>
       <Box display='flex' alignItems='center'>
-        <Typography variant='h1'>CATEGORIES / </Typography>{' '}
-        <Typography variant='h2'> {genre}</Typography>
+        <Typography variant='h1'>CATEGORIES/{genre} </Typography>{' '}
       </Box>
 
-      <Box width='100%' display='flex' justifyContent='flex-start'>
-        {/* <Typography variant='h5' p={3} className='Genre'>
-          {genre}
-        </Typography> */}
-      </Box>
+      <Box width='100%' display='flex' justifyContent='flex-start'></Box>
       <Box display='flex' justifyContent='center' flexWrap='wrap' gap='1rem'>
         {moviesByGenre.map(movie => (
           <ThumbnailCard key={movie.title} movie={movie} />
