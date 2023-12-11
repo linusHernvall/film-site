@@ -1,15 +1,27 @@
 import { Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
+import { useThumbnailContext } from '../../context/BookmarkedContext'
 import { Movie } from '../../interface/interfaces'
+import { theme } from '../../theme'
 import placeholderImg from './images/error.png'
-import { Card, CardBox, Container, NextArrow, PrevArrow } from './style'
+import {
+  Card,
+  Container,
+  Content,
+  HeartButton,
+  HeartIcon,
+  HeartIconRed,
+  NextArrow,
+  PrevArrow,
+  TypographyContainer,
+} from './style'
 
 interface ICarousel {
   movies: Movie[]
 }
 
 function Carousel({ movies }: ICarousel) {
-  console.log(window.innerWidth, 'Inner width')
+  // console.log(window.innerWidth, 'Inner width')
 
   const cardWidth = 200 + 16
 
@@ -18,13 +30,16 @@ function Carousel({ movies }: ICarousel) {
   const [visibleMoviesCount, setVisibleMoviesCount] = useState(
     Math.floor(window.innerWidth / cardWidth)
   )
+
+  const { bookmarkedMovies, setBookmarkedMovies } = useThumbnailContext()
+
   const boxRef = useRef<HTMLDivElement>(null)
 
   const updateVisibleMoviesCount = () => {
     if (boxRef.current) {
-      console.log({ boxRef })
+      // console.log({ boxRef })
       const boxWidth = boxRef.current.offsetWidth
-      console.log({ boxWidth })
+      // console.log({ boxWidth })
 
       const newVisibleMoviesCount = Math.floor(boxWidth / cardWidth)
       setVisibleMoviesCount(Math.floor(boxWidth / cardWidth))
@@ -49,17 +64,13 @@ function Carousel({ movies }: ICarousel) {
   }
 
   const renderMovies = () => {
-    const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-      e.currentTarget.src = placeholderImg
-    }
-
     const totalMovies = movies.length
 
     const endIndex = current + visibleMoviesCount
-    console.log({ current })
-    console.log({ endIndex })
-    console.log({ visibleMoviesCount })
-    console.log({ totalMovies })
+    // console.log({ current })
+    // console.log({ endIndex })
+    // console.log({ visibleMoviesCount })
+    // console.log({ totalMovies })
 
     let movieSlice = []
 
@@ -75,30 +86,61 @@ function Carousel({ movies }: ICarousel) {
       }
     }
 
-    return movieSlice.map((movie, index) => (
-      <Card key={index}>
-        <img
-          style={{
-            maxWidth: '100%',
-            objectFit: 'contain',
-            borderRadius: '8px',
-          }}
-          src={movie.thumbnail}
-          alt={movie.title}
-          onError={handleImgError}
-        />
-        <CardBox
-          sx={{
-            padding: '2px 8px',
-            borderRadius: '8px',
-            opacity: '0.5',
-          }}
-        >
-          <Typography variant='body2'>{movie.year}</Typography>
-          <Typography variant='body2'>{movie.rating}</Typography>
-        </CardBox>
-      </Card>
-    ))
+    return movieSlice.map(movie => {
+      const isBookmarked = bookmarkedMovies.some(
+        bookmarkedMovie => bookmarkedMovie.title === movie.title
+      )
+
+      const toggleBookmark = () => {
+        if (isBookmarked) {
+          setBookmarkedMovies(
+            bookmarkedMovies.filter(bookmarkedMovie => bookmarkedMovie.title !== movie.title)
+          )
+        } else {
+          setBookmarkedMovies([...bookmarkedMovies, movie])
+        }
+      }
+
+      const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+        e.currentTarget.src = placeholderImg
+      }
+
+      return (
+        <Card key={movie.title}>
+          <img
+            style={{
+              maxWidth: '100%',
+              objectFit: 'contain',
+              borderRadius: '8px',
+            }}
+            src={movie.thumbnail}
+            alt={movie.title}
+            onError={handleImgError}
+          />
+
+          <Content>
+            <TypographyContainer>
+              <Typography color={theme.palette.black[400]} variant='body1'>
+                {movie.year}
+              </Typography>
+              <Typography color={theme.palette.black[400]} variant='body1'>
+                |
+              </Typography>
+              <Typography color={theme.palette.black[400]} variant='body1'>
+                {movie.rating}
+              </Typography>
+            </TypographyContainer>
+            <HeartButton onClick={toggleBookmark}>
+              {isBookmarked ? (
+                <HeartIconRed className='material-symbols-outlined'>favorite</HeartIconRed>
+              ) : (
+                <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
+              )}
+            </HeartButton>
+          </Content>
+        </Card>
+      )
+    })
   }
 
   return (
