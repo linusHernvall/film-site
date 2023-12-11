@@ -2,6 +2,15 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { Box as MuiBox, styled } from '@mui/material'
 
+export const Container = styled(MuiBox)(() => ({
+  display: 'flex',
+  overflow: 'hidden',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+  position: 'relative',
+}))
+
 export const Card = styled(MuiBox)(() => ({
   position: 'relative',
   display: 'flex',
@@ -9,7 +18,6 @@ export const Card = styled(MuiBox)(() => ({
   alignItems: 'center',
   borderRadius: '8px',
   width: '200px',
-  minHeight: '300px',
   margin: '0 8px',
   overflow: 'hidden',
   transition: 'transform 0.3s ease-out',

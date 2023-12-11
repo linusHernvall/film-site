@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import { useState } from 'react'
 import movieData from '../../data/movies.json'
+import MovieCarousel from '../components/movieCarousel/MovieCarousel'
 import SearchBar from '../components/searchBar/SearchBar'
 import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
 import { Movie } from '../interface/interfaces'
@@ -65,6 +66,7 @@ function HomePage() {
           <ThumbnailCard key={movie.title} movie={movie} />
         ))}
       </Box>
+      <MovieCarousel />
     </div>
   )
 }
