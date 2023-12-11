@@ -11,7 +11,12 @@ function MovieCarousel() {
 
   useEffect(() => {
     const trending = movieData.filter(movie => movie.isTrending)
-    const recommended = movieData.filter(movie => !movie.isTrending)
+
+    const nonTrending = movieData.filter(movie => !movie.isTrending)
+
+    const shuffledNonTrending = nonTrending.sort(() => 0.5 - Math.random())
+
+    const recommended = shuffledNonTrending.slice(0, 10)
 
     setTrendingMovies(trending)
     setRecommendedMovies(recommended)
