@@ -9,7 +9,7 @@ import Categories from './Pages/Categories.tsx'
 import CategorySpecific from './Pages/CategorySpecific.tsx'
 import FilmView from './Pages/FilmView.tsx'
 import HomePage from './Pages/HomePage.tsx'
-import { ThumbnailProvider } from './context/BookmarkedContext.tsx'
+import { ThumbnailProvider } from './context/ThumbnailContext.tsx'
 import './index.css'
 import { theme } from './theme.tsx'
 
