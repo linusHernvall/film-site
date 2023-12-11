@@ -50,7 +50,7 @@ function HomePage() {
       />
 
       {/* Single Box for displaying messages or acting as a filler */}
-      <Box sx={{ minHeight: '24px' }}>
+      <Box sx={{ minHeight: '24px', marginBottom: '24px' }}>
         {' '}
         <Typography
           variant='body1'
@@ -60,9 +60,11 @@ function HomePage() {
         </Typography>
       </Box>
 
-      {searchResults.map(movie => (
-        <ThumbnailCard key={movie.title} movie={movie} />
-      ))}
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        {searchResults.map(movie => (
+          <ThumbnailCard key={movie.title} movie={movie} />
+        ))}
+      </Box>
     </div>
   )
 }
