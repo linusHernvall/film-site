@@ -4,20 +4,21 @@ export const Content = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',  // Updated to column layout
   backgroundColor: theme.palette.secondary.main,
-  justifyContent: 'center',  // Center the content vertically
   alignItems: 'center',
 }))
 
 export const HeartButton = styled(Box)(({ theme }) => ({
   display: 'flex',
   color: theme.palette.secondary[900],
+  marginLeft:"150px"
 }))
 
 export const TypographyContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   gap: '0.4rem',
+  marginRight: "10px",
   backgroundColor: theme.palette.secondary.main,
-  marginTop: '0.4rem',  // Add margin to separate title from other text
+  marginTop: '0.4rem', 
 }))
 
 export const Text = styled(Typography)(({ theme }) => ({

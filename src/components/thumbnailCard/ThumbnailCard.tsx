@@ -62,14 +62,14 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
             <Text variant='body1'>{year}</Text>
             <Text variant='body1'>|</Text>
             <Text variant='body1'>{rating}</Text>
+            <HeartButton onClick={toggleBookmark}>
+              {isBookmarked ? (
+                <HeartIconRed className='material-symbols-outlined'>favorite</HeartIconRed>
+              ) : (
+                <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
+              )}
+            </HeartButton>
           </TypographyContainer>
-          <HeartButton onClick={toggleBookmark}>
-            {isBookmarked ? (
-              <HeartIconRed className='material-symbols-outlined'>favorite</HeartIconRed>
-            ) : (
-              <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
-            )}
-          </HeartButton>
         </Content>
       </Card>
     </MuiBox>
