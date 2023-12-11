@@ -40,7 +40,7 @@ describe('Categories', () => {
     })
   })
 
-  test.only('should navigate to correct movie card when clicking on a movie', async () => {
+  test('should navigate to correct movie card when clicking on a movie', async () => {
     const mockMovie = {
       title: '12 ANGRY MEN',
       year: 1957,
