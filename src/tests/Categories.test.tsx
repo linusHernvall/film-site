@@ -6,7 +6,7 @@ import { describe, expect, test } from 'vitest'
 import Categories from '../Pages/Categories'
 import CategorySpecific from '../Pages/CategorySpecific'
 import MovieCard from '../components/MovieCard/MovieCard'
-import { ThumbnailProvider } from '../context/BookmarkedContext'
+import { ThumbnailProvider } from '../context/ThumbnailContext'
 // import CategorySpecific from '../Pages/CategorySpecific'
 // import MovieCard from '../components/MovieCard/MovieCard'
 

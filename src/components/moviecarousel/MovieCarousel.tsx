@@ -11,7 +11,12 @@ function MovieCarousel() {
 
   useEffect(() => {
     const trending = movieData.filter(movie => movie.isTrending)
-    const recommended = movieData.filter(movie => !movie.isTrending)
+
+    const nonTrending = movieData.filter(movie => !movie.isTrending)
+
+    const shuffledNonTrending = nonTrending.sort(() => 0.5 - Math.random())
+
+    const recommended = shuffledNonTrending.slice(0, 10)
 
     setTrendingMovies(trending)
     setRecommendedMovies(recommended)
@@ -20,12 +25,12 @@ function MovieCarousel() {
   return (
     <Container sx={{ gap: '80px' }}>
       <Container sx={{ gap: '16px' }}>
-        <Typography variant='h6'>Trending</Typography>
+        <Typography variant='h2'>Trending</Typography>
         <Carousel movies={trendingMovies} />
       </Container>
 
       <Container sx={{ gap: '16px' }}>
-        <Typography variant='h6'>Recommended for you</Typography>
+        <Typography variant='h2'>Recommended for you</Typography>
         <Carousel movies={recommendedMovies} />
       </Container>
     </Container>

@@ -1,32 +1,43 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router'
+import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
-import placeholderImg from './images/error.png'
-import { Card, CardBox, Container, NextArrow, PrevArrow } from './style'
+import { theme } from '../../theme'
+import {
+  ArrowContainer,
+  Card,
+  Container,
+  Content,
+  HeartButton,
+  HeartIcon,
+  HeartIconRed,
+  MovieContainer,
+  NextArrow,
+  PrevArrow,
+  TypographyContainer,
+} from './style'
 
 interface ICarousel {
   movies: Movie[]
 }
 
 function Carousel({ movies }: ICarousel) {
-  console.log(window.innerWidth, 'Inner width')
-
   const cardWidth = 200 + 16
-
   const [current, setCurrent] = useState(0)
   const [showArrows, setShowArrows] = useState(false)
   const [visibleMoviesCount, setVisibleMoviesCount] = useState(
     Math.floor(window.innerWidth / cardWidth)
   )
+  const { bookmarkedMovies, setBookmarkedMovies } = useThumbnailContext()
   const boxRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
 
   const updateVisibleMoviesCount = () => {
     if (boxRef.current) {
-      console.log({ boxRef })
       const boxWidth = boxRef.current.offsetWidth
-      console.log({ boxWidth })
-
       const newVisibleMoviesCount = Math.floor(boxWidth / cardWidth)
+
       setVisibleMoviesCount(Math.floor(boxWidth / cardWidth))
       setShowArrows(movies.length > newVisibleMoviesCount)
     }
@@ -48,18 +59,15 @@ function Carousel({ movies }: ICarousel) {
     setCurrent(prev => (prev - 1 + movies.length) % movies.length)
   }
 
-  const renderMovies = () => {
-    const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-      e.currentTarget.src = placeholderImg
-    }
+  const handleNavigate = (title: string) => {
+    const formattedTitle = title.replace(/\s+/g, '-')
+    navigate(`/filmview/${formattedTitle}`)
+  }
 
+  const renderMovies = () => {
     const totalMovies = movies.length
 
     const endIndex = current + visibleMoviesCount
-    console.log({ current })
-    console.log({ endIndex })
-    console.log({ visibleMoviesCount })
-    console.log({ totalMovies })
 
     let movieSlice = []
 
@@ -75,37 +83,84 @@ function Carousel({ movies }: ICarousel) {
       }
     }
 
-    return movieSlice.map((movie, index) => (
-      <Card key={index}>
-        <img
-          style={{
-            maxWidth: '100%',
-            objectFit: 'contain',
-            borderRadius: '8px',
-          }}
-          src={movie.thumbnail}
-          alt={movie.title}
-          onError={handleImgError}
-        />
-        <CardBox
-          sx={{
-            padding: '2px 8px',
-            borderRadius: '8px',
-            opacity: '0.5',
-          }}
-        >
-          <Typography variant='body2'>{movie.year}</Typography>
-          <Typography variant='body2'>{movie.rating}</Typography>
-        </CardBox>
-      </Card>
-    ))
+    return movieSlice.map(movie => {
+      const isBookmarked = bookmarkedMovies.some(
+        bookmarkedMovie => bookmarkedMovie.title === movie.title
+      )
+
+      const toggleBookmark = () => {
+        if (isBookmarked) {
+          setBookmarkedMovies(
+            bookmarkedMovies.filter(bookmarkedMovie => bookmarkedMovie.title !== movie.title)
+          )
+        } else {
+          setBookmarkedMovies([...bookmarkedMovies, movie])
+        }
+      }
+
+      const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+        e.currentTarget.src =
+          'https://bfl-bred.com/wp-content/themes/finacia/assets/images/no-image/No-Image-Found-400x264.png'
+      }
+
+      return (
+        <Card key={movie.title}>
+          <img
+            style={{
+              maxWidth: '100%',
+              height: '300px',
+              objectFit: 'cover',
+            }}
+            src={movie.thumbnail}
+            alt={movie.title}
+            onError={handleImgError}
+            onClick={() => handleNavigate(movie.title)}
+          />
+
+          <Content>
+            <Box
+              sx={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItem: 'center',
+              }}
+            >
+              <TypographyContainer>
+                <Typography color={theme.palette.black[400]} variant='body1'>
+                  {movie.year}
+                </Typography>
+                <Typography color={theme.palette.black[400]} variant='body1'>
+                  |
+                </Typography>
+                <Typography color={theme.palette.black[400]} variant='body1'>
+                  {movie.rating}
+                </Typography>
+              </TypographyContainer>
+              <HeartButton onClick={toggleBookmark}>
+                {isBookmarked ? (
+                  <HeartIconRed className='material-symbols-outlined'>favorite</HeartIconRed>
+                ) : (
+                  <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
+                )}
+              </HeartButton>
+            </Box>
+            <Typography color={theme.palette.black[400]} variant='h6'>
+              {movie.title}
+            </Typography>
+          </Content>
+        </Card>
+      )
+    })
   }
 
   return (
-    <Container ref={boxRef}>
-      {showArrows && <PrevArrow role='prevArrow' onClick={handlePrev} />}
-      {renderMovies()}
-      {showArrows && <NextArrow role='nextArrow' onClick={handleNext} />}
+    <Container>
+      <MovieContainer ref={boxRef}>{renderMovies()}</MovieContainer>
+      <ArrowContainer>
+        {showArrows && <PrevArrow role='prevArrow' onClick={handlePrev} />}
+        {showArrows && <NextArrow role='nextArrow' onClick={handleNext} />}
+      </ArrowContainer>
     </Container>
   )
 }
