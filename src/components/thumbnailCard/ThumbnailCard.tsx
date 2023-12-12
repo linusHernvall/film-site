@@ -57,7 +57,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
           onClick={handleClick}
         />
         <Content>
-          <Text variant='body1'>{title}</Text>
+          <Text variant='h5'>{title}</Text>
           <TypographyContainer>
             <Text variant='body1'>{year}</Text>
             <Text variant='body1'>|</Text>

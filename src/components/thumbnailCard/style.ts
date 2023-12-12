@@ -4,7 +4,7 @@ export const Content = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',  // Updated to column layout
   backgroundColor: theme.palette.secondary.main,
-  alignItems: 'center',
+  // alignItems: 'center',
 }))
 
 export const HeartButton = styled(Box)(({ theme }) => ({
