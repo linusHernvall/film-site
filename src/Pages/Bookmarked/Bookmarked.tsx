@@ -8,7 +8,9 @@ function Bookmarked() {
 
   return (
     <ContainerBox>
-      <Typography variant='h1'>Your List</Typography>
+      <Typography variant='h1' margin='3rem'>
+        Your List
+      </Typography>
       {bookmarkedMovies.length > 0 ? (
         <ThumbnailBox>
           {bookmarkedMovies.map((movie, index) => (
