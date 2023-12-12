@@ -1,6 +1,10 @@
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { Box, Grid, Typography } from '@mui/material'
+import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
+import { HeartButton } from '../thumbnailCard/style'
 import {
+  FilledHeart,
   MovieCardContainer,
   MovieInfoBox,
   MovieInfoItemBox,
@@ -14,6 +18,19 @@ interface MovieCardProps {
 
 function MovieCard({ movie }: MovieCardProps) {
   const { title, year, rating, actors, genre, synopsis, thumbnail } = movie
+  const { bookmarkedMovies, setBookmarkedMovies } = useThumbnailContext()
+
+  const isBookmarked = bookmarkedMovies.some(bookmarkedMovie => bookmarkedMovie.title === title)
+
+  const toggleBookmark = () => {
+    if (isBookmarked) {
+      setBookmarkedMovies(
+        bookmarkedMovies.filter(bookmarkedMovie => bookmarkedMovie.title !== title)
+      )
+    } else {
+      setBookmarkedMovies([...bookmarkedMovies, movie])
+    }
+  }
 
   return (
     <Box style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -36,6 +53,9 @@ function MovieCard({ movie }: MovieCardProps) {
                 <Typography variant='h3'>Genre: {genre}</Typography>
               </Box>
             </MovieInfoItemBox>
+            <HeartButton onClick={toggleBookmark}>
+              {isBookmarked ? <FilledHeart /> : <FavoriteBorderIcon />}
+            </HeartButton>
 
             <br />
             <Typography variant='body1'>{synopsis}</Typography>
