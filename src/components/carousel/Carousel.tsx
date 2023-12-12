@@ -108,7 +108,7 @@ function Carousel({ movies }: ICarousel) {
           <img
             style={{
               maxWidth: '100%',
-              height: '295px',
+              height: '300px',
               objectFit: 'cover',
             }}
             src={movie.thumbnail}
