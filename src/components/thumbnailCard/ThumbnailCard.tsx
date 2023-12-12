@@ -57,7 +57,6 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
           onClick={handleClick}
         />
         <Content>
-          <Text variant='h5'>{title}</Text>
           <TypographyContainer>
             <Text variant='body1'>{year}</Text>
             <Text variant='body1'>|</Text>
@@ -70,6 +69,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
               )}
             </HeartButton>
           </TypographyContainer>
+          <Text variant='h5'>{title}</Text>
         </Content>
       </Card>
     </MuiBox>
