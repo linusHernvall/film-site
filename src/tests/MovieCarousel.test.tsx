@@ -1,9 +1,8 @@
-// TO BE CONTINUED...
-
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 
+import { MemoryRouter } from 'react-router'
 import MovieCarousel from '../components/movieCarousel/MovieCarousel'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
 
@@ -47,9 +46,11 @@ describe('MovieCarousel', () => {
 
   test('renders a carousel with movies that are trending', async () => {
     render(
-      <ThumbnailProvider>
-        <MovieCarousel />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <MovieCarousel />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const godfather2Image = await screen.findByRole('img', {
@@ -65,9 +66,11 @@ describe('MovieCarousel', () => {
     vi.spyOn(global.Math, 'random').mockReturnValue(0.1)
 
     render(
-      <ThumbnailProvider>
-        <MovieCarousel />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <MovieCarousel />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const recommendedMovieImage = await screen.findByRole('img', {

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 
+import { MemoryRouter } from 'react-router'
 import Carousel from '../components/carousel/Carousel'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
 
@@ -64,9 +65,11 @@ describe('Carousel', () => {
     ]
 
     render(
-      <ThumbnailProvider>
-        <Carousel movies={mockMovies} />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <Carousel movies={mockMovies} />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const movieElements = await screen.getAllByRole('img')
@@ -89,9 +92,11 @@ describe('Carousel', () => {
     ]
 
     render(
-      <ThumbnailProvider>
-        <Carousel movies={mockMovies} />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <Carousel movies={mockMovies} />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const yearElement = await screen.findByText(1994)
@@ -141,9 +146,11 @@ describe('Carousel', () => {
     ]
 
     render(
-      <ThumbnailProvider>
-        <Carousel movies={mockMovies} />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <Carousel movies={mockMovies} />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const renderedMovies = await screen.findAllByRole('img')
@@ -172,9 +179,11 @@ describe('Carousel', () => {
     ]
 
     render(
-      <ThumbnailProvider>
-        <Carousel movies={mockMovies} />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <Carousel movies={mockMovies} />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     // queryByRole seemed to be better in this situation where I expected the arrows not to be found.
