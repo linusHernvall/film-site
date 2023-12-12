@@ -42,6 +42,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
           maxWidth: 300,
           '& .MuiCardContent-root:last-child': {
             padding: '20px',
+            height: '100px',
           },
           '&:hover': {
             cursor: 'pointer',
