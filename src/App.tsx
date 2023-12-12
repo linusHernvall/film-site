@@ -10,8 +10,12 @@ function App() {
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Header />
       </Box>
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ width: '90%', display: 'flex' }}>
+          <BackArrow />
+        </Box>
+      </Box>
 
-      <BackArrow />
       <Outlet />
       <Footer />
     </Box>
