@@ -1,7 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { expect, test } from 'vitest'
+import Bookmarked from '../Pages/Bookmarked/Bookmarked'
 import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
 
@@ -16,23 +17,45 @@ const mockedMovie = {
   thumbnail: 'test-image.jpg',
 }
 
-test('should toggle bookmark on click', async () => {
+test.only('should add bookmarked thumbnail to bookmarked page', async () => {
   render(
     <MemoryRouter>
       <ThumbnailProvider>
         <ThumbnailCard movie={mockedMovie} />
+        <Bookmarked />
       </ThumbnailProvider>
     </MemoryRouter>
   )
   const user = userEvent.setup()
 
-  // Initial state: Not bookmarked
-  const heartIcon = screen.getByText(/favorite/i)
-  expect(heartIcon).toBeInTheDocument()
-  expect(heartIcon).toHaveStyle({ color: 'rgb(0, 0, 0)' })
+  const bookmarkButton = screen.getByText('favorite')
+  user.click(bookmarkButton)
 
-  await user.click(heartIcon)
-
-  expect(heartIcon).toHaveStyle({ color: 'rgb(255, 0, 0)' })
-  console.log(heartIcon)
+  const bookmarkedMovieYear = screen.getByText(mockedMovie.year)
+  expect(bookmarkedMovieYear).toBeInTheDocument()
 })
+
+// test.only('should remove bookmarked thumbnail on bookmarked page', async () => {
+//   render(
+//     <MemoryRouter>
+//       <ThumbnailProvider>
+//         <ThumbnailCard movie={mockedMovie} />
+//         <Bookmarked />
+//       </ThumbnailProvider>
+//     </MemoryRouter>
+//   )
+//   const user = userEvent.setup()
+
+//   const bookmarkButton = screen.getByText('favorite')
+//   user.click(bookmarkButton)
+
+//   const bookmarkedMovieYear = screen.getByText(mockedMovie.year)
+//   expect(bookmarkedMovieYear).toBeInTheDocument()
+
+//   user.click(bookmarkButton)
+
+//   await waitFor(() => {
+//     const bookmarkedMovieYear2 = screen.queryByText(mockedMovie.year)
+//     expect(bookmarkedMovieYear2).not.toBeInTheDocument()
+//   })
+// })
