@@ -48,6 +48,7 @@ function HomePage() {
           searchMovie={searchMovie}
           setSearchMovie={setSearchMovie}
           onSubmit={handleSearch}
+          data-testid='search-bar'
         />
       </Box>
       {/* Single Box for displaying messages or acting as a filler */}
