@@ -20,7 +20,7 @@ const mockedMovie = {
     'https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_QL75_UX380_CR0,5,380,562_.jpg',
 }
 
-test.only('should add bookmarked thumbnail to bookmarked page', async () => {
+test.only('should be possible to add bookmarked thumbnail to bookmarked page', async () => {
   render(
     <MemoryRouter initialEntries={['/categories/War']}>
       <ThumbnailProvider>
@@ -32,34 +32,27 @@ test.only('should add bookmarked thumbnail to bookmarked page', async () => {
       </ThumbnailProvider>
     </MemoryRouter>
   )
-  const user = userEvent.setup()
+  const user = userEvent.setup();
 
-  screen.debug()
+  expect(screen.getByText('CATEGORIES/War')).toBeInTheDocument();
 
-  const categoryTitle = screen.getByText('CATEGORIES/War')
-  expect(categoryTitle).toBeInTheDocument()
+  expect(screen.getByText(mockedMovie.year)).toBeInTheDocument();
 
-  const movieYear = screen.getByText(mockedMovie.year)
-  expect(movieYear).toBeInTheDocument()
+  user.click(screen.getByText('favorite'));
 
-  const bookmarkButton = screen.getByText('favorite')
-  expect(bookmarkButton).toBeInTheDocument()
+  const bookmarkPage = screen.getByTestId('FavoriteRoundedIcon');
+  expect(bookmarkPage).toBeInTheDocument();
 
-  user.click(bookmarkButton)
+  user.click(bookmarkPage);
 
-  const bookmarkPage = screen.getByTestId('FavoriteRoundedIcon')
-  expect(bookmarkPage).toBeInTheDocument()
+  const bookmarkPageTitle = await screen.findByText('Your List');
+  expect(bookmarkPageTitle).toBeInTheDocument();
 
-  user.click(bookmarkPage)
-
-  const bookmarkPageTitle = await screen.findByText('Your List')
-  expect(bookmarkPageTitle).toBeInTheDocument()
-
-  const bookmarkedMovieYear = await screen.findByText(mockedMovie.year)
-  expect(bookmarkedMovieYear).toBeInTheDocument()
+  const bookmarkedMovieYear = await screen.findByText(mockedMovie.year);
+  expect(bookmarkedMovieYear).toBeInTheDocument();
 })
 
-test.only('should remove bookmarked thumbnail on bookmarked page', async () => {
+test.only('should be possible to remove bookmarked thumbnail on bookmarked page', async () => {
   render(
     <MemoryRouter initialEntries={['/categories/War']}>
       <ThumbnailProvider>
@@ -71,39 +64,29 @@ test.only('should remove bookmarked thumbnail on bookmarked page', async () => {
       </ThumbnailProvider>
     </MemoryRouter>
   )
-  const user = userEvent.setup()
+  const user = userEvent.setup();
 
-  screen.debug()
+  expect(screen.getByText('CATEGORIES/War')).toBeInTheDocument();
 
-  const categoryTitle = screen.getByText('CATEGORIES/War')
-  expect(categoryTitle).toBeInTheDocument()
+  expect(screen.getByText(mockedMovie.year)).toBeInTheDocument();
 
-  const movieYear = screen.getByText(mockedMovie.year)
-  expect(movieYear).toBeInTheDocument()
+  user.click(screen.getByText('favorite'));
 
-  const bookmarkButton = screen.getByText('favorite')
-  expect(bookmarkButton).toBeInTheDocument()
+  const bookmarkPageButton = screen.getByTestId('FavoriteRoundedIcon');
+  expect(bookmarkPageButton).toBeInTheDocument();
 
-  user.click(bookmarkButton)
+  user.click(bookmarkPageButton);
 
-  const bookmarkPageButton = screen.getByTestId('FavoriteRoundedIcon')
-  expect(bookmarkPageButton).toBeInTheDocument()
+  const bookmarkPageTitle = await screen.findByText('Your List');
+  expect(bookmarkPageTitle).toBeInTheDocument();
 
-  user.click(bookmarkPageButton)
+  const bookmarkedMovieYear = await screen.findByText(mockedMovie.year);
+  expect(bookmarkedMovieYear).toBeInTheDocument();
 
-  const bookmarkPageTitle = await screen.findByText('Your List')
-  expect(bookmarkPageTitle).toBeInTheDocument()
-
-  const bookmarkedMovieYear = await screen.findByText(mockedMovie.year)
-  expect(bookmarkedMovieYear).toBeInTheDocument()
-
-  const bookmarkButtonRemove = screen.getByText('favorite')
-  expect(bookmarkButtonRemove).toBeInTheDocument()
-
-  user.click(bookmarkButtonRemove)
+  user.click(screen.getByText('favorite'));
 
   await waitFor(() => {
-    const removedMovie = screen.queryByText(mockedMovie.year)
-    expect(removedMovie).toBeInTheDocument()
-  })
+    const removedMovie = screen.queryByText(mockedMovie.year);
+    expect(removedMovie).toBeInTheDocument();
+  });
 })
