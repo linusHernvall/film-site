@@ -7,7 +7,10 @@ import Footer from './components/footer/Footer'
 function App() {
   return (
     <Box>
-      <Header />
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Header />
+      </Box>
+
       <BackArrow />
       <Outlet />
       <Footer />
