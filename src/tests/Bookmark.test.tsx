@@ -7,7 +7,6 @@ import CategorySpecific from '../Pages/CategorySpecific'
 import Header from '../components/Header/Header'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
 
-// Mock movie data
 const mockedMovie = {
   title: 'Casablanca',
   year: 1942,
@@ -20,75 +19,78 @@ const mockedMovie = {
     'https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_QL75_UX380_CR0,5,380,562_.jpg',
 }
 
-describe('Bookmark functionality', () => {
-  test.only('should be possible to add bookmarked thumbnail to bookmarked page', async () => {
-    render(
-      <MemoryRouter initialEntries={['/categories/War']}>
-        <ThumbnailProvider>
-          <Header />
-          <Routes>
-            <Route path='/categories/:genre' element={<CategorySpecific />} />
-            <Route path='/bookmarked' element={<Bookmarked />} />
-          </Routes>
-        </ThumbnailProvider>
-      </MemoryRouter>
-    )
-    const user = userEvent.setup()
+test('should be possible to remove bookmarked thumbnail on bookmarked page and display text', async () => {
+  render(
+    <MemoryRouter initialEntries={['/categories/War']}>
+      <ThumbnailProvider>
+        <Header />
+        <Routes>
+          <Route path='/categories/:genre' element={<CategorySpecific />} />
+          <Route path='/bookmarked' element={<Bookmarked />} />
+        </Routes>
+      </ThumbnailProvider>
+    </MemoryRouter>
+  )
+  const user = userEvent.setup()
 
-    expect(screen.getByText('CATEGORIES/War')).toBeInTheDocument()
+  expect(screen.getByText('CATEGORIES/War')).toBeInTheDocument()
 
-    expect(screen.getByText(mockedMovie.year)).toBeInTheDocument()
+  expect(screen.getByText(mockedMovie.title)).toBeInTheDocument()
 
-    user.click(screen.getByText('favorite'))
+  user.click(screen.getByText('favorite'))
 
-    const bookmarkPage = screen.getByTestId('FavoriteRoundedIcon')
-    expect(bookmarkPage).toBeInTheDocument()
+  const bookmarkPageButton = screen.getByTestId('FavoriteRoundedIcon')
+  expect(bookmarkPageButton).toBeInTheDocument()
 
-    user.click(bookmarkPage)
+  user.click(bookmarkPageButton)
 
-    const bookmarkPageTitle = await screen.findByText('Your List')
-    expect(bookmarkPageTitle).toBeInTheDocument()
+  const bookmarkPageTitle = await screen.findByText('Your List')
+  expect(bookmarkPageTitle).toBeInTheDocument()
 
-    const bookmarkedMovieYear = await screen.findByText(mockedMovie.year)
-    expect(bookmarkedMovieYear).toBeInTheDocument()
+  const bookmarkedMovieTitle = await screen.findByText(mockedMovie.title)
+  expect(bookmarkedMovieTitle).toBeInTheDocument()
+
+  await user.click(screen.getByText('favorite'))
+
+  await waitFor(() => {
+    const bookmarkedMovieYearRemoved = screen.queryByText(mockedMovie.title)
+    expect(bookmarkedMovieYearRemoved).not.toBeInTheDocument()
   })
 
-  test.only('should be possible to remove bookmarked thumbnail on bookmarked page', async () => {
-    render(
-      <MemoryRouter initialEntries={['/categories/War']}>
-        <ThumbnailProvider>
-          <Header />
-          <Routes>
-            <Route path='/categories/:genre' element={<CategorySpecific />} />
-            <Route path='/bookmarked' element={<Bookmarked />} />
-          </Routes>
-        </ThumbnailProvider>
-      </MemoryRouter>
-    )
-    const user = userEvent.setup()
+  const emptyBookmarkPageText = await screen.findByText(
+    'You haven’t added any titles to your list yet.'
+  )
+  expect(emptyBookmarkPageText).toBeInTheDocument()
+})
 
-    expect(screen.getByText('CATEGORIES/War')).toBeInTheDocument()
+test('should be possible to add bookmarked thumbnail to bookmarked page', async () => {
+  render(
+    <MemoryRouter initialEntries={['/categories/War']}>
+      <ThumbnailProvider>
+        <Header />
+        <Routes>
+          <Route path='/categories/:genre' element={<CategorySpecific />} />
+          <Route path='/bookmarked' element={<Bookmarked />} />
+        </Routes>
+      </ThumbnailProvider>
+    </MemoryRouter>
+  )
+  const user = userEvent.setup()
 
-    expect(screen.getByText(mockedMovie.year)).toBeInTheDocument()
+  expect(screen.getByText('CATEGORIES/War')).toBeInTheDocument()
 
-    user.click(screen.getByText('favorite'))
+  expect(screen.getByText(mockedMovie.title)).toBeInTheDocument()
 
-    const bookmarkPageButton = screen.getByTestId('FavoriteRoundedIcon')
-    expect(bookmarkPageButton).toBeInTheDocument()
+  user.click(screen.getByText('favorite'))
 
-    user.click(bookmarkPageButton)
+  const bookmarkPage = screen.getByTestId('FavoriteRoundedIcon')
+  expect(bookmarkPage).toBeInTheDocument()
 
-    const bookmarkPageTitle = await screen.findByText('Your List')
-    expect(bookmarkPageTitle).toBeInTheDocument()
+  user.click(bookmarkPage)
 
-    const bookmarkedMovieYear = await screen.findByText(mockedMovie.year)
-    expect(bookmarkedMovieYear).toBeInTheDocument()
+  const bookmarkPageTitle = await screen.findByText('Your List')
+  expect(bookmarkPageTitle).toBeInTheDocument()
 
-    user.click(screen.getByText('favorite'))
-
-    await waitFor(() => {
-      const removedMovie = screen.queryByText(mockedMovie.year)
-      expect(removedMovie).toBeInTheDocument()
-    })
-  })
+  const bookmarkedMovieTitle = await screen.findByText(mockedMovie.title)
+  expect(bookmarkedMovieTitle).toBeInTheDocument()
 })
