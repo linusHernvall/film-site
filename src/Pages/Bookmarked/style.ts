@@ -6,7 +6,7 @@ export const ThumbnailBox = styled(Box)(() => ({
   gap: '2rem',
   justifyContent: 'center',
   alignItems: 'center',
-  marginTop: '3rem',
+  //marginTop: '3rem',
   padding: '2rem',
 }))
 
