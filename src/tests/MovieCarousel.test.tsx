@@ -1,59 +1,80 @@
 // TO BE CONTINUED...
 
-// import '@testing-library/jest-dom'
-// import { render, screen } from '@testing-library/react'
-// import { describe, expect, test, vi } from 'vitest'
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
+import { describe, expect, test, vi } from 'vitest'
 
-// import MovieCarousel from '../components/movieCarousel/MovieCarousel'
+import MovieCarousel from '../components/movieCarousel/MovieCarousel'
+import { ThumbnailProvider } from '../context/ThumbnailContext'
 
-// describe('MovieCarousel', () => {
-//   Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 800 })
-//   Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', {
-//     configurable: true,
-//     value: () => ({ width: 800 }),
-//   })
+describe('MovieCarousel', () => {
+  Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 800 })
+  Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', {
+    configurable: true,
+    value: () => ({ width: 800 }),
+  })
 
-//   global.window.innerWidth = 800
+  global.window.innerWidth = 800
 
-//   vi.mock('../../../data/movies.json', () => ({
-//     default: [
-//       {
-//         title: 'Star Wars: Episode V - The Empire Strikes Back',
-//         year: 1980,
-//         rating: 'PG',
-//         actors: ['Mark Hamill', 'Harrison Ford', 'Carrie Fisher'],
-//         genre: 'Action, Adventure, Fantasy',
-//         synopsis:
-//           'After the Rebels are overpowered by the Empire, Luke Skywalker begins his Jedi training with Yoda, while his friends are pursued across the galaxy by Darth Vader and bounty hunter Boba Fett.',
-//         thumbnail:
-//           'https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,675,1000_AL_.jpg',
-//         isTrending: true,
-//       },
-//       {
-//         title: 'City of God',
-//         year: 2002,
-//         rating: 'R',
-//         actors: ['Alexandre Rodrigues', 'Leandro Firmino', 'Matheus Nachtergaele'],
-//         genre: 'Crime, Drama',
-//         synopsis:
-//           "In the slums of Rio, two kids' paths diverge as one struggles to become a photographer and the other a kingpin.",
-//         thumbnail:
-//           'https://m.media-amazon.com/images/M/MV5BMGU5OWEwZDItNmNkMC00NzZmLTk1YTctNzVhZTJjM2NlZTVmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SY1000_CR0,0,675,1000_AL_.jpg',
-//         isTrending: false,
-//       },
-//     ],
-//   }))
+  vi.mock('../../../data/movies.json', () => ({
+    default: [
+      {
+        title: 'The Godfather: Part II',
+        year: 1974,
+        rating: 'R',
+        actors: ['Al Pacino', 'Robert De Niro', 'Robert Duvall'],
+        genre: 'Crime, Drama',
+        synopsis:
+          'The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.',
+        thumbnail:
+          'https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_QL75_UY562_CR7,0,380,562_.jpg',
+        isTrending: true,
+      },
+      {
+        title: 'The Shawshank Redemption',
+        year: 1994,
+        rating: 'R',
+        actors: ['Tim Robbins', 'Morgan Freeman', 'Bob Gunton'],
+        genre: 'Drama',
+        synopsis:
+          'Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.',
+        thumbnail:
+          'https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_QL75_UX380_CR0,4,380,562_.jpg',
+        isTrending: false,
+      },
+    ],
+  }))
 
-//   test.skip('displays a carousel with movies that are trending', async () => {
-//     render(<MovieCarousel />)
-//     screen.debug()
+  test('renders a carousel with movies that are trending', async () => {
+    render(
+      <ThumbnailProvider>
+        <MovieCarousel />
+      </ThumbnailProvider>
+    )
 
-//     const starWarsImage = await screen.findByRole('img', {
-//       name: 'Star Wars: Episode V - The Empire Strikes Back',
-//     })
-//     expect(starWarsImage).toBeInTheDocument()
+    const godfather2Image = await screen.findByRole('img', {
+      name: 'The Godfather: Part II',
+    })
+    expect(godfather2Image).toBeInTheDocument()
 
-//     const cityOfGodImage = screen.queryByRole('img', { name: 'City of God' })
-//     expect(cityOfGodImage).not.toBeInTheDocument()
-//   })
-// })
+    const shawShankRedemptionImage = screen.queryByRole('img', { name: 'The Shawshank Redemption' })
+    expect(shawShankRedemptionImage).not.toBeInTheDocument()
+  })
+
+  test('renders a carousel with movies that are recommended', async () => {
+    vi.spyOn(global.Math, 'random').mockReturnValue(0.1)
+
+    render(
+      <ThumbnailProvider>
+        <MovieCarousel />
+      </ThumbnailProvider>
+    )
+
+    const recommendedMovieImage = await screen.findByRole('img', {
+      name: 'The Shawshank Redemption',
+    })
+    expect(recommendedMovieImage).toBeInTheDocument()
+
+    vi.restoreAllMocks()
+  })
+})
