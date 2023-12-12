@@ -67,12 +67,6 @@ function HomePage() {
         ))}
       </Box>
       <MovieCarousel />
-
-      <div>
-        {moviesData.map((movie, index) => (
-          <ThumbnailCard key={index} movie={movie} />
-        ))}
-      </div>
     </div>
   )
 }
