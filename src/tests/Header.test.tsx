@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest'
 import App from '../App.tsx'
 import Bookmarked from '../Pages/Bookmarked/Bookmarked'
 import Categories from '../Pages/Categories.tsx'
-import HomePage from '../Pages/HomePage'
+import HomePage from '../Pages/HomePage.tsx'
 import Header from '../components/Header/Header'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
 
@@ -65,7 +65,7 @@ describe('Header', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
         <ThumbnailProvider>
-          {/* <Header /> */}
+          <Header />
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/bookmarked' element={<Bookmarked />} />
@@ -76,6 +76,8 @@ describe('Header', () => {
 
     const heartIcon = screen.getByTestId('FavoriteRoundedIcon')
     expect(heartIcon).toBeInTheDocument()
+
+    userEvent.click(heartIcon)
 
     await waitFor(() => {
       const bookmarkHeader = screen.getByText('Your List')
