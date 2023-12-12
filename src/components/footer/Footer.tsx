@@ -49,7 +49,7 @@ function Footer() {
               flexDirection: 'column',
             }}
           >
-            <Footertext>Valiga frågor</Footertext>
+            <Footertext>Vanliga frågor</Footertext>
             <Footertext>Lös in presentkort</Footertext>
             <Footertext>Hastighetstest</Footertext>
           </Box>
@@ -70,7 +70,7 @@ function Footer() {
         sx={{
           width: '100%',
           display: 'flex',
-          color: 'white',
+          color: '#939391',
           gap: '2rem',
           paddingTop: '1.5rem',
           justifyContent: 'center',
