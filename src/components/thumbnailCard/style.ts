@@ -4,6 +4,8 @@ export const Content = styled(CardContent)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',  
   backgroundColor: theme.palette.secondary.main,
+  gap: '5px',
+  height: '100px'
 }))
 
 export const HeartButton = styled(Box)(({ theme }) => ({
