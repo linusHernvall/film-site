@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import movieData from '../../../data/movies.json'
 import { Movie } from '../../interface/interfaces'
@@ -25,12 +25,20 @@ function MovieCarousel() {
   return (
     <Container sx={{ gap: '80px' }}>
       <Container sx={{ gap: '16px' }}>
-        <Typography variant='h2'>Trending</Typography>
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ width: '95%', display: 'flex' }}>
+            <Typography variant='h2'>Trending</Typography>
+          </Box>
+        </Box>
         <Carousel movies={trendingMovies} />
       </Container>
 
       <Container sx={{ gap: '16px' }}>
-        <Typography variant='h2'>Recommended for you</Typography>
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ width: '95%', display: 'flex' }}>
+            <Typography variant='h2'>Recommended for you</Typography>
+          </Box>
+        </Box>
         <Carousel movies={recommendedMovies} />
       </Container>
     </Container>
