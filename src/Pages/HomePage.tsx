@@ -1,12 +1,11 @@
 import { Box, Typography } from '@mui/material'
 import { useState } from 'react'
-import movieData from '../../data/movies.json'
+import { default as movieData } from '../../data/movies.json'
 import MovieCarousel from '../components/moviecarousel/MovieCarousel'
 import SearchBar from '../components/searchBar/SearchBar'
 import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
 import { Movie } from '../interface/interfaces'
 import { theme } from '../theme'
-import moviesData from '../../data/movies.json'
 
 function HomePage() {
   const [searchMovie, setSearchMovie] = useState('')
@@ -68,12 +67,6 @@ function HomePage() {
         ))}
       </Box>
       <MovieCarousel />
-
-      <div>
-        {moviesData.map((movie, index) => (
-          <ThumbnailCard key={index} movie={movie} />
-        ))}
-      </div>
     </div>
   )
 }
