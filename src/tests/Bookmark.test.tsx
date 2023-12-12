@@ -19,6 +19,18 @@ const mockedMovie = {
     'https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_QL75_UX380_CR0,5,380,562_.jpg',
 }
 
+test('show a text if there is no bookmarked thumbnails on BookmarkPage', async () => {
+  render(
+    <MemoryRouter>
+      <ThumbnailProvider>
+        <Bookmarked />
+      </ThumbnailProvider>
+    </MemoryRouter>
+  )
+
+  expect(screen.getByText('You haven’t added any titles to your list yet.')).toBeInTheDocument()
+})
+
 test('should be possible to remove bookmarked thumbnail on bookmarked page and display text', async () => {
   render(
     <MemoryRouter initialEntries={['/categories/War']}>
