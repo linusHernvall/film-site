@@ -16,3 +16,9 @@ export const ContainerBox = styled(Box)(() => ({
   justifyContent: 'center',
   alignItems: 'center',
 }))
+
+export const NoBookmarkedBox = styled(Box)(() => ({
+  marginTop: '8rem',
+  marginBottom: '8rem'
+}))
+
