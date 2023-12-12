@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router'
 import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
 import { theme } from '../../theme'
@@ -23,16 +24,14 @@ interface ICarousel {
 
 function Carousel({ movies }: ICarousel) {
   const cardWidth = 200 + 16
-
   const [current, setCurrent] = useState(0)
   const [showArrows, setShowArrows] = useState(false)
   const [visibleMoviesCount, setVisibleMoviesCount] = useState(
     Math.floor(window.innerWidth / cardWidth)
   )
-
   const { bookmarkedMovies, setBookmarkedMovies } = useThumbnailContext()
-
   const boxRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
 
   const updateVisibleMoviesCount = () => {
     if (boxRef.current) {
@@ -58,6 +57,11 @@ function Carousel({ movies }: ICarousel) {
 
   const handlePrev = () => {
     setCurrent(prev => (prev - 1 + movies.length) % movies.length)
+  }
+
+  const handleNavigate = (title: string) => {
+    const formattedTitle = title.replace(/\s+/g, '-')
+    navigate(`/filmview/${formattedTitle}`)
   }
 
   const renderMovies = () => {
@@ -104,12 +108,13 @@ function Carousel({ movies }: ICarousel) {
           <img
             style={{
               maxWidth: '100%',
-              height: '295px',
+              height: '300px',
               objectFit: 'cover',
             }}
             src={movie.thumbnail}
             alt={movie.title}
             onError={handleImgError}
+            onClick={() => handleNavigate(movie.title)}
           />
 
           <Content>
