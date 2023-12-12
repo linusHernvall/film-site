@@ -1,15 +1,18 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { MemoryRouter } from 'react-router'
 import { describe, expect } from 'vitest'
 import HomePage from '../Pages/HomePage'
-import { ThumbnailProvider } from '../context/BookmarkedContext'
+import { ThumbnailProvider } from '../context/ThumbnailContext'
 
 describe('Search error message', () => {
   test('show an error message when searching with a blank input using the enter-key', async () => {
     render(
-      <ThumbnailProvider>
-        <HomePage />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <HomePage />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const searchMovie = screen.getByPlaceholderText('Search movies...')
@@ -22,9 +25,11 @@ describe('Search error message', () => {
 
   test('movie not found', async () => {
     render(
-      <ThumbnailProvider>
-        <HomePage />
-      </ThumbnailProvider>
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <HomePage />
+        </ThumbnailProvider>
+      </MemoryRouter>
     )
 
     const searchMovie = screen.getByPlaceholderText('Search movies...')

@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 
 import MovieCarousel from '../components/movieCarousel/MovieCarousel'
-import { ThumbnailProvider } from '../context/BookmarkedContext'
+import { ThumbnailProvider } from '../context/ThumbnailContext'
 
 describe('MovieCarousel', () => {
   Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 800 })

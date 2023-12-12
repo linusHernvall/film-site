@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 
 import Carousel from '../components/carousel/Carousel'
-import { ThumbnailProvider } from '../context/BookmarkedContext'
+import { ThumbnailProvider } from '../context/ThumbnailContext'
 
 describe('Carousel', () => {
   // Sets the rendered window width in the test. Makes the movies render properly.

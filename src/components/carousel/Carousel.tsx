@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
-import { useThumbnailContext } from '../../context/BookmarkedContext'
+import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
 import { theme } from '../../theme'
 import {
