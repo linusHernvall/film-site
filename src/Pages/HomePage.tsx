@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import { useState } from 'react'
-import { default as movieData, default as moviesData } from '../../data/movies.json'
-import Header from '../components/Header/Header'
+import { default as movieData } from '../../data/movies.json'
 import MovieCarousel from '../components/moviecarousel/MovieCarousel'
 import SearchBar from '../components/searchBar/SearchBar'
 import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
@@ -44,13 +43,13 @@ function HomePage() {
 
   return (
     <div>
-      <Header />
-      <SearchBar
-        searchMovie={searchMovie}
-        setSearchMovie={setSearchMovie}
-        onSubmit={handleSearch}
-      />
-
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <SearchBar
+          searchMovie={searchMovie}
+          setSearchMovie={setSearchMovie}
+          onSubmit={handleSearch}
+        />
+      </Box>
       {/* Single Box for displaying messages or acting as a filler */}
       <Box sx={{ minHeight: '24px', marginBottom: '24px' }}>
         {' '}
@@ -68,12 +67,6 @@ function HomePage() {
         ))}
       </Box>
       <MovieCarousel />
-
-      <div>
-        {moviesData.map((movie, index) => (
-          <ThumbnailCard key={index} movie={movie} />
-        ))}
-      </div>
     </div>
   )
 }

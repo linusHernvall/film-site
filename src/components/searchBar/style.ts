@@ -10,6 +10,7 @@ export const Input = styled('input')(({ theme }) => ({
   padding: '10px 12px',
   width: '450px',
   borderRadius: '5px',
+  background: 'transparent',
   color: theme.palette.secondary.main,
   border: `1px solid ${theme.palette.secondary.main}`,
   [theme.breakpoints.down('sm')]: {

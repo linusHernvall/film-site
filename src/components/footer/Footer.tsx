@@ -3,11 +3,15 @@ import InstagramIcon from '@mui/icons-material/Instagram'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import { Box } from '@mui/material'
 import { theme } from '../../theme'
-import { FooterBox, FooterContainer, Footertext } from './style'
+import { DividingLine, FooterBox, FooterContainer, Footertext } from './style'
 
 function Footer() {
   return (
     <FooterContainer>
+      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <DividingLine />
+      </Box>
+
       <FooterBox>
         <Box
           sx={{
@@ -45,6 +49,17 @@ function Footer() {
               flexDirection: 'column',
             }}
           >
+            <Footertext>Vanliga frågor</Footertext>
+            <Footertext>Lös in presentkort</Footertext>
+            <Footertext>Hastighetstest</Footertext>
+          </Box>
+          <Box
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              color: 'white',
+            }}
+          >
             <Footertext>Hjälpcenter</Footertext>
             <Footertext>Jobba hos oss</Footertext>
             <Footertext>Cookie-inställningar</Footertext>
@@ -52,12 +67,17 @@ function Footer() {
         </Box>
       </FooterBox>
       <Box
-        style={{
+        sx={{
           width: '100%',
           display: 'flex',
-          color: 'white',
+          color: '#939391',
           gap: '2rem',
           paddingTop: '1.5rem',
+          justifyContent: 'center',
+          [theme.breakpoints.down('sm')]: {
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start', // Optional: align items to flex-start for mobile
+          },
         }}
       >
         <FacebookIcon />

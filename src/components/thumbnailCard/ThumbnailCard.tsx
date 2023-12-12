@@ -42,6 +42,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
           maxWidth: 300,
           '& .MuiCardContent-root:last-child': {
             padding: '20px',
+            height: '100px',
           },
           '&:hover': {
             cursor: 'pointer',
@@ -61,14 +62,15 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
             <Text variant='body1'>{year}</Text>
             <Text variant='body1'>|</Text>
             <Text variant='body1'>{rating}</Text>
+            <HeartButton onClick={toggleBookmark}>
+              {isBookmarked ? (
+                <HeartIconRed className='material-symbols-outlined'>favorite</HeartIconRed>
+              ) : (
+                <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
+              )}
+            </HeartButton>
           </TypographyContainer>
-          <HeartButton onClick={toggleBookmark}>
-            {isBookmarked ? (
-              <HeartIconRed className='material-symbols-outlined'>favorite</HeartIconRed>
-            ) : (
-              <HeartIcon className='material-symbols-outlined'>favorite</HeartIcon>
-            )}
-          </HeartButton>
+          <Text variant='h5'>{title}</Text>
         </Content>
       </Card>
     </MuiBox>
