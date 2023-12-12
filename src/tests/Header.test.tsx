@@ -2,7 +2,6 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router'
 import { describe, expect, test } from 'vitest'
-import App from '../App.tsx'
 import Bookmarked from '../Pages/Bookmarked/Bookmarked'
 import Categories from '../Pages/Categories.tsx'
 import HomePage from '../Pages/HomePage.tsx'
@@ -30,12 +29,13 @@ describe('Header', () => {
     expect(categoriesLink).toBeInTheDocument()
   })
 
-  test('should navigate to /categories', async () => {
+  test.only('should navigate to /categories', async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/bookmarked']}>
         <ThumbnailProvider>
+          <Header />
           <Routes>
-            <Route path='/' element={<App />} />
+            <Route path='/bookmarked' element={<Bookmarked />} />
             <Route path='/categories' element={<Categories />} />
           </Routes>
         </ThumbnailProvider>
@@ -46,7 +46,7 @@ describe('Header', () => {
     userEvent.click(categoriesLink)
 
     await waitFor(() => {
-      const categoriesLink = screen.getByText('CATEGORIES')
+      const categoriesLink = screen.getByText('Drama')
       expect(categoriesLink).toBeInTheDocument()
     })
   })
@@ -61,7 +61,7 @@ describe('Header', () => {
     expect(heartIcon).toBeInTheDocument()
   })
 
-  test.only('should navigate to /bookmarked', async () => {
+  test('should navigate to /bookmarked', async () => {
     render(
       <MemoryRouter initialEntries={['/']}>
         <ThumbnailProvider>
