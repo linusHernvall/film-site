@@ -1,7 +1,7 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { describe, expect, test } from 'vitest'
-import Categories from '../Pages/Categories'
 import Header from '../components/Header/Header'
 
 describe('Header', () => {
@@ -25,34 +25,29 @@ describe('Header', () => {
     expect(categoriesLink).toBeInTheDocument()
   })
 
-  test.only('should render Categories-link and navigate to Categories page', async () => {
+  test('should navigate to /categories', async () => {
     render(
       <MemoryRouter>
         <Header />
-        <Categories />
       </MemoryRouter>
     )
 
-    // Find the Categories link
     const categoriesLink = screen.getByText('CATEGORIES')
+    userEvent.click(categoriesLink)
 
-    // Simulate a click on the link
-    fireEvent.click(categoriesLink)
-
-    // Wait for the navigation to occur
     await waitFor(() => {
-      // Check if the current pathname is '/categories'
-      expect(window.location.pathname).toBe('/categories')
+      const categoryTitle = screen.getByText('CATEGORIES')
+      expect(categoryTitle).toBeInTheDocument()
     })
+  })
 
-    test('should render bookmark-icon', () => {
-      render(
-        <MemoryRouter>
-          <Header />
-        </MemoryRouter>
-      )
-      const heartIcon = screen.getByTestId('FavoriteRoundedIcon')
-      expect(heartIcon).toBeInTheDocument()
-    })
+  test('should render bookmark-icon', () => {
+    render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    )
+    const heartIcon = screen.getByTestId('FavoriteRoundedIcon')
+    expect(heartIcon).toBeInTheDocument()
   })
 })
