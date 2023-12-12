@@ -19,69 +19,91 @@ describe('Header', () => {
     expect(titleElement).toBeInTheDocument()
   })
 
-  test('should render Categories-link', () => {
-    render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>
-    )
-    const categoriesLink = screen.getByText('CATEGORIES')
-    expect(categoriesLink).toBeInTheDocument()
-  })
-
-  test.only('should navigate to /categories', async () => {
+  test.only('should navigate to home', async () => {
     render(
       <MemoryRouter initialEntries={['/bookmarked']}>
         <ThumbnailProvider>
           <Header />
           <Routes>
             <Route path='/bookmarked' element={<Bookmarked />} />
-            <Route path='/categories' element={<Categories />} />
-          </Routes>
-        </ThumbnailProvider>
-      </MemoryRouter>
-    )
-
-    const categoriesLink = screen.getByText('CATEGORIES')
-    userEvent.click(categoriesLink)
-
-    await waitFor(() => {
-      const categoriesLink = screen.getByText('Drama')
-      expect(categoriesLink).toBeInTheDocument()
-    })
-  })
-
-  test('should render bookmark-icon', () => {
-    render(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>
-    )
-    const heartIcon = screen.getByTestId('FavoriteRoundedIcon')
-    expect(heartIcon).toBeInTheDocument()
-  })
-
-  test('should navigate to /bookmarked', async () => {
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <ThumbnailProvider>
-          <Header />
-          <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/bookmarked' element={<Bookmarked />} />
           </Routes>
         </ThumbnailProvider>
       </MemoryRouter>
     )
 
-    const heartIcon = screen.getByTestId('FavoriteRoundedIcon')
-    expect(heartIcon).toBeInTheDocument()
-
-    userEvent.click(heartIcon)
+    const titleElement = screen.getByText('NETFLAX')
+    userEvent.click(titleElement)
 
     await waitFor(() => {
       const bookmarkHeader = screen.getByText('Your List')
       expect(bookmarkHeader).toBeInTheDocument()
+    })
+
+    test('should render Categories-link', () => {
+      render(
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
+      )
+      const categoriesLink = screen.getByText('CATEGORIES')
+      expect(categoriesLink).toBeInTheDocument()
+    })
+
+    test('should navigate to /categories', async () => {
+      render(
+        <MemoryRouter initialEntries={['/bookmarked']}>
+          <ThumbnailProvider>
+            <Header />
+            <Routes>
+              <Route path='/bookmarked' element={<Bookmarked />} />
+              <Route path='/categories' element={<Categories />} />
+            </Routes>
+          </ThumbnailProvider>
+        </MemoryRouter>
+      )
+
+      const categoriesLink = screen.getByText('CATEGORIES')
+      userEvent.click(categoriesLink)
+
+      await waitFor(() => {
+        const categoriesLink = screen.getByText('Drama')
+        expect(categoriesLink).toBeInTheDocument()
+      })
+    })
+
+    test('should render bookmark-icon', () => {
+      render(
+        <MemoryRouter>
+          <Header />
+        </MemoryRouter>
+      )
+      const heartIcon = screen.getByTestId('FavoriteRoundedIcon')
+      expect(heartIcon).toBeInTheDocument()
+    })
+
+    test('should navigate to /bookmarked', async () => {
+      render(
+        <MemoryRouter initialEntries={['/']}>
+          <ThumbnailProvider>
+            <Header />
+            <Routes>
+              <Route path='/' element={<HomePage />} />
+              <Route path='/bookmarked' element={<Bookmarked />} />
+            </Routes>
+          </ThumbnailProvider>
+        </MemoryRouter>
+      )
+
+      const heartIcon = screen.getByTestId('FavoriteRoundedIcon')
+      expect(heartIcon).toBeInTheDocument()
+
+      userEvent.click(heartIcon)
+
+      await waitFor(() => {
+        const bookmarkHeader = screen.getByText('Your List')
+        expect(bookmarkHeader).toBeInTheDocument()
+      })
     })
   })
 })
