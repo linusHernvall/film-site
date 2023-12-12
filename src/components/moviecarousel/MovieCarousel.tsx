@@ -25,12 +25,12 @@ function MovieCarousel() {
   return (
     <Container sx={{ gap: '80px' }}>
       <Container sx={{ gap: '16px' }}>
-        <Typography variant='h6'>Trending</Typography>
+        <Typography variant='h2'>Trending</Typography>
         <Carousel movies={trendingMovies} />
       </Container>
 
       <Container sx={{ gap: '16px' }}>
-        <Typography variant='h6'>Recommended for you</Typography>
+        <Typography variant='h2'>Recommended for you</Typography>
         <Carousel movies={recommendedMovies} />
       </Container>
     </Container>

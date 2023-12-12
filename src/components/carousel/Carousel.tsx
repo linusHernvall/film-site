@@ -4,12 +4,14 @@ import { useThumbnailContext } from '../../context/BookmarkedContext'
 import { Movie } from '../../interface/interfaces'
 import { theme } from '../../theme'
 import {
+  ArrowContainer,
   Card,
   Container,
   Content,
   HeartButton,
   HeartIcon,
   HeartIconRed,
+  MovieContainer,
   NextArrow,
   PrevArrow,
   TypographyContainer,
@@ -20,8 +22,6 @@ interface ICarousel {
 }
 
 function Carousel({ movies }: ICarousel) {
-  // console.log(window.innerWidth, 'Inner width')
-
   const cardWidth = 200 + 16
 
   const [current, setCurrent] = useState(0)
@@ -36,11 +36,9 @@ function Carousel({ movies }: ICarousel) {
 
   const updateVisibleMoviesCount = () => {
     if (boxRef.current) {
-      // console.log({ boxRef })
       const boxWidth = boxRef.current.offsetWidth
-      // console.log({ boxWidth })
-
       const newVisibleMoviesCount = Math.floor(boxWidth / cardWidth)
+
       setVisibleMoviesCount(Math.floor(boxWidth / cardWidth))
       setShowArrows(movies.length > newVisibleMoviesCount)
     }
@@ -66,10 +64,6 @@ function Carousel({ movies }: ICarousel) {
     const totalMovies = movies.length
 
     const endIndex = current + visibleMoviesCount
-    // console.log({ current })
-    // console.log({ endIndex })
-    // console.log({ visibleMoviesCount })
-    // console.log({ totalMovies })
 
     let movieSlice = []
 
@@ -110,7 +104,7 @@ function Carousel({ movies }: ICarousel) {
           <img
             style={{
               maxWidth: '100%',
-              height: '300px',
+              height: '295px',
               objectFit: 'cover',
             }}
             src={movie.thumbnail}
@@ -156,10 +150,12 @@ function Carousel({ movies }: ICarousel) {
   }
 
   return (
-    <Container ref={boxRef}>
-      {showArrows && <PrevArrow role='prevArrow' onClick={handlePrev} />}
-      {renderMovies()}
-      {showArrows && <NextArrow role='nextArrow' onClick={handleNext} />}
+    <Container>
+      <MovieContainer ref={boxRef}>{renderMovies()}</MovieContainer>
+      <ArrowContainer>
+        {showArrows && <PrevArrow role='prevArrow' onClick={handlePrev} />}
+        {showArrows && <NextArrow role='nextArrow' onClick={handleNext} />}
+      </ArrowContainer>
     </Container>
   )
 }

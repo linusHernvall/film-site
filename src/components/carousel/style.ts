@@ -1,16 +1,26 @@
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
-import { Box as MuiBox, Typography as MuiTypography, styled } from '@mui/material'
+import { Box as MuiBox, styled } from '@mui/material'
 import { theme } from '../../theme'
 
 export const Container = styled(MuiBox)(() => ({
   display: 'flex',
-  overflow: 'hidden',
   justifyContent: 'center',
-  alignItems: 'center',
+  flexDirection: 'column',
   width: '100%',
-  position: 'relative',
+}))
+
+export const MovieContainer = styled(MuiBox)(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100%',
   gap: '24px',
+}))
+
+export const ArrowContainer = styled(MuiBox)(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'canter',
 }))
 
 export const Card = styled(MuiBox)(() => ({
@@ -46,11 +56,6 @@ export const TypographyContainer = styled(MuiBox)(() => ({
   gap: '0.4rem',
 }))
 
-export const Text = styled(MuiTypography)(({ theme }) => ({
-  display: 'flex',
-  color: theme.palette.background.default,
-}))
-
 export const HeartButton = styled(MuiBox)(() => ({
   cursor: 'pointer',
 }))
@@ -68,22 +73,11 @@ export const HeartIconRed = styled(MuiBox)(({ theme }) => ({
   color: theme.palette.primary.main,
 }))
 
-export const CardBox = styled(MuiBox)(() => ({
-  position: 'absolute',
-  bottom: '16px',
-  left: '4px',
-}))
-
 export const PrevArrow = styled(NavigateBeforeIcon)(({ theme }) => ({
   fontSize: '80px',
   color: theme.palette.secondary.main,
   background: 'transparent',
   cursor: 'pointer',
-  position: 'absolute',
-  left: 0,
-  top: '50%',
-  transform: 'translateY(-50%)',
-  zIndex: '10',
 }))
 
 export const NextArrow = styled(NavigateNextIcon)(({ theme }) => ({
@@ -91,9 +85,4 @@ export const NextArrow = styled(NavigateNextIcon)(({ theme }) => ({
   background: 'transparent',
   color: theme.palette.secondary.main,
   cursor: 'pointer',
-  position: 'absolute',
-  right: 0,
-  top: '50%',
-  transform: 'translateY(-50%)',
-  zIndex: '10',
 }))
