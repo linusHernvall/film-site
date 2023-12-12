@@ -1,8 +1,13 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { MemoryRouter } from 'react-router'
+import { MemoryRouter, Route, Routes } from 'react-router'
 import { describe, expect, test } from 'vitest'
+import App from '../App.tsx'
+import Bookmarked from '../Pages/Bookmarked/Bookmarked'
+import Categories from '../Pages/Categories.tsx'
+import HomePage from '../Pages/HomePage'
 import Header from '../components/Header/Header'
+import { ThumbnailProvider } from '../context/ThumbnailContext'
 
 describe('Header', () => {
   test('should render logotype', () => {
@@ -27,8 +32,13 @@ describe('Header', () => {
 
   test('should navigate to /categories', async () => {
     render(
-      <MemoryRouter>
-        <Header />
+      <MemoryRouter initialEntries={['/']}>
+        <ThumbnailProvider>
+          <Routes>
+            <Route path='/' element={<App />} />
+            <Route path='/categories' element={<Categories />} />
+          </Routes>
+        </ThumbnailProvider>
       </MemoryRouter>
     )
 
@@ -36,8 +46,8 @@ describe('Header', () => {
     userEvent.click(categoriesLink)
 
     await waitFor(() => {
-      const categoryTitle = screen.getByText('CATEGORIES')
-      expect(categoryTitle).toBeInTheDocument()
+      const categoriesLink = screen.getByText('CATEGORIES')
+      expect(categoriesLink).toBeInTheDocument()
     })
   })
 
@@ -49,5 +59,27 @@ describe('Header', () => {
     )
     const heartIcon = screen.getByTestId('FavoriteRoundedIcon')
     expect(heartIcon).toBeInTheDocument()
+  })
+
+  test.only('should navigate to /bookmarked', async () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <ThumbnailProvider>
+          {/* <Header /> */}
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/bookmarked' element={<Bookmarked />} />
+          </Routes>
+        </ThumbnailProvider>
+      </MemoryRouter>
+    )
+
+    const heartIcon = screen.getByTestId('FavoriteRoundedIcon')
+    expect(heartIcon).toBeInTheDocument()
+
+    await waitFor(() => {
+      const bookmarkHeader = screen.getByText('Your List')
+      expect(bookmarkHeader).toBeInTheDocument()
+    })
   })
 })

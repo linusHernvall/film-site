@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import { useState } from 'react'
 import { default as movieData, default as moviesData } from '../../data/movies.json'
+import Header from '../components/Header/Header'
 import MovieCarousel from '../components/moviecarousel/MovieCarousel'
 import SearchBar from '../components/searchBar/SearchBar'
 import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
@@ -43,6 +44,7 @@ function HomePage() {
 
   return (
     <div>
+      <Header />
       <SearchBar
         searchMovie={searchMovie}
         setSearchMovie={setSearchMovie}
