@@ -3,7 +3,7 @@ import { Box, Button, Typography, styled } from '@mui/material'
 export const InfoContainer = styled(Box)(({theme}) => ({
   position: 'absolute',
   left: '100px',
-  top: '350px',
+  top: '380px',
   width: '500px',
   [theme.breakpoints.down('sm')]: {
     width: '300px',
@@ -15,7 +15,7 @@ export const InfoContainer = styled(Box)(({theme}) => ({
 export const TitleAndButtonContainer = styled(Box)(({theme}) => ({
   display: 'flex',
   alignItems: 'center',
-  gap: '2rem',
+  gap: '1rem',
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -36,10 +36,10 @@ export const Title = styled(Typography)(() => ({}))
 export const PlayButton = styled(Button)(() => ({
   backgroundColor: 'white',
   color: 'black',
-  width: '100px',
+  width: '110px',
+  height: '100%',
   display: 'flex',
   alignItems: 'center',
-  height: '100%',
   borderRadius: '5px',
   gap: '0.1rem',
 }))
@@ -47,12 +47,13 @@ export const PlayButton = styled(Button)(() => ({
 export const InfoButton = styled(Button)(() => ({
   backgroundColor: 'lightgrey',
   color: 'black',
-  width: '100px',
+  width: '110px',
+  height: '100%',
   display: 'flex',
   alignItems: 'center',
-  height: '100%',
-  gap: '0.2rem',
   borderRadius: '5px',
+  gap: '0.2rem',
+  
 }))
 
 export const InfoTextContainer = styled(Box)(() => ({
@@ -68,4 +69,6 @@ export const InfoText = styled(Typography)(({theme}) => ({
 
 export const BtnText = styled(Typography)(() => ({
   color: 'black',
+  fontSize: '14px',
+  paddingTop: '0.1rem'
 }))
