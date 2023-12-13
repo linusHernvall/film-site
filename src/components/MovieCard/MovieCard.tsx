@@ -14,13 +14,17 @@ interface MovieCardProps {
 
 function MovieCard({ movie }: MovieCardProps) {
   const { title, year, rating, actors, genre, synopsis, thumbnail } = movie
-
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    // Replace the thumbnail with the placeholder image if there's an error loading the image
+    // eslint-disable-next-line no-extra-semi
+    ;(event.target as HTMLImageElement).src = '../src/assets/placeholder.png'
+  }
   return (
     <Box style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <MovieCardContainer container spacing={2} justifyContent='center'>
         {/* Movie Poster */}
         <Grid item md={4} style={{ display: 'flex', justifyContent: 'center' }}>
-          <MoviePosterImage src={thumbnail} alt='Movie Poster' />
+          <MoviePosterImage src={thumbnail} alt='Movie Poster' onError={handleImageError} />
         </Grid>
 
         {/* Movie Description */}

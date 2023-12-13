@@ -99,8 +99,7 @@ function Carousel({ movies }: ICarousel) {
       }
 
       const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-        e.currentTarget.src =
-          'https://bfl-bred.com/wp-content/themes/finacia/assets/images/no-image/No-Image-Found-400x264.png'
+        e.currentTarget.src = '../src/assets/placeholder.png'
       }
 
       return (
