@@ -1,9 +1,9 @@
 import { Box as MuiBox, Grid as MuiGrid, styled } from '@mui/material'
 
 export const SearchContainer = styled(MuiBox)(() => ({
-  width: '100%',
   display: 'flex',
   justifyContent: 'center',
+  flexDirection: 'column',
 }))
 
 export const ErrorContainer = styled(MuiBox)(() => ({

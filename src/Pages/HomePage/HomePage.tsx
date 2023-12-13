@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { Box as MuiBox, Typography } from '@mui/material'
 import { useState } from 'react'
 import movieData from '../../../data/movies.json'
 import MovieCarousel from '../../components/moviecarousel/MovieCarousel'
@@ -44,23 +44,25 @@ function HomePage() {
 
   return (
     <div>
-      <SearchContainer>
-        <SearchBar
-          searchMovie={searchMovie}
-          setSearchMovie={setSearchMovie}
-          onSubmit={handleSearch}
-        />
-      </SearchContainer>
-      {/* Single Box for displaying messages or acting as a filler */}
-      <ErrorContainer>
-        {' '}
-        <Typography
-          variant='body1'
-          color={isError || noResults ? theme.palette.secondary.main : 'transparent'}
-        >
-          {getMessage()}
-        </Typography>
-      </ErrorContainer>
+      <MuiBox sx={{ display: 'flex', justifyContent: 'center' }}>
+        <SearchContainer>
+          <SearchBar
+            searchMovie={searchMovie}
+            setSearchMovie={setSearchMovie}
+            onSubmit={handleSearch}
+          />
+          {/* Single Box for displaying messages or acting as a filler */}
+          <ErrorContainer>
+            {' '}
+            <Typography
+              variant='body1'
+              color={isError || noResults ? theme.palette.secondary.main : 'transparent'}
+            >
+              {getMessage()}
+            </Typography>
+          </ErrorContainer>
+        </SearchContainer>
+      </MuiBox>
 
       <SearchResultGrid container>
         {searchResults.map(movie => (
