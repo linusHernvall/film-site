@@ -1,4 +1,12 @@
 import { Box, CardMedia } from '@mui/material'
+import {
+  ButtonContainer,
+  InfoButton,
+  InfoContainer,
+  PlayButton,
+  Title,
+  TitleAndButtonContainer,
+} from './style'
 
 function Herobanner() {
   return (
@@ -11,27 +19,19 @@ function Herobanner() {
         sx={{ width: '100%', height: '600px', objectFit: 'cover' }}
         src='https://www.pexels.com/sv-se/download/video/2711111/?fps=24.0&h=720&w=1280'
       ></CardMedia>
-      <div style={{ position: 'absolute', left: '100px', top: '350px' }}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '2rem',
-          }}
-        >
-          <h1 style={{ color: 'white' }}>Nature's Adventure</h1>
-          <div
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}
-          >
-            <button style={{ display: 'flex,', alignItems: 'center' }}>
+      <InfoContainer>
+        <TitleAndButtonContainer>
+          <Title variant='h1'>Nature's Adventure</Title>
+          <ButtonContainer>
+            <PlayButton style={{ display: 'flex,', alignItems: 'center' }}>
               <span className='material-symbols-outlined'>play_arrow</span>
               Play
-            </button>
-            <button style={{ display: 'flex,', alignItems: 'center' }}>
+            </PlayButton>
+            <InfoButton style={{ display: 'flex,', alignItems: 'center' }}>
               <span className='material-symbols-outlined'>info</span>More info
-            </button>
-          </div>
-        </div>
+            </InfoButton>
+          </ButtonContainer>
+        </TitleAndButtonContainer>
         <div style={{ width: '500px' }}>
           <p style={{ color: 'white' }}>
             Emily, an adventurous biologist, sets out to uncover the secrets of an untouched
@@ -40,7 +40,7 @@ function Herobanner() {
             intrinsic connection between humanity and the great outdoors.
           </p>
         </div>
-      </div>
+      </InfoContainer>
     </Box>
   )
 }
