@@ -1,11 +1,12 @@
-import { Box, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { useState } from 'react'
-import { default as movieData, default as moviesData } from '../../data/movies.json'
-import MovieCarousel from '../components/moviecarousel/MovieCarousel'
-import SearchBar from '../components/searchBar/SearchBar'
-import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
-import { Movie } from '../interface/interfaces'
-import { theme } from '../theme'
+import movieData from '../../../data/movies.json'
+import MovieCarousel from '../../components/moviecarousel/MovieCarousel'
+import SearchBar from '../../components/searchBar/SearchBar'
+import ThumbnailCard from '../../components/thumbnailCard/ThumbnailCard'
+import { Movie } from '../../interface/interfaces'
+import { theme } from '../../theme'
+import { ErrorContainer, SearchContainer, SearchResultGrid } from './style'
 
 function HomePage() {
   const [searchMovie, setSearchMovie] = useState('')
@@ -43,15 +44,15 @@ function HomePage() {
 
   return (
     <div>
-      <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <SearchContainer>
         <SearchBar
           searchMovie={searchMovie}
           setSearchMovie={setSearchMovie}
           onSubmit={handleSearch}
         />
-      </Box>
+      </SearchContainer>
       {/* Single Box for displaying messages or acting as a filler */}
-      <Box sx={{ minHeight: '24px', marginBottom: '24px' }}>
+      <ErrorContainer>
         {' '}
         <Typography
           variant='body1'
@@ -59,13 +60,15 @@ function HomePage() {
         >
           {getMessage()}
         </Typography>
-      </Box>
+      </ErrorContainer>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <SearchResultGrid container>
         {searchResults.map(movie => (
-          <ThumbnailCard key={movie.title} movie={movie} />
+          <SearchResultGrid item xs={12} sm={6} md={4} lg={3} xl={2} key={movie.title}>
+            <ThumbnailCard movie={movie} />
+          </SearchResultGrid>
         ))}
-      </Box>
+      </SearchResultGrid>
       <MovieCarousel />
     </div>
   )
