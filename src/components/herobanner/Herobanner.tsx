@@ -1,16 +1,16 @@
-import { Box, CardMedia } from '@mui/material'
+import { Box, CardMedia, Typography } from '@mui/material'
+import { theme } from '../../theme'
 import {
-  BtnText,
+  BtnTextInfo,
+  BtnTextPlay,
   ButtonContainer,
   InfoButton,
   InfoContainer,
   InfoText,
   InfoTextContainer,
   PlayButton,
-  Title,
   TitleAndButtonContainer,
 } from './style'
-import { theme } from '../../theme'
 
 function Herobanner() {
   return (
@@ -32,7 +32,7 @@ function Herobanner() {
       ></CardMedia>
       <InfoContainer>
         <TitleAndButtonContainer>
-          <Title variant='h1'>Nature's Adventure</Title>
+          <Typography variant='h1'>Nature's Adventure</Typography>
           <ButtonContainer>
             <PlayButton>
               <span
@@ -43,11 +43,13 @@ function Herobanner() {
               >
                 play_arrow
               </span>
-              <BtnText variant='body2'>Play</BtnText>
+              <BtnTextPlay variant='body2'>Play</BtnTextPlay>
             </PlayButton>
             <InfoButton>
-              <span className='material-symbols-outlined'>info</span>
-              <BtnText variant='body2'>More info</BtnText>
+              <span style={{ color: 'white' }} className='material-symbols-outlined'>
+                info
+              </span>
+              <BtnTextInfo variant='body2'>More info</BtnTextInfo>
             </InfoButton>
           </ButtonContainer>
         </TitleAndButtonContainer>
