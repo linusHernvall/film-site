@@ -1,4 +1,4 @@
-import { Box as MuiBox, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { useState } from 'react'
 import movieData from '../../../data/movies.json'
 import MovieCarousel from '../../components/moviecarousel/MovieCarousel'
@@ -6,7 +6,7 @@ import SearchBar from '../../components/searchBar/SearchBar'
 import ThumbnailCard from '../../components/thumbnailCard/ThumbnailCard'
 import { Movie } from '../../interface/interfaces'
 import { theme } from '../../theme'
-import { ErrorContainer, SearchContainer, SearchResultGrid } from './style'
+import { Container, ErrorContainer, SearchResultGrid } from './style'
 
 function HomePage() {
   const [searchMovie, setSearchMovie] = useState('')
@@ -44,8 +44,8 @@ function HomePage() {
 
   return (
     <div>
-      <MuiBox sx={{ display: 'flex', justifyContent: 'center' }}>
-        <SearchContainer>
+      <Container>
+        <Container sx={{ flexDirection: 'column' }}>
           <SearchBar
             searchMovie={searchMovie}
             setSearchMovie={setSearchMovie}
@@ -61,8 +61,8 @@ function HomePage() {
               {getMessage()}
             </Typography>
           </ErrorContainer>
-        </SearchContainer>
-      </MuiBox>
+        </Container>
+      </Container>
 
       <SearchResultGrid container>
         {searchResults.map(movie => (
