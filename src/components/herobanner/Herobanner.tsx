@@ -1,13 +1,16 @@
+import { Box, CardMedia } from '@mui/material'
+
 function Herobanner() {
   return (
-    <div style={{ marginBottom: '6rem' }}>
-      <video
+    <Box sx={{ marginBottom: '6rem' }}>
+      <CardMedia
+        component='video'
         autoPlay
         loop
         muted
-        style={{ width: '100%', height: '600px', objectFit: 'cover' }}
+        sx={{ width: '100%', height: '600px', objectFit: 'cover' }}
         src='https://www.pexels.com/sv-se/download/video/2711111/?fps=24.0&h=720&w=1280'
-      ></video>
+      ></CardMedia>
       <div style={{ position: 'absolute', left: '100px', top: '350px' }}>
         <div
           style={{
@@ -29,8 +32,8 @@ function Herobanner() {
             </button>
           </div>
         </div>
-        <div style={{width: '500px'}}>
-          <p style={{ color:'white'}}>
+        <div style={{ width: '500px' }}>
+          <p style={{ color: 'white' }}>
             Emily, an adventurous biologist, sets out to uncover the secrets of an untouched
             wilderness. As she immerses herself in the diverse landscapes, from towering mountains
             to serene lakeshores, the film becomes a celebration of nature's resilience and the
@@ -38,7 +41,7 @@ function Herobanner() {
           </p>
         </div>
       </div>
-    </div>
+    </Box>
   )
 }
 
