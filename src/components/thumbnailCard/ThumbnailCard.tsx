@@ -16,9 +16,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
   const isBookmarked = bookmarkedMovies.some(bookmarkedMovie => bookmarkedMovie.title === title)
   const navigate = useNavigate()
 
-  const imageSource = imageError
-    ? 'https://bfl-bred.com/wp-content/themes/finacia/assets/images/no-image/No-Image-Found-400x264.png'
-    : thumbnail
+  const imageSource = imageError ? '../src/assets/placeholder.png' : thumbnail
 
   const toggleBookmark = () => {
     if (isBookmarked) {
