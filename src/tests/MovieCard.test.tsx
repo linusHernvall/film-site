@@ -1,6 +1,8 @@
-import { render } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router'
 import { expect, test } from 'vitest'
 import MovieCard from '../components/MovieCard/MovieCard'
+import { ThumbnailProvider } from '../context/ThumbnailContext'
 
 // Mock movie data
 const mockMovie = {
@@ -38,4 +40,22 @@ test('renders MovieCard component correctly', async () => {
   const moviePoster = getByAltText('Movie Poster')
   expect(moviePoster).toBeInTheDocument()
   expect(moviePoster).toHaveAttribute('src', mockMovie.thumbnail)
+})
+
+test('should render ThumbnailCard with placeholder image if error', async () => {
+  render(
+    <MemoryRouter>
+      <ThumbnailProvider>
+        <MovieCard movie={mockMovie} />
+      </ThumbnailProvider>
+    </MemoryRouter>
+  )
+
+  const originalImage = screen.getByRole('img')
+  expect(originalImage).toHaveAttribute('src', mockMovie.thumbnail)
+  screen.debug()
+  fireEvent.error(originalImage)
+
+  const placeholderImage = await screen.getByRole('img')
+  expect(placeholderImage).toHaveAttribute('src', '../src/assets/placeholder.png')
 })
