@@ -31,8 +31,6 @@ export const ButtonContainer = styled(Box)(() => ({
   gap: '1rem',
 }))
 
-export const Title = styled(Typography)(() => ({}))
-
 export const PlayButton = styled(Button)(() => ({
   backgroundColor: 'white',
   color: 'black',
@@ -72,9 +70,14 @@ export const InfoText = styled(Typography)(({theme}) => ({
   },
 }))
 
-export const BtnText = styled(Typography)(() => ({
+export const BtnTextPlay = styled(Typography)(() => ({
   color: 'black',
   fontSize: '14px',
   paddingTop: '0.1rem',
-  opacity: '1'
+}))
+
+export const BtnTextInfo = styled(Typography)(() => ({
+  color: 'white',
+  fontSize: '14px',
+  paddingTop: '0.1rem',
 }))
