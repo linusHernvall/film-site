@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import { useState } from 'react'
-import { default as movieData, default as moviesData } from '../../data/movies.json'
+import { default as movieData } from '../../data/movies.json'
+import Herobanner from '../components/herobanner/Herobanner'
 import MovieCarousel from '../components/moviecarousel/MovieCarousel'
 import SearchBar from '../components/searchBar/SearchBar'
 import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
@@ -43,6 +44,9 @@ function HomePage() {
 
   return (
     <div>
+      <Box>
+        <Herobanner />
+      </Box>
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <SearchBar
           searchMovie={searchMovie}
