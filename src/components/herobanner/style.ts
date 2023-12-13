@@ -6,7 +6,7 @@ export const InfoContainer = styled(Box)(({theme}) => ({
   top: '380px',
   width: '500px',
   [theme.breakpoints.down('sm')]: {
-    width: '300px',
+    width: '250px',
     left: '20px',
     top: '300px'
   },
@@ -42,10 +42,13 @@ export const PlayButton = styled(Button)(() => ({
   alignItems: 'center',
   borderRadius: '5px',
   gap: '0.1rem',
+  '&:hover': {
+    backgroundColor: 'white',
+  },
 }))
 
 export const InfoButton = styled(Button)(() => ({
-  backgroundColor: 'lightgrey',
+  backgroundColor: 'rgba(217, 217, 217, 0.7)',
   color: 'black',
   width: '110px',
   height: '100%',
@@ -53,7 +56,9 @@ export const InfoButton = styled(Button)(() => ({
   alignItems: 'center',
   borderRadius: '5px',
   gap: '0.2rem',
-  
+  '&:hover': {
+    backgroundColor: 'rgba(217, 217, 217, 0.7)', 
+  },
 }))
 
 export const InfoTextContainer = styled(Box)(() => ({
@@ -70,5 +75,6 @@ export const InfoText = styled(Typography)(({theme}) => ({
 export const BtnText = styled(Typography)(() => ({
   color: 'black',
   fontSize: '14px',
-  paddingTop: '0.1rem'
+  paddingTop: '0.1rem',
+  opacity: '1'
 }))
