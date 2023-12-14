@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router'
 import { describe, expect, test } from 'vitest'
 import Bookmarked from '../Pages/Bookmarked/Bookmarked'
 import Categories from '../Pages/Categories.tsx'
-import HomePage from '../Pages/HomePage.tsx'
+import HomePage from '../Pages/HomePage/HomePage.tsx'
 import Header from '../components/Header/Header'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
 
