@@ -51,7 +51,7 @@ export const palette: PaletteOptions = {
     '800': '#939391',
     '900': '#6e6e6c',
   },
-  black: {
+  grey: {
     '100': '#e9e9e9',
     '200': '#dedddd',
     '300': '#bababa',

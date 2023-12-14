@@ -1,6 +1,6 @@
-import { Box as MuiBox, styled } from '@mui/material'
+import { Box, styled } from '@mui/material'
 
-export const Container = styled(MuiBox)(() => ({
+export const Container = styled(Box)(() => ({
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
