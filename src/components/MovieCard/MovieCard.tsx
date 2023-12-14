@@ -70,15 +70,15 @@ function MovieCard({ movie }: MovieCardProps) {
 
             {/* Box with movie information */}
             <MovieInfoItemBox>
-              <Typography variant='h4'>Year: </Typography>
+              <Typography variant='h4'>Year:&nbsp;</Typography>
               <Typography variant='body1'>{year}</Typography>
             </MovieInfoItemBox>
             <MovieInfoItemBox>
-              <Typography variant='h4'>Rating:</Typography>
+              <Typography variant='h4'>Rating:&nbsp;</Typography>
               <Typography variant='body1'>{rating}</Typography>
             </MovieInfoItemBox>
             <MovieInfoItemBox>
-              <Typography variant='h4'>Cast:</Typography>
+              <Typography variant='h4'>Cast:&nbsp;</Typography>
               <Typography variant='body1'>{actors.join(', ')}</Typography>
             </MovieInfoItemBox>
 

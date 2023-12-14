@@ -6,7 +6,6 @@ export const ThumbnailBox = styled(Box)(() => ({
   gap: '2rem',
   justifyContent: 'center',
   alignItems: 'center',
-  //marginTop: '3rem',
   padding: '2rem',
 }))
 
@@ -15,7 +14,6 @@ export const ContainerBox = styled(Box)(() => ({
   flexDirection: 'column',
   justifyContent: 'flex-start',
   alignItems: 'center',
-  minHeight: '100vh',
 }))
 
 export const NoBookmarkedBox = styled(Box)(() => ({
