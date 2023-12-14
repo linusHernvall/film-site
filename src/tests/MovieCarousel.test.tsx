@@ -3,7 +3,7 @@ import { render, screen, within } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 
 import { MemoryRouter } from 'react-router'
-import MovieCarousel from '../components/moviecarousel/MovieCarousel'
+import MovieCarousel from '../components/movieCarousel/MovieCarousel'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
 
 describe('MovieCarousel', () => {

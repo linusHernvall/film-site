@@ -1,7 +1,7 @@
 import SearchIcon from '@mui/icons-material/Search'
-import { Box as MuiBox, styled } from '@mui/material'
+import { Box, styled } from '@mui/material'
 
-export const InputContainer = styled(MuiBox)(() => ({
+export const InputContainer = styled(Box)(() => ({
   position: 'relative',
   display: 'inline-block',
 }))
