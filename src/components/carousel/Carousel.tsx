@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
+import placeholderImage from '../../../public/placeholder.png'
 import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
 import { theme } from '../../theme'
@@ -99,7 +100,7 @@ function Carousel({ movies }: ICarousel) {
       }
 
       const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-        e.currentTarget.src = '../src/assets/placeholder.png'
+        e.currentTarget.src = placeholderImage
         e.currentTarget.alt = 'Placeholder'
       }
 
@@ -127,13 +128,13 @@ function Carousel({ movies }: ICarousel) {
               }}
             >
               <TypographyContainer>
-                <Typography color={theme.palette.black[400]} variant='body1'>
+                <Typography color={theme.palette.grey[400]} variant='body1'>
                   {movie.year}
                 </Typography>
-                <Typography color={theme.palette.black[400]} variant='body1'>
+                <Typography color={theme.palette.grey[400]} variant='body1'>
                   |
                 </Typography>
-                <Typography color={theme.palette.black[400]} variant='body1'>
+                <Typography color={theme.palette.grey[400]} variant='body1'>
                   {movie.rating}
                 </Typography>
               </TypographyContainer>
@@ -145,7 +146,7 @@ function Carousel({ movies }: ICarousel) {
                 )}
               </HeartButton>
             </Box>
-            <Typography color={theme.palette.black[400]} variant='h6'>
+            <Typography color={theme.palette.grey[400]} variant='h6'>
               {movie.title}
             </Typography>
           </Content>

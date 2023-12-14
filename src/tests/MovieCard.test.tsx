@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router'
 import { expect, test } from 'vitest'
 import MovieCard from '../components/MovieCard/MovieCard'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
+// import placeholderImage from '../../public/placeholder.png'
 
 // Mock movie data
 const mockMovie = {
@@ -67,5 +68,5 @@ test('should render ThumbnailCard with placeholder image if error', async () => 
   fireEvent.error(originalImage)
 
   const placeholderImage = await screen.getByRole('img')
-  expect(placeholderImage).toHaveAttribute('src', '../src/assets/placeholder.png')
+  expect(placeholderImage).toHaveAttribute('src', '/public/placeholder.png')
 })

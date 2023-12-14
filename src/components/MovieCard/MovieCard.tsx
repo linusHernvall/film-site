@@ -1,7 +1,9 @@
 import { Box, Grid, Typography } from '@mui/material'
+import placeholderImage from '../../../public/placeholder.png'
 import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
 import { HeartButton } from '../thumbnailCard/style'
+
 import {
   FilledHeart,
   MovieCardContainer,
@@ -34,7 +36,7 @@ function MovieCard({ movie }: MovieCardProps) {
 
   const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     // eslint-disable-next-line no-extra-semi
-    ;(event.target as HTMLImageElement).src = '../src/assets/placeholder.png'
+    ;(event.target as HTMLImageElement).src = placeholderImage
   }
 
   return (

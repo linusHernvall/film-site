@@ -1,8 +1,10 @@
 import { Box, Card, CardMedia } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import placeholderImage from '../../../public/placeholder.png'
 import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
+
 import { Content, HeartButton, HeartIcon, HeartIconRed, Text, TypographyContainer } from './style'
 
 interface ThumbnailCardProps {
@@ -16,7 +18,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
   const isBookmarked = bookmarkedMovies.some(bookmarkedMovie => bookmarkedMovie.title === title)
   const navigate = useNavigate()
 
-  const imageSource = imageError ? '../src/assets/placeholder.png' : thumbnail
+  const imageSource = imageError ? placeholderImage : thumbnail
 
   const toggleBookmark = () => {
     if (isBookmarked) {
