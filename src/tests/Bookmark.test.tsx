@@ -4,6 +4,12 @@
 // import ThumbnailCard from '../components/thumbnailCard/ThumbnailCard'
 // import { ThumbnailProvider } from '../context/BookmarkedContext'
 
+import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router'
+import { expect, test } from 'vitest'
+import Bookmarked from '../Pages/Bookmarked/Bookmarked'
+import { ThumbnailProvider } from '../context/ThumbnailContext'
+
 // import { render, screen } from '@testing-library/react'
 // import userEvent from '@testing-library/user-event'
 // import { MemoryRouter } from 'react-router'
@@ -78,8 +84,70 @@
 //       </MemoryRouter>
 //     )
 
-//     // Check if the bookmarked movie year is still in the DOM after refresh
-//     const refreshedBookmarkedMovieYear = screen.getByText(mockedMovie.year)
-//     expect(refreshedBookmarkedMovieYear).toBeInTheDocument()
-//   })
-// })
+import userEvent from '@testing-library/user-event'
+import { Route, Routes } from 'react-router'
+import Categories from '../Pages/Categories'
+import CategorySpecific from '../Pages/CategorySpecific'
+import Header from '../components/Header/Header'
+
+const mockedMovie1 = {
+  title: 'Casablanca',
+  year: 1942,
+  rating: 'PG',
+  actors: ['Humphrey Bogart', 'Ingrid Bergman', 'Paul Henreid'],
+  genre: 'Drama, Romance, War',
+  synopsis:
+    'A cynical expatriate American cafe owner struggles to decide whether or not to help his former lover and her fugitive husband escape the Nazis in French Morocco.',
+  thumbnail:
+    'https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_QL75_UX380_CR0,5,380,562_.jpg',
+}
+
+test('should be possible to reloag page and still see bookmarked movie', async () => {
+  render(
+    <MemoryRouter initialEntries={['/categories/War']}>
+      <ThumbnailProvider>
+        <Header />
+        <Routes>
+          <Route path='/categories/:genre' element={<CategorySpecific />} />
+          <Route path='/categories/' element={<Categories />} />
+          <Route path='/bookmarked' element={<Bookmarked />} />
+        </Routes>
+      </ThumbnailProvider>
+    </MemoryRouter>
+  )
+  const user = userEvent.setup()
+
+  // Find title
+  expect(screen.getByText('CATEGORIES/War')).toBeInTheDocument()
+  expect(screen.getByText(mockedMovie1.title)).toBeInTheDocument()
+  // Bookmark movie
+  user.click(screen.getByText('favorite'))
+  // Navigate to bookmark-page
+  const bookmarkPage = screen.getByTestId('FavoriteRoundedIcon')
+  expect(bookmarkPage).toBeInTheDocument()
+  user.click(bookmarkPage)
+
+  // Find bookmark page title
+  const bookmarkPageTitle = await screen.findByText('Your List')
+  expect(bookmarkPageTitle).toBeInTheDocument()
+
+  // Wait to fins bookmarked movie
+  const bookmarkedMovieTitle = await screen.findByText(mockedMovie1.title)
+  expect(bookmarkedMovieTitle).toBeInTheDocument()
+
+  // Re render app
+  render(
+    <MemoryRouter initialEntries={['/categories/War']}>
+      <ThumbnailProvider>
+        <Header />
+        <Routes>
+          <Route path='/bookmarked' element={<Bookmarked />} />
+        </Routes>
+      </ThumbnailProvider>
+    </MemoryRouter>
+  )
+
+  // Check if the text is still there after "refreshing" the page
+  const bookmarkedMovieTitleAfterRefresh = screen.queryByText(mockedMovie1.title)
+  expect(bookmarkedMovieTitleAfterRefresh).toBeInTheDocument()
+})
