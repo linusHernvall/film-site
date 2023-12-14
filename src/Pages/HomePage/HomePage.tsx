@@ -1,6 +1,7 @@
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useState } from 'react'
 import movieData from '../../../data/movies.json'
+import Herobanner from '../../components/herobanner/Herobanner'
 import MovieCarousel from '../../components/movieCarousel/MovieCarousel'
 import SearchBar from '../../components/searchBar/SearchBar'
 import ThumbnailCard from '../../components/thumbnailCard/ThumbnailCard'
@@ -44,6 +45,9 @@ function HomePage() {
 
   return (
     <div>
+      <Box>
+        <Herobanner />
+      </Box>
       <Container>
         <Container sx={{ flexDirection: 'column' }}>
           <SearchBar
