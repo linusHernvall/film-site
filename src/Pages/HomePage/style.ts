@@ -1,11 +1,11 @@
-import { Box as MuiBox, Grid as MuiGrid, styled } from '@mui/material'
+import { Box, Grid as MuiGrid, styled } from '@mui/material'
 
-export const Container = styled(MuiBox)(() => ({
+export const Container = styled(Box)(() => ({
   display: 'flex',
   justifyContent: 'center',
 }))
 
-export const ErrorContainer = styled(MuiBox)(() => ({
+export const ErrorContainer = styled(Box)(() => ({
   minHeight: '24px',
   marginBottom: '24px',
 }))

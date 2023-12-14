@@ -1,4 +1,4 @@
-import { Card, CardMedia, Box as MuiBox } from '@mui/material'
+import { Box, Card, CardMedia } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useThumbnailContext } from '../../context/ThumbnailContext'
@@ -36,7 +36,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
   }
 
   return (
-    <MuiBox>
+    <Box>
       <Card
         sx={{
           maxWidth: 300,
@@ -73,7 +73,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
           <Text variant='h5'>{title}</Text>
         </Content>
       </Card>
-    </MuiBox>
+    </Box>
   )
 }
 
