@@ -22,10 +22,16 @@ function Herobanner() {
         muted
         sx={{
           width: '100%',
-          height: '600px',
+          height: '500px',
           objectFit: 'cover',
-          [theme.breakpoints.down('sm')]: {
-            height: '500px',
+          [theme.breakpoints.up('sm')]: {
+            height: '600px',
+          },
+          [theme.breakpoints.up('lg')]: {
+            height: '700px',
+          },
+          [theme.breakpoints.up('xl')]: {
+            height: '800px',
           },
         }}
         src='https://www.pexels.com/sv-se/download/video/2711111/?fps=24.0&h=720&w=1280'
