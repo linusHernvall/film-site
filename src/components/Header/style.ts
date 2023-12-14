@@ -2,7 +2,7 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded'
 import { Box, Typography, styled } from '@mui/material'
 
 export const HeaderBox = styled(Box)(() => ({
-  width: '100%',
+  width: '90%',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
