@@ -6,11 +6,16 @@ export const InfoContainer = styled(Box)(({ theme }) => ({
   left: '20px',
   top: '300px',
   [theme.breakpoints.up('sm')]: {
-    left: '100px',
-    top: '380px',
+    left: '50px',
+    top: '360px',
     width: '500px',
   },
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('md')]: {
+    left: '80px',
+    top: '420px',
+    width: '500px',
+  },
+  [theme.breakpoints.up('xl')]: {
     top: '450px',
     width: '560px',
   },
@@ -30,7 +35,7 @@ export const TitleAndButtonContainer = styled(Box)(({ theme }) => ({
 }))
 
 export const Title = styled(Typography)(({ theme }) => ({
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('xl')]: {
     fontSize: '40px',
   },
 }))
@@ -42,8 +47,8 @@ export const ButtonContainer = styled(Box)(() => ({
   gap: '1rem',
 }))
 
-export const PlayButton = styled(Button)(({theme}) => ({
-  backgroundColor: 'white',
+export const PlayButton = styled(Button)(({ theme }) => ({
+  backgroundColor: '#ffffff',
   color: 'black',
   width: '110px',
   height: '100%',
@@ -54,14 +59,14 @@ export const PlayButton = styled(Button)(({theme}) => ({
   '&:hover': {
     backgroundColor: 'white',
   },
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('xl')]: {
     width: '130px',
   },
 }))
 
-export const InfoButton = styled(Button)(({theme}) => ({
+export const InfoButton = styled(Button)(({ theme }) => ({
   backgroundColor: 'rgba(217, 217, 217, 0.7)',
-  color: 'black',
+  color: theme.palette.black[900],
   width: '110px',
   height: '100%',
   display: 'flex',
@@ -71,7 +76,7 @@ export const InfoButton = styled(Button)(({theme}) => ({
   '&:hover': {
     backgroundColor: 'rgba(217, 217, 217, 0.7)',
   },
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('xl')]: {
     width: '130px',
   },
 }))
@@ -81,30 +86,30 @@ export const InfoTextContainer = styled(Box)(() => ({
 }))
 
 export const InfoText = styled(Typography)(({ theme }) => ({
-  color: 'white',
+  color: theme.palette.black[100],
   fontSize: '12px',
   [theme.breakpoints.up('sm')]: {
     fontSize: '16px',
   },
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('xl')]: {
     fontSize: '18px',
   },
 }))
 
 export const BtnTextPlay = styled(Typography)(({ theme }) => ({
-  color: 'black',
+  color: '#000000',
   fontSize: '14px',
   paddingTop: '0.1rem',
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('xl')]: {
     fontSize: '18px',
   },
 }))
 
 export const BtnTextInfo = styled(Typography)(({ theme }) => ({
-  color: 'white',
+  color: '#ffffff',
   fontSize: '14px',
   paddingTop: '0.1rem',
-  [theme.breakpoints.up('lg')]: {
+  [theme.breakpoints.up('xl')]: {
     fontSize: '18px',
   },
 }))
