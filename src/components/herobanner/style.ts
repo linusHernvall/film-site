@@ -1,26 +1,37 @@
 import { Box, Button, Typography, styled } from '@mui/material'
 
-export const InfoContainer = styled(Box)(({theme}) => ({
+export const InfoContainer = styled(Box)(({ theme }) => ({
   position: 'absolute',
-  left: '100px',
-  top: '380px',
-  width: '500px',
-  [theme.breakpoints.down('sm')]: {
-    width: '250px',
-    left: '20px',
-    top: '300px'
+  width: '250px',
+  left: '20px',
+  top: '300px',
+  [theme.breakpoints.up('sm')]: {
+    left: '100px',
+    top: '380px',
+    width: '500px',
+  },
+  [theme.breakpoints.up('lg')]: {
+    top: '450px',
+    width: '560px',
   },
 }))
 
-export const TitleAndButtonContainer = styled(Box)(({theme}) => ({
+export const TitleAndButtonContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
-  alignItems: 'center',
-  gap: '1rem',
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    gap: '0rem',
-    marginBottom: '0.7rem'
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  marginBottom: '0.7rem',
+  [theme.breakpoints.up('sm')]: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 0,
+    gap: '1rem',
+  },
+}))
+
+export const Title = styled(Typography)(({ theme }) => ({
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '40px',
   },
 }))
 
@@ -31,7 +42,7 @@ export const ButtonContainer = styled(Box)(() => ({
   gap: '1rem',
 }))
 
-export const PlayButton = styled(Button)(() => ({
+export const PlayButton = styled(Button)(({theme}) => ({
   backgroundColor: 'white',
   color: 'black',
   width: '110px',
@@ -43,9 +54,12 @@ export const PlayButton = styled(Button)(() => ({
   '&:hover': {
     backgroundColor: 'white',
   },
+  [theme.breakpoints.up('lg')]: {
+    width: '130px',
+  },
 }))
 
-export const InfoButton = styled(Button)(() => ({
+export const InfoButton = styled(Button)(({theme}) => ({
   backgroundColor: 'rgba(217, 217, 217, 0.7)',
   color: 'black',
   width: '110px',
@@ -55,7 +69,10 @@ export const InfoButton = styled(Button)(() => ({
   borderRadius: '5px',
   gap: '0.2rem',
   '&:hover': {
-    backgroundColor: 'rgba(217, 217, 217, 0.7)', 
+    backgroundColor: 'rgba(217, 217, 217, 0.7)',
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '130px',
   },
 }))
 
@@ -63,21 +80,31 @@ export const InfoTextContainer = styled(Box)(() => ({
   width: '100%',
 }))
 
-export const InfoText = styled(Typography)(({theme}) => ({
+export const InfoText = styled(Typography)(({ theme }) => ({
   color: 'white',
-  [theme.breakpoints.down('sm')]: {
-   fontSize: '12px'
+  fontSize: '12px',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '16px',
+  },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '18px',
   },
 }))
 
-export const BtnTextPlay = styled(Typography)(() => ({
+export const BtnTextPlay = styled(Typography)(({ theme }) => ({
   color: 'black',
   fontSize: '14px',
   paddingTop: '0.1rem',
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '18px',
+  },
 }))
 
-export const BtnTextInfo = styled(Typography)(() => ({
+export const BtnTextInfo = styled(Typography)(({ theme }) => ({
   color: 'white',
   fontSize: '14px',
   paddingTop: '0.1rem',
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '18px',
+  },
 }))

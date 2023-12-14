@@ -1,4 +1,4 @@
-import { Box, CardMedia, Typography } from '@mui/material'
+import { Box, CardMedia } from '@mui/material'
 import { theme } from '../../theme'
 import {
   BtnTextInfo,
@@ -10,6 +10,7 @@ import {
   InfoTextContainer,
   PlayButton,
   TitleAndButtonContainer,
+  Title
 } from './style'
 
 function Herobanner() {
@@ -38,7 +39,7 @@ function Herobanner() {
       ></CardMedia>
       <InfoContainer>
         <TitleAndButtonContainer>
-          <Typography variant='h1'>Nature's Adventure</Typography>
+          <Title variant='h1'>Nature's Adventure</Title>
           <ButtonContainer>
             <PlayButton>
               <span
