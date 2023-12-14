@@ -2,7 +2,7 @@ import { Box, Button, Typography, styled } from '@mui/material'
 
 export const InfoContainer = styled(Box)(({ theme }) => ({
   position: 'absolute',
-  width: '250px',
+  width: '260px',
   left: '20px',
   top: '300px',
   [theme.breakpoints.up('sm')]: {
@@ -12,12 +12,12 @@ export const InfoContainer = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.up('md')]: {
     left: '80px',
-    top: '420px',
-    width: '500px',
+    top: '410px',
+    width: '520px',
   },
   [theme.breakpoints.up('xl')]: {
-    top: '450px',
-    width: '560px',
+    top: '560px',
+    width: '640px',
   },
 }))
 
@@ -35,8 +35,11 @@ export const TitleAndButtonContainer = styled(Box)(({ theme }) => ({
 }))
 
 export const Title = styled(Typography)(({ theme }) => ({
-  [theme.breakpoints.up('xl')]: {
+  [theme.breakpoints.up('md')]: {
     fontSize: '40px',
+  },
+  [theme.breakpoints.up('xl')]: {
+    fontSize: '50px',
   },
 }))
 

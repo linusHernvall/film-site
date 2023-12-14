@@ -29,7 +29,7 @@ function Herobanner() {
             height: '600px',
           },
           [theme.breakpoints.up('xl')]: {
-            height: '700px',
+            height: '800px',
           },
         }}
         src='https://www.pexels.com/sv-se/download/video/2711111/?fps=24.0&h=720&w=1280'
