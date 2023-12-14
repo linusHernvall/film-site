@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { describe, expect } from 'vitest'
-import HomePage from '../Pages/HomePage'
+import HomePage from '../Pages/HomePage/HomePage'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
 
 describe('Search error message', () => {
