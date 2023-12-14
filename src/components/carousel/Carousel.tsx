@@ -127,13 +127,13 @@ function Carousel({ movies }: ICarousel) {
               }}
             >
               <TypographyContainer>
-                <Typography color={theme.palette.black[400]} variant='body1'>
+                <Typography color={theme.palette.grey[400]} variant='body1'>
                   {movie.year}
                 </Typography>
-                <Typography color={theme.palette.black[400]} variant='body1'>
+                <Typography color={theme.palette.grey[400]} variant='body1'>
                   |
                 </Typography>
-                <Typography color={theme.palette.black[400]} variant='body1'>
+                <Typography color={theme.palette.grey[400]} variant='body1'>
                   {movie.rating}
                 </Typography>
               </TypographyContainer>
@@ -145,7 +145,7 @@ function Carousel({ movies }: ICarousel) {
                 )}
               </HeartButton>
             </Box>
-            <Typography color={theme.palette.black[400]} variant='h6'>
+            <Typography color={theme.palette.grey[400]} variant='h6'>
               {movie.title}
             </Typography>
           </Content>
