@@ -1,12 +1,14 @@
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 
 import { MemoryRouter } from 'react-router'
-import MovieCarousel from '../components/movieCarousel/MovieCarousel'
+import MovieCarousel from '../components/moviecarousel/MovieCarousel'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
 
 describe('MovieCarousel', () => {
+  // Sets the rendered window width in the test. Makes the movies render properly.
+
   Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 800 })
   Object.defineProperty(HTMLElement.prototype, 'getBoundingClientRect', {
     configurable: true,
@@ -44,7 +46,7 @@ describe('MovieCarousel', () => {
     ],
   }))
 
-  test('renders a carousel with movies that are trending', async () => {
+  test('renders a carousel with trending movies', async () => {
     render(
       <MemoryRouter>
         <ThumbnailProvider>
@@ -53,13 +55,18 @@ describe('MovieCarousel', () => {
       </MemoryRouter>
     )
 
-    const godfather2Image = await screen.findByRole('img', {
-      name: 'The Godfather: Part II',
-    })
-    expect(godfather2Image).toBeInTheDocument()
+    await screen.findByRole('img', { name: 'The Godfather: Part II' })
 
-    const shawShankRedemptionImage = screen.queryByRole('img', { name: 'The Shawshank Redemption' })
-    expect(shawShankRedemptionImage).not.toBeInTheDocument()
+    const carouselContainer = document.querySelector('.MuiBox-root.css-16ni5k9') as HTMLElement
+    if (!carouselContainer) {
+      throw new Error('Carousel container not found')
+    }
+
+    const shawshankImage = within(carouselContainer).queryByRole('img', {
+      name: 'The Shawshank Redemption',
+    })
+
+    expect(shawshankImage).not.toBeInTheDocument()
   })
 
   test('renders a carousel with movies that are recommended', async () => {
@@ -79,5 +86,97 @@ describe('MovieCarousel', () => {
     expect(recommendedMovieImage).toBeInTheDocument()
 
     vi.restoreAllMocks()
+  })
+
+  test('thumbnail should contain year and rating of the movie', async () => {
+    render(
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <MovieCarousel />
+        </ThumbnailProvider>
+      </MemoryRouter>
+    )
+
+    const godfatherContainer = await (
+      await screen.findByRole('img', {
+        name: 'The Godfather: Part II',
+      })
+    ).closest('div')
+
+    if (!godfatherContainer) {
+      throw new Error('Container for The Godfather: Part II not found')
+    }
+
+    const yearElement = within(godfatherContainer).getByText(/1974/)
+    expect(yearElement).toBeInTheDocument()
+
+    const ratingElement = within(godfatherContainer).getByText(/R/)
+    expect(ratingElement).toBeInTheDocument()
+  })
+
+  test('do not render the same movie twice', async () => {
+    render(
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <MovieCarousel />
+        </ThumbnailProvider>
+      </MemoryRouter>
+    )
+
+    const renderedMovies = await screen.findAllByRole('img')
+
+    const movieTitles = renderedMovies.map(img => (img as HTMLImageElement).alt)
+
+    const uniqueMovieTitles = new Set(movieTitles)
+    expect(movieTitles.length).toBe(uniqueMovieTitles.size)
+  })
+
+  test('arrows disappears when all movies are showing', async () => {
+    Object.defineProperty(window, 'innerWidth', { writable: true, value: 800 })
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 800 })
+
+    render(
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <MovieCarousel />
+        </ThumbnailProvider>
+      </MemoryRouter>
+    )
+
+    // queryByRole seemed to be better in this situation where I expected the arrows not to be found.
+    const prevArrow = screen.queryByRole('prevArrow')
+    const nextArrow = screen.queryByRole('nextArrow')
+
+    expect(prevArrow).not.toBeInTheDocument()
+    expect(nextArrow).not.toBeInTheDocument()
+  })
+
+  test('should render ThumbnailCard with placeholder image if error', async () => {
+    const mockMovie = {
+      title: 'Fight Club',
+      year: 1999,
+      rating: 'R',
+      actors: ['Brad Pitt', 'Edward Norton', 'Helena Bonham Carter'],
+      genre: 'Drama',
+      synopsis:
+        'An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.',
+      thumbnail:
+        'https://m.media-amazon.com/images/M/MV5BMjJmYTNkNmItYjYyZC00MGUxLWEyZmUtZTg1ZDM1YjNhOWE4XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,675,1000_AL_.jpg',
+    }
+    render(
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <MovieCarousel />
+        </ThumbnailProvider>
+      </MemoryRouter>
+    )
+
+    const originalImage = screen.getByRole('img')
+    expect(originalImage).toHaveAttribute('src', mockMovie.thumbnail)
+    fireEvent.error(originalImage)
+
+    screen.debug()
+    const placeholderImage = await screen.getAllByRole('img')
+    expect(placeholderImage).toHaveAttribute('src', '../src/assets/placeholder.png')
   })
 })

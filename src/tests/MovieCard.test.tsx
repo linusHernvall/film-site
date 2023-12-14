@@ -16,7 +16,13 @@ const mockMovie = {
 }
 
 test('renders MovieCard component correctly', async () => {
-  const { getByText, getByAltText } = render(<MovieCard movie={mockMovie} />)
+  const { getByText, getByAltText } = render(
+    <MemoryRouter>
+      <ThumbnailProvider>
+        <MovieCard movie={mockMovie} />
+      </ThumbnailProvider>
+    </MemoryRouter>
+  )
 
   // Check if movie title, genre, and year are rendered
   expect(getByText(mockMovie.title)).toBeInTheDocument()
@@ -40,6 +46,10 @@ test('renders MovieCard component correctly', async () => {
   const moviePoster = getByAltText('Movie Poster')
   expect(moviePoster).toBeInTheDocument()
   expect(moviePoster).toHaveAttribute('src', mockMovie.thumbnail)
+
+  // Check if bookmark-icon is rendered
+  const heartIcon = screen.getByTestId('FavoriteBorderIcon')
+  expect(heartIcon).toBeInTheDocument()
 })
 
 test('should render ThumbnailCard with placeholder image if error', async () => {

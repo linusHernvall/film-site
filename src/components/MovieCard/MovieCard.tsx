@@ -1,10 +1,14 @@
 import { Box, Grid, Typography } from '@mui/material'
+import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
+import { HeartButton } from '../thumbnailCard/style'
 import {
+  FilledHeart,
   MovieCardContainer,
   MovieInfoBox,
   MovieInfoItemBox,
   MoviePosterImage,
+  OutlinedHeart,
   VerticalLine,
 } from './style'
 
@@ -14,11 +18,25 @@ interface MovieCardProps {
 
 function MovieCard({ movie }: MovieCardProps) {
   const { title, year, rating, actors, genre, synopsis, thumbnail } = movie
+  const { bookmarkedMovies, setBookmarkedMovies } = useThumbnailContext()
+
+  const isBookmarked = bookmarkedMovies.some(bookmarkedMovie => bookmarkedMovie.title === title)
+
+  const toggleBookmark = () => {
+    if (isBookmarked) {
+      setBookmarkedMovies(
+        bookmarkedMovies.filter(bookmarkedMovie => bookmarkedMovie.title !== title)
+      )
+    } else {
+      setBookmarkedMovies([...bookmarkedMovies, movie])
+    }
+  }
+
   const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    // Replace the thumbnail with the placeholder image if there's an error loading the image
     // eslint-disable-next-line no-extra-semi
     ;(event.target as HTMLImageElement).src = '../src/assets/placeholder.png'
   }
+
   return (
     <Box style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <MovieCardContainer container spacing={2} justifyContent='center'>
@@ -34,10 +52,16 @@ function MovieCard({ movie }: MovieCardProps) {
             <MovieInfoItemBox>
               {/* Vertical line */}
               <VerticalLine />
-
-              <Box>
-                <Typography variant='h1'>{title}</Typography>
-                <Typography variant='h3'>Genre: {genre}</Typography>
+              <Box style={{ display: 'flex' }}>
+                <Box>
+                  <Typography variant='h1'>{title}</Typography>
+                  <Typography variant='h3'>Genre: {genre}</Typography>
+                </Box>
+                <Box style={{ display: 'flex', alignItems: 'flex-end' }}>
+                  <HeartButton onClick={toggleBookmark}>
+                    {isBookmarked ? <FilledHeart /> : <OutlinedHeart />}
+                  </HeartButton>
+                </Box>
               </Box>
             </MovieInfoItemBox>
 
