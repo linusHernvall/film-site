@@ -1,3 +1,5 @@
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import { Box, Grid, styled } from '@mui/material'
 
 export const MovieCardContainer = styled(Grid)(() => ({
@@ -32,4 +34,12 @@ export const VerticalLine = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.primary[800],
   marginRight: '10px',
   marginLeft: '-10px',
+}))
+
+export const FilledHeart = styled(FavoriteIcon)(({ theme }) => ({
+  color: theme.palette.primary.main,
+}))
+
+export const OutlinedHeart = styled(FavoriteBorderIcon)(({ theme }) => ({
+  color: theme.palette.secondary[200],
 }))
