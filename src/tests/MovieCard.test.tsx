@@ -1,6 +1,8 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router'
 import { expect, test } from 'vitest'
 import MovieCard from '../components/MovieCard/MovieCard'
+import { ThumbnailProvider } from '../context/ThumbnailContext'
 
 // Mock movie data
 const mockMovie = {
@@ -14,7 +16,13 @@ const mockMovie = {
 }
 
 test('renders MovieCard component correctly', async () => {
-  const { getByText, getByAltText } = render(<MovieCard movie={mockMovie} />)
+  const { getByText, getByAltText } = render(
+    <MemoryRouter>
+      <ThumbnailProvider>
+        <MovieCard movie={mockMovie} />
+      </ThumbnailProvider>
+    </MemoryRouter>
+  )
 
   // Check if movie title, genre, and year are rendered
   expect(getByText(mockMovie.title)).toBeInTheDocument()
@@ -38,4 +46,8 @@ test('renders MovieCard component correctly', async () => {
   const moviePoster = getByAltText('Movie Poster')
   expect(moviePoster).toBeInTheDocument()
   expect(moviePoster).toHaveAttribute('src', mockMovie.thumbnail)
+
+  // Check if bookmark-icon is rendered
+  const heartIcon = screen.getByTestId('FavoriteBorderIcon')
+  expect(heartIcon).toBeInTheDocument()
 })
