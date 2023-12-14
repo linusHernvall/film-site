@@ -64,7 +64,7 @@ test('should render ThumbnailCard with placeholder image if error', async () => 
 
   const originalImage = screen.getByRole('img')
   expect(originalImage).toHaveAttribute('src', mockMovie.thumbnail)
-  screen.debug()
+
   fireEvent.error(originalImage)
 
   const placeholderImage = await screen.getByRole('img')
