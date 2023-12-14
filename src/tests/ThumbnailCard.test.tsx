@@ -84,6 +84,6 @@ describe('ThumbnailCard tests', () => {
     screen.debug()
 
     const placeholderImage = await screen.findByAltText('The Shawshank Redemption')
-    expect(placeholderImage).toHaveAttribute('src', '../src/assets/placeholder.png')
+    expect(placeholderImage).toHaveAttribute('src', '/public/placeholder.png')
   })
 })
