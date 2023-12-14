@@ -151,18 +151,20 @@ describe('MovieCarousel', () => {
     expect(nextArrow).not.toBeInTheDocument()
   })
 
-  test('should render ThumbnailCard with placeholder image if error', async () => {
-    const mockMovie = {
-      title: 'Fight Club',
-      year: 1999,
+  test('should render placeholder image if thumbnail loading fails', async () => {
+    const mockedMovie = {
+      title: 'The Godfather: Part II',
+      year: 1974,
       rating: 'R',
-      actors: ['Brad Pitt', 'Edward Norton', 'Helena Bonham Carter'],
-      genre: 'Drama',
+      actors: ['Al Pacino', 'Robert De Niro', 'Robert Duvall'],
+      genre: 'Crime, Drama',
       synopsis:
-        'An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.',
+        'The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.',
       thumbnail:
-        'https://m.media-amazon.com/images/M/MV5BMjJmYTNkNmItYjYyZC00MGUxLWEyZmUtZTg1ZDM1YjNhOWE4XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,675,1000_AL_.jpg',
+        'https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_QL75_UY562_CR7,0,380,562_.jpg',
+      isTrending: true,
     }
+
     render(
       <MemoryRouter>
         <ThumbnailProvider>
@@ -171,12 +173,12 @@ describe('MovieCarousel', () => {
       </MemoryRouter>
     )
 
-    const originalImage = screen.getByRole('img')
-    expect(originalImage).toHaveAttribute('src', mockMovie.thumbnail)
-    fireEvent.error(originalImage)
+    expect(screen.queryByAltText('Placeholder')).toBeNull()
 
-    screen.debug()
-    const placeholderImage = await screen.getAllByRole('img')
-    expect(placeholderImage).toHaveAttribute('src', '../src/assets/placeholder.png')
+    const image = screen.getByAltText(mockedMovie.title)
+    fireEvent.error(image)
+
+    const placeholderImage = await screen.findByAltText('Placeholder')
+    expect(placeholderImage).toBeInTheDocument()
   })
 })

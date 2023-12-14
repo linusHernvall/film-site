@@ -100,6 +100,7 @@ function Carousel({ movies }: ICarousel) {
 
       const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
         e.currentTarget.src = '../src/assets/placeholder.png'
+        e.currentTarget.alt = 'Placeholder'
       }
 
       return (
