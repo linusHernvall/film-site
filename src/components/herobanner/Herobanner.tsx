@@ -1,4 +1,4 @@
-import { Box, CardMedia, Typography } from '@mui/material'
+import { Box, CardMedia } from '@mui/material'
 import { theme } from '../../theme'
 import {
   BtnTextInfo,
@@ -10,6 +10,7 @@ import {
   InfoTextContainer,
   PlayButton,
   TitleAndButtonContainer,
+  Title
 } from './style'
 
 function Herobanner() {
@@ -22,17 +23,20 @@ function Herobanner() {
         muted
         sx={{
           width: '100%',
-          height: '600px',
+          height: '500px',
           objectFit: 'cover',
-          [theme.breakpoints.down('sm')]: {
-            height: '500px',
+          [theme.breakpoints.up('md')]: {
+            height: '600px',
+          },
+          [theme.breakpoints.up('xl')]: {
+            height: '800px',
           },
         }}
         src='https://www.pexels.com/sv-se/download/video/2711111/?fps=24.0&h=720&w=1280'
       ></CardMedia>
       <InfoContainer>
         <TitleAndButtonContainer>
-          <Typography variant='h1'>Nature's Adventure</Typography>
+          <Title variant='h1'>Nature's Adventure</Title>
           <ButtonContainer>
             <PlayButton>
               <span
