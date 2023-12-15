@@ -80,10 +80,10 @@ describe('ThumbnailCard tests', () => {
 
     const originalImage = screen.getByRole('img')
     expect(originalImage).toHaveAttribute('src', mockedMovie.thumbnail)
-    
+
     fireEvent.error(originalImage)
 
     const placeholderImage = await screen.findByAltText('The Shawshank Redemption')
-    expect(placeholderImage).toHaveAttribute('src', '/public/placeholder.png')
+    expect(placeholderImage).toHaveAttribute('src', '/placeholder.png')
   })
 })

@@ -1,8 +1,8 @@
 import { Box, Grid, Typography } from '@mui/material'
-import placeholderImage from '../../../public/placeholder.png'
 import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
 import { HeartButton } from '../thumbnailCard/style'
+import placeholderImage from '/placeholder.png'
 
 import {
   FilledHeart,

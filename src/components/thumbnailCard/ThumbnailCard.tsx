@@ -1,9 +1,9 @@
 import { Box, Card, CardMedia } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import placeholderImage from '../../../public/placeholder.png'
 import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
+import placeholderImage from '/placeholder.png'
 
 import { Content, HeartButton, HeartIcon, HeartIconRed, Text, TypographyContainer } from './style'
 
