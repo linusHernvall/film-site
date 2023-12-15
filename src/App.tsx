@@ -6,7 +6,13 @@ import Footer from './components/footer/Footer'
 
 function App() {
   return (
-    <Box>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Header />
       </Box>
@@ -17,7 +23,9 @@ function App() {
       </Box>
 
       <Outlet />
-      <Footer />
+      <Box sx={{ marginTop: 'auto' }}>
+        <Footer />
+      </Box>
     </Box>
   )
 }
