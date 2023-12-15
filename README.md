@@ -1,30 +1,25 @@
-# React + TypeScript + Vite
+# Netflax
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a school project where we would create a website similar to Netflix where you can choose and search among various available films. However, for natural reasons, the films do not need to be able to be played. Instead, you should be able to see a summary and some other information.
 
-Currently, two official plugins are available:
+The goal of the project was to practice git, github and create a good workflow. The project also includes unit and integration tests.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+We used React and Typescript and used MUI as the styling library. The testing was done with Vitest and React testing library.
 
-## Expanding the ESLint configuration
+This project was created by:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [Linus Hernvall](https://github.com/linusHernvall)
+- [Nathalie Gustafsson](https://github.com/nathaliegustafsson)
+- [Jenny Weijland](https://github.com/JennyWeij)
+- [Madeleine Gustafsson](https://github.com/MadeleineGustafson)
 
-- Configure the top-level `parserOptions` property like this:
+# How to get started
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+1. Clone the project
+2. Install the necessary dependencies: **npm install**
+3. Run the project locally: **npm run dev**
+4. Run the tests: **npm test**
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# Link to demo-page
+
+[Click here to watch Netflax demo-page](https://netflax-film-site.netlify.app/)

@@ -20,7 +20,7 @@ export const LogoText = styled(Typography)(({ theme }) => ({
 
 export const Categories = styled(Typography)(({ theme }) => ({
   '&:hover': {
-    color: theme.palette.primary[800],
+    color: theme.palette.primary.main,
   },
 }))
 
@@ -29,6 +29,6 @@ export const HeartIcon = styled(FavoriteRoundedIcon)(({ theme }) => ({
   fontSize: '2rem',
   marginLeft: '1rem',
   '&:hover': {
-    color: theme.palette.primary[800],
+    color: theme.palette.primary.main,
   },
 }))

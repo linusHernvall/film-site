@@ -1,8 +1,10 @@
-import { Card, CardMedia, Box as MuiBox } from '@mui/material'
+import { Box, Card, CardMedia } from '@mui/material'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import placeholderImage from '../../../public/placeholder.png'
 import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
+
 import { Content, HeartButton, HeartIcon, HeartIconRed, Text, TypographyContainer } from './style'
 
 interface ThumbnailCardProps {
@@ -16,9 +18,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
   const isBookmarked = bookmarkedMovies.some(bookmarkedMovie => bookmarkedMovie.title === title)
   const navigate = useNavigate()
 
-  const imageSource = imageError
-    ? 'https://bfl-bred.com/wp-content/themes/finacia/assets/images/no-image/No-Image-Found-400x264.png'
-    : thumbnail
+  const imageSource = imageError ? placeholderImage : thumbnail
 
   const toggleBookmark = () => {
     if (isBookmarked) {
@@ -36,7 +36,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
   }
 
   return (
-    <MuiBox>
+    <Box>
       <Card
         sx={{
           maxWidth: 300,
@@ -73,7 +73,7 @@ function ThumbnailCard({ movie }: ThumbnailCardProps) {
           <Text variant='h5'>{title}</Text>
         </Content>
       </Card>
-    </MuiBox>
+    </Box>
   )
 }
 

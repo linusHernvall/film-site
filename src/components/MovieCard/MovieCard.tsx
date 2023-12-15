@@ -1,7 +1,9 @@
 import { Box, Grid, Typography } from '@mui/material'
+import placeholderImage from '../../../public/placeholder.png'
 import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
 import { HeartButton } from '../thumbnailCard/style'
+
 import {
   FilledHeart,
   MovieCardContainer,
@@ -32,12 +34,17 @@ function MovieCard({ movie }: MovieCardProps) {
     }
   }
 
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    // eslint-disable-next-line no-extra-semi
+    ;(event.target as HTMLImageElement).src = placeholderImage
+  }
+
   return (
     <Box style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <MovieCardContainer container spacing={2} justifyContent='center'>
         {/* Movie Poster */}
         <Grid item md={4} style={{ display: 'flex', justifyContent: 'center' }}>
-          <MoviePosterImage src={thumbnail} alt='Movie Poster' />
+          <MoviePosterImage src={thumbnail} alt='Movie Poster' onError={handleImageError} />
         </Grid>
 
         {/* Movie Description */}
@@ -47,13 +54,13 @@ function MovieCard({ movie }: MovieCardProps) {
             <MovieInfoItemBox>
               {/* Vertical line */}
               <VerticalLine />
-              <Box style={{ display: 'flex' }}>
+              <Box>
                 <Box>
                   <Typography variant='h1'>{title}</Typography>
-                  <Typography variant='h3'>Genre: {genre}</Typography>
                 </Box>
-                <Box style={{ display: 'flex', alignItems: 'flex-end' }}>
-                  <HeartButton onClick={toggleBookmark}>
+                <Box style={{ display: 'flex', alignItems: 'center' }}>
+                  <Typography variant='h3'>Genre: {genre}</Typography>
+                  <HeartButton onClick={toggleBookmark} style={{ marginLeft: '1rem' }}>
                     {isBookmarked ? <FilledHeart /> : <OutlinedHeart />}
                   </HeartButton>
                 </Box>
@@ -65,15 +72,15 @@ function MovieCard({ movie }: MovieCardProps) {
 
             {/* Box with movie information */}
             <MovieInfoItemBox>
-              <Typography variant='h4'>Year: </Typography>
+              <Typography variant='h4'>Year:&nbsp;</Typography>
               <Typography variant='body1'>{year}</Typography>
             </MovieInfoItemBox>
             <MovieInfoItemBox>
-              <Typography variant='h4'>Rating:</Typography>
+              <Typography variant='h4'>Rating:&nbsp;</Typography>
               <Typography variant='body1'>{rating}</Typography>
             </MovieInfoItemBox>
             <MovieInfoItemBox>
-              <Typography variant='h4'>Cast:</Typography>
+              <Typography variant='h4'>Cast:&nbsp;</Typography>
               <Typography variant='body1'>{actors.join(', ')}</Typography>
             </MovieInfoItemBox>
 

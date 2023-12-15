@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { describe, expect, test, vi } from 'vitest'
 
 import { MemoryRouter } from 'react-router'
@@ -149,5 +149,36 @@ describe('MovieCarousel', () => {
 
     expect(prevArrow).not.toBeInTheDocument()
     expect(nextArrow).not.toBeInTheDocument()
+  })
+
+  test('should render placeholder image if thumbnail loading fails', async () => {
+    const mockedMovie = {
+      title: 'The Godfather: Part II',
+      year: 1974,
+      rating: 'R',
+      actors: ['Al Pacino', 'Robert De Niro', 'Robert Duvall'],
+      genre: 'Crime, Drama',
+      synopsis:
+        'The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.',
+      thumbnail:
+        'https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_QL75_UY562_CR7,0,380,562_.jpg',
+      isTrending: true,
+    }
+
+    render(
+      <MemoryRouter>
+        <ThumbnailProvider>
+          <MovieCarousel />
+        </ThumbnailProvider>
+      </MemoryRouter>
+    )
+
+    expect(screen.queryByAltText('Placeholder')).toBeNull()
+
+    const image = screen.getByAltText(mockedMovie.title)
+    fireEvent.error(image)
+
+    const placeholderImage = await screen.findByAltText('Placeholder')
+    expect(placeholderImage).toBeInTheDocument()
   })
 })

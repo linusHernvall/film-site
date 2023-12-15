@@ -9,13 +9,7 @@ function CategorySpecific() {
   const moviesByGenre = genre ? movies.filter(movie => movie.genre.includes(genre)) : []
 
   return (
-    <Box
-      display='flex'
-      justifyContent='flex-start'
-      flexDirection='column'
-      alignItems='center'
-      minHeight='100vh'
-    >
+    <Box display='flex' justifyContent='flex-start' flexDirection='column' alignItems='center'>
       <Box display='flex' alignItems='center'>
         <Typography variant='h1' margin='3rem'>
           CATEGORIES/{genre}{' '}
@@ -23,7 +17,7 @@ function CategorySpecific() {
       </Box>
 
       <Box width='100%' display='flex' justifyContent='flex-start'></Box>
-      <Box display='flex' justifyContent='center' flexWrap='wrap' gap='1rem'>
+      <Box display='flex' justifyContent='center' flexWrap='wrap' gap='24px'>
         {moviesByGenre.map(movie => (
           <ThumbnailCard key={movie.title} movie={movie} />
         ))}
