@@ -54,13 +54,13 @@ function MovieCard({ movie }: MovieCardProps) {
             <MovieInfoItemBox>
               {/* Vertical line */}
               <VerticalLine />
-              <Box style={{ display: 'flex' }}>
+              <Box>
                 <Box>
                   <Typography variant='h1'>{title}</Typography>
-                  <Typography variant='h3'>Genre: {genre}</Typography>
                 </Box>
-                <Box style={{ display: 'flex', alignItems: 'flex-end' }}>
-                  <HeartButton onClick={toggleBookmark}>
+                <Box style={{ display: 'flex', alignItems: 'center' }}>
+                  <Typography variant='h3'>Genre: {genre}</Typography>
+                  <HeartButton onClick={toggleBookmark} style={{ marginLeft: '1rem' }}>
                     {isBookmarked ? <FilledHeart /> : <OutlinedHeart />}
                   </HeartButton>
                 </Box>

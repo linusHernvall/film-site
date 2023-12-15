@@ -22,4 +22,4 @@ This project was created by:
 
 # Link to demo-page
 
-[Click here to watch Netflax demo-page](xx)
+[Click here to watch Netflax demo-page](https://netflax-film-site.netlify.app/)
