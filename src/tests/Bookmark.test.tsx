@@ -131,7 +131,7 @@ test('should be possible to reloag page and still see bookmarked movie', async (
   const bookmarkPageTitle = await screen.findByText('Your List')
   expect(bookmarkPageTitle).toBeInTheDocument()
 
-  // Wait to fins bookmarked movie
+  // Wait to find bookmarked movie
   const bookmarkedMovieTitle = await screen.findByText(mockedMovie1.title)
   expect(bookmarkedMovieTitle).toBeInTheDocument()
 
@@ -147,7 +147,7 @@ test('should be possible to reloag page and still see bookmarked movie', async (
     </MemoryRouter>
   )
 
-  // Check if the text is still there after "refreshing" the page
+  // Check if the text is still there after refreshing the page
   const bookmarkedMovieTitleAfterRefresh = screen.queryByText(mockedMovie1.title)
   expect(bookmarkedMovieTitleAfterRefresh).toBeInTheDocument()
 })
