@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
-import placeholderImage from '../../../public/placeholder.png'
 import { useThumbnailContext } from '../../context/ThumbnailContext'
 import { Movie } from '../../interface/interfaces'
 import { theme } from '../../theme'
@@ -18,6 +17,7 @@ import {
   PrevArrow,
   TypographyContainer,
 } from './style'
+import placeholderImage from '/placeholder.png'
 
 interface ICarousel {
   movies: Movie[]
