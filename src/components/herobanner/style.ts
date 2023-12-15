@@ -69,7 +69,7 @@ export const PlayButton = styled(Button)(({ theme }) => ({
 
 export const InfoButton = styled(Button)(({ theme }) => ({
   backgroundColor: 'rgba(217, 217, 217, 0.7)',
-  color: theme.palette.black[900],
+  color:  '#ffffff',
   width: '110px',
   height: '100%',
   display: 'flex',
@@ -89,7 +89,7 @@ export const InfoTextContainer = styled(Box)(() => ({
 }))
 
 export const InfoText = styled(Typography)(({ theme }) => ({
-  color: theme.palette.black[100],
+  color: '#ffffff',
   fontSize: '12px',
   [theme.breakpoints.up('sm')]: {
     fontSize: '16px',
