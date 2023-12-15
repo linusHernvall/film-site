@@ -1,5 +1,4 @@
 import { render, screen, waitFor } from '@testing-library/react'
-// import userEvent from '@testing-library/user-event'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router'
 import { describe, expect, test } from 'vitest'
@@ -7,8 +6,6 @@ import Categories from '../Pages/Categories'
 import CategorySpecific from '../Pages/CategorySpecific'
 import MovieCard from '../components/MovieCard/MovieCard'
 import { ThumbnailProvider } from '../context/ThumbnailContext'
-// import CategorySpecific from '../Pages/CategorySpecific'
-// import MovieCard from '../components/MovieCard/MovieCard'
 
 describe('Categories', () => {
   test('should render categories title', () => {
@@ -18,7 +15,6 @@ describe('Categories', () => {
       </MemoryRouter>
     )
 
-    //
     const titleElement = screen.getByText('CATEGORIES')
     expect(titleElement).toBeInTheDocument()
   })
