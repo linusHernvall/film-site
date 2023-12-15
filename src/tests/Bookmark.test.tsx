@@ -1,7 +1,7 @@
 import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router'
-import { expect, test } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import Bookmarked from '../Pages/Bookmarked/Bookmarked'
 import CategorySpecific from '../Pages/CategorySpecific'
 import Header from '../components/Header/Header'
@@ -75,6 +75,23 @@ describe('Bookmark functionality', () => {
 
     const bookmarkedMovieTitle = await screen.findByText(mockedMovie1.title)
     expect(bookmarkedMovieTitle).toBeInTheDocument()
+  })
+
+  test('should still see thumbnail after re-rendering the page', async () => {
+    render(
+      <MemoryRouter initialEntries={['/bookmarked']}>
+        <ThumbnailProvider>
+          <Header />
+          <Routes>
+            <Route path='/bookmarked' element={<Bookmarked />} />
+          </Routes>
+        </ThumbnailProvider>
+      </MemoryRouter>
+    )
+
+    // Check if the text is still there after refreshing the page
+    const bookmarkedMovieTitleAfterRefresh = screen.queryByText(mockedMovie1.title)
+    expect(bookmarkedMovieTitleAfterRefresh).toBeInTheDocument()
   })
 
   // Test if it's possible to add and remove a movie via favourite button and if it's rendered correctly on BookmarkPage
